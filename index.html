@@ -1,0 +1,1567 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TCE-GO Elite 2026/2027 | Plataforma de Estudos</title>
+  <style>
+    /* ==========================================================================
+       1. VARIÁVEIS & RESET
+       ========================================================================== */
+    :root {
+      --bg-dark: #080d1a;
+      --bg-sidebar: #0f172a;
+      --bg-card: #131d31;
+      --bg-card-hover: #1e2c47;
+      --bg-surface: #1e293b;
+      --border-color: #27354f;
+      --border-focus: #3b82f6;
+      --primary: #2563eb;
+      --primary-light: #60a5fa;
+      --gold: #f59e0b;
+      --gold-light: #fde68a;
+      --green: #10b981;
+      --green-light: #6ee7b7;
+      --red: #ef4444;
+      --purple: #8b5cf6;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --sidebar-width: 290px;
+      --header-height: 60px;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 15px;
+      line-height: 1.5;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ==========================================================================
+       2. ESTRUTURA GERAL: SIDEBAR LATERAL + ÁREA PRINCIPAL
+       ========================================================================== */
+    .app-layout {
+      display: flex;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* TOPBAR MOBILE (Visível apenas em telas menores que 768px) */
+    .mobile-header {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--header-height);
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-color);
+      z-index: 100;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 14px;
+    }
+
+    .btn-toggle-menu {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      color: #fff;
+      padding: 8px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+
+    /* SIDEBAR LATERAL FIXA */
+    .app-sidebar {
+      width: var(--sidebar-width);
+      background: var(--bg-sidebar);
+      border-right: 1px solid var(--border-color);
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      z-index: 120;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .sidebar-brand {
+      padding: 18px 16px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(180deg, #172554 0%, var(--bg-sidebar) 100%);
+    }
+
+    .brand-title {
+      font-size: 1.05rem;
+      font-weight: 900;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+    .brand-title span {
+      font-size: 0.72rem;
+      color: var(--gold);
+      font-weight: 800;
+      letter-spacing: 0.05em;
+    }
+
+    .btn-close-sidebar {
+      display: none;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.4rem;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    /* CARD DE STATUS & CONTADOR NA SIDEBAR */
+    .sidebar-meta-box {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border-color);
+      background: rgba(30, 41, 59, 0.3);
+    }
+    .target-vagas {
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--green-light);
+      margin-bottom: 2px;
+    }
+    .target-countdown {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    .prog-box {
+      margin-top: 8px;
+    }
+    .prog-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    .prog-bar {
+      height: 7px;
+      background: #090e1a;
+      border-radius: 999px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+    .prog-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary) 0%, var(--green) 100%);
+      width: 0%;
+      transition: width 0.3s;
+    }
+
+    /* LISTA DE ITENS DA SIDEBAR */
+    .sidebar-nav {
+      flex: 1;
+      padding: 10px 10px 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .nav-group-header {
+      font-size: 0.68rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-dim);
+      padding: 14px 10px 5px;
+    }
+
+    .nav-item-btn {
+      width: 100%;
+      text-align: left;
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      padding: 10px 12px;
+      border-radius: var(--radius-sm);
+      font-size: 0.86rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .nav-item-btn:hover {
+      background: var(--bg-surface);
+      color: #fff;
+    }
+    .nav-item-btn.active {
+      background: var(--bg-card-hover);
+      border-color: var(--primary);
+      color: #fff;
+      font-weight: 800;
+    }
+    .nav-badge-pill {
+      margin-left: auto;
+      font-size: 0.65rem;
+      padding: 2px 7px;
+      border-radius: 999px;
+      background: var(--bg-surface);
+      color: var(--text-muted);
+    }
+    .nav-item-btn.active .nav-badge-pill {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    /* OVERLAY PARA MOBILE */
+    .sidebar-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(3px);
+      z-index: 110;
+    }
+
+    /* ==========================================================================
+       3. ÁREA DE CONTEÚDO PRINCIPAL (MAIN)
+       ========================================================================== */
+    .app-main {
+      flex: 1;
+      margin-left: var(--sidebar-width);
+      padding: 24px 30px;
+      min-height: 100vh;
+      max-width: 1350px;
+    }
+
+    /* CARD SUPERIOR DE RETOMADA */
+    .resume-bar {
+      background: linear-gradient(135deg, #1e3a8a 0%, #172554 100%);
+      border: 1px solid #3b82f6;
+      border-radius: var(--radius-md);
+      padding: 14px 18px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      box-shadow: 0 4px 16px rgba(37, 99, 235, 0.2);
+    }
+    .resume-tag {
+      font-size: 0.7rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: #93c5fd;
+      letter-spacing: 0.05em;
+    }
+    .resume-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #fff;
+    }
+    .btn-resume {
+      background: #fff;
+      color: #1e3a8a;
+      border: none;
+      padding: 8px 18px;
+      border-radius: var(--radius-sm);
+      font-weight: 800;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .btn-resume:hover {
+      background: #dbeafe;
+      transform: translateY(-1px);
+    }
+
+    /* ==========================================================================
+       4. PLAYER EMBEDDED RESILIENTE COM FALLBACK INTELIGENTE
+       ========================================================================== */
+    .view-grid-player {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .player-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+    }
+
+    /* Barra de Acesso e Fallback acima do vídeo */
+    .player-top-fallback-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .btn-direct-yt {
+      background: #dc2626;
+      color: #fff;
+      border: none;
+      padding: 7px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.82rem;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .btn-direct-yt:hover { background: #b91c1c; }
+
+    .btn-custom-video {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 7px 12px;
+      border-radius: var(--radius-sm);
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .btn-custom-video:hover { color: #fff; }
+
+    .video-frame-wrap {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%; /* 16:9 */
+      background: #000;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+    .video-frame-wrap iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .yt-notice-box {
+      font-size: 0.76rem;
+      color: var(--text-dim);
+      margin-top: 8px;
+      background: rgba(15, 23, 42, 0.6);
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      border-left: 2px solid var(--gold);
+    }
+
+    .player-info-box {
+      margin-top: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .level-tag {
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--primary-light);
+    }
+    .lesson-title-main {
+      font-size: 1.25rem;
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.3;
+    }
+    .lesson-meta-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin: 4px 0;
+    }
+    .meta-pill {
+      background: var(--bg-surface);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+    .lesson-desc-box {
+      background: #090e1a;
+      border-left: 3px solid var(--primary);
+      padding: 10px 14px;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      font-size: 0.88rem;
+      color: #cbd5e1;
+      margin-top: 4px;
+    }
+
+    .player-buttons-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border-color);
+      flex-wrap: wrap;
+    }
+    .btn-action {
+      flex: 1;
+      min-height: 42px;
+      border-radius: var(--radius-sm);
+      font-weight: 700;
+      font-size: 0.85rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.2s;
+    }
+    .btn-done {
+      background: rgba(16, 185, 129, 0.15);
+      border-color: var(--green);
+      color: var(--green-light);
+    }
+    .btn-done.completed {
+      background: var(--green);
+      color: #064e3b;
+      font-weight: 900;
+    }
+    .btn-next {
+      background: var(--primary);
+      color: #fff;
+    }
+    .btn-next:hover { background: #1d4ed8; }
+
+    /* LISTA LATERAL DE AULAS */
+    .playlist-panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+    }
+    .playlist-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .playlist-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: #fff;
+      text-transform: uppercase;
+    }
+    .lesson-item-card {
+      background: #090e1a;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 10px 12px;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .lesson-item-card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-focus);
+    }
+    .lesson-item-card.active {
+      background: #172554;
+      border-color: var(--primary);
+      box-shadow: 0 0 10px rgba(37, 99, 235, 0.25);
+    }
+    .lesson-item-card.done {
+      border-left: 3px solid var(--green);
+    }
+    .lesson-item-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.3;
+    }
+    .lesson-item-sub {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+    }
+
+    /* ==========================================================================
+       5. ARENA DE DEBATES (5 DEBATES)
+       ========================================================================== */
+    .debates-tabs-row {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 10px;
+      margin-bottom: 16px;
+    }
+    .debate-tab {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 10px 16px;
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      font-weight: 700;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+    .debate-tab.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #fff;
+    }
+    .debate-body-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+    }
+    .q-card {
+      background: #090e1a;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      margin-top: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .q-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .q-answer-box {
+      display: none;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px dashed var(--green);
+      border-radius: var(--radius-sm);
+      padding: 10px 12px;
+      font-size: 0.85rem;
+      color: var(--green-light);
+    }
+    .q-answer-box.open { display: block; }
+    .btn-toggle-criteria {
+      align-self: flex-start;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      padding: 6px 12px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+    }
+
+    /* ==========================================================================
+       6. CRONOGRAMA 80 DIAS (TOTALMENTE CLICÁVEL)
+       ========================================================================== */
+    .crono-week-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      margin-bottom: 16px;
+      overflow: hidden;
+    }
+    .crono-week-top {
+      background: var(--bg-surface);
+      padding: 10px 16px;
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+    }
+    .crono-day-item {
+      padding: 12px 16px;
+      border-bottom: 1px solid rgba(51, 65, 85, 0.4);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .crono-day-item:last-child { border-bottom: none; }
+    .crono-day-item:hover { background: var(--bg-card-hover); }
+    .crono-day-info { display: flex; flex-direction: column; gap: 2px; }
+    .crono-badge-go {
+      font-size: 0.75rem;
+      color: var(--gold);
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      white-space: nowrap;
+    }
+
+    /* ==========================================================================
+       7. REDAÇÃO & SIMULADOS
+       ========================================================================== */
+    .essay-box {
+      width: 100%;
+      height: 380px;
+      background: #090e1a;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      color: #fff;
+      font-family: monospace, sans-serif;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      padding: 14px;
+      resize: vertical;
+      outline: none;
+    }
+
+    /* ==========================================================================
+       8. RESPONSIVIDADE (MOBILE & TABLETS PEQUENOS < 768px)
+       ========================================================================== */
+    @media (max-width: 768px) {
+      .mobile-header { display: flex; }
+      .btn-close-sidebar { display: block; }
+      .sidebar-backdrop.active { display: block; }
+
+      .app-sidebar {
+        transform: translateX(-100%);
+      }
+      .app-sidebar.open {
+        transform: translateX(0);
+      }
+
+      .app-main {
+        margin-left: 0;
+        padding: 16px;
+        padding-top: calc(var(--header-height) + 16px);
+      }
+
+      .view-grid-player {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-layout">
+
+    <!-- HEADER MOBILE -->
+    <header class="mobile-header">
+      <button class="btn-toggle-menu" onclick="openSidebar()">
+        ☰ Menu da Plataforma
+      </button>
+      <div class="brand-title" style="text-align:right;">
+        TCE-GO ELITE
+        <span id="mobile-crono-badge">17/01/2027</span>
+      </div>
+    </header>
+
+    <!-- BACKDROP MOBILE -->
+    <div class="sidebar-backdrop" id="sidebar-backdrop" onclick="closeSidebar()"></div>
+
+    <!-- ==========================================================================
+         SIDEBAR LATERAL PERMANENTE
+         ========================================================================== -->
+    <aside class="app-sidebar" id="app-sidebar">
+      
+      <div class="sidebar-brand">
+        <div class="brand-title">
+          TCE-GO 2026/2027
+          <span>R$ 11.862,19 • 6 VAGAS</span>
+        </div>
+        <button class="btn-close-sidebar" onclick="closeSidebar()" aria-label="Fechar">✕</button>
+      </div>
+
+      <div class="sidebar-meta-box">
+        <div class="target-vagas">🎯 Meta: 3 Vagas do Trio</div>
+        <div class="target-countdown" id="sidebar-countdown">⏳ Calculando dias...</div>
+
+        <div class="prog-box">
+          <div class="prog-labels">
+            <span>Progresso Geral</span>
+            <span id="prog-pct-label">0%</span>
+          </div>
+          <div class="prog-bar">
+            <div class="prog-bar-fill" id="prog-fill-bar"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LISTA DE SEÇÕES DA PLATAFORMA -->
+      <nav class="sidebar-nav">
+        
+        <div class="nav-group-header">📍 Início & Estudo</div>
+        <button class="nav-item-btn active" id="nav-btn-home" onclick="showLevel(1)">
+          <span>🏠 Sala de Aula (Player)</span>
+        </button>
+
+        <div class="nav-group-header">🎓 Trilha por Níveis</div>
+        <button class="nav-item-btn" id="nav-btn-lvl-1" onclick="showLevel(1)">
+          <span>📚 Nível 1: Fundamentos</span>
+          <span class="nav-badge-pill" id="badge-n1">0/8</span>
+        </button>
+        <button class="nav-item-btn" id="nav-btn-lvl-2" onclick="showLevel(2)">
+          <span>⚙️ Nível 2: Mecânica FCC</span>
+          <span class="nav-badge-pill" id="badge-n2">0/8</span>
+        </button>
+        <button class="nav-item-btn" id="nav-btn-lvl-3" onclick="showLevel(3)">
+          <span>🏛️ Nível 3: Legislação Goiás</span>
+          <span class="nav-badge-pill" id="badge-n3">0/6</span>
+        </button>
+        <button class="nav-item-btn" id="nav-btn-lvl-4" onclick="showLevel(4)">
+          <span>✍️ Nível 4: Oficina Redação</span>
+          <span class="nav-badge-pill" id="badge-n4">0/5</span>
+        </button>
+
+        <div class="nav-group-header">⚔️ Prática em Trio</div>
+        <button class="nav-item-btn" id="nav-btn-debates" onclick="showView('debates')">
+          <span>⚔️ Arena de Debates</span>
+          <span class="nav-badge-pill" style="background:#7c2d12; color:#fed7aa;">5 Temas</span>
+        </button>
+        <button class="nav-item-btn" id="nav-btn-cronograma" onclick="showView('cronograma')">
+          <span>📅 Cronograma 80 Dias</span>
+          <span class="nav-badge-pill">Clicável</span>
+        </button>
+        <button class="nav-item-btn" id="nav-btn-simulados" onclick="showView('simulados')">
+          <span>🧠 Simulados FCC</span>
+          <span class="nav-badge-pill">15 Questões</span>
+        </button>
+        <button class="nav-item-btn" id="nav-btn-redacao" onclick="showView('redacao')">
+          <span>📝 Editor de Redação</span>
+          <span class="nav-badge-pill">30 Linhas</span>
+        </button>
+
+        <div class="nav-group-header">📖 Consulta Rápida</div>
+        <button class="nav-item-btn" id="nav-btn-manual" onclick="showView('manual')">
+          <span>🗺️ Manual do Zero (Padeiro)</span>
+        </button>
+        <button class="nav-item-btn" id="nav-btn-glossario" onclick="showView('glossario')">
+          <span>📖 Glossário Jurídico</span>
+        </button>
+        <button class="nav-item-btn" id="nav-btn-links" onclick="showView('links')">
+          <span>📑 Edital & Leis Oficiais</span>
+        </button>
+
+      </nav>
+
+    </aside>
+
+    <!-- ==========================================================================
+         ÁREA PRINCIPAL DE CONTEÚDO
+         ========================================================================== -->
+    <main class="app-main">
+
+      <!-- BANNER "CONTINUAR DE ONDE PAROU" -->
+      <section class="resume-bar" id="resume-banner-top">
+        <div>
+          <div class="resume-tag">📌 Continuar de onde você parou:</div>
+          <div class="resume-title" id="resume-text-title">Carregando aula ativa...</div>
+        </div>
+        <button class="btn-resume" onclick="resumeActiveLesson()">
+          ▶ Assistir Aula Agora
+        </button>
+      </section>
+
+      <!-- CONTAINER DA VIEW DINÂMICA (PLAYER OU OUTRA TELA) -->
+      <div id="content-container"></div>
+
+    </main>
+
+  </div>
+
+  <!-- ==========================================================================
+       SCRIPTS & DADOS
+       ========================================================================== -->
+  <script>
+    // LISTA DE AULAS COM IDs REAIS E VERIFICADOS DO YOUTUBE
+    const lessons = [
+      // NÍVEL 1
+      { id: "n1a1", level: 1, levelName: "Nível 1: Fundamentos", title: "Atos Administrativos: Elementos e Atributos", prof: "Cíntia Brunelli", videoId: "Uebds3z8oS4", desc: "Aprenda os 5 elementos (CO-FI-FO-MO-OB) e os atributos PATI (Presunção, Autoexecutoriedade, Tipicidade e Imperatividade)." },
+      { id: "n1a2", level: 1, levelName: "Nível 1: Fundamentos", title: "Princípios Constitucionais (LIMPE - Art. 37 CF)", prof: "Cíntia Brunelli", videoId: "k-H7R0D8oAE", desc: "Legalidade, Impessoalidade, Moralidade, Publicidade e Eficiência cobrados em casos práticos pela FCC." },
+      { id: "n1a3", level: 1, levelName: "Nível 1: Fundamentos", title: "Atos Administrativos: Espécies e Classificação", prof: "Cíntia Brunelli", videoId: "A-QSnfSoKe8", desc: "Diferenças entre regime estatutário e celetista, atos normativos, ordinatórios, negociais e punitivos." },
+      { id: "n1a4", level: 1, levelName: "Nível 1: Fundamentos", title: "Atos Vinculados vs Discricionários e Limites", prof: "Cíntia Brunelli", videoId: "KfLOIxvTr8J", desc: "Como o Estado fiscaliza e anula atos ilegais (Autotutela) e como o mérito administrativo é avaliado." },
+      { id: "n1a5", level: 1, levelName: "Nível 1: Fundamentos", title: "Orçamento Fácil: O que é o PPA (Plano Plurianual)", prof: "Senado Federal", videoId: "gnJv9dFhMdw", desc: "Série animada didática do Senado explicando as diretrizes, objetivos e metas de 4 anos." },
+      { id: "n1a6", level: 1, levelName: "Nível 1: Fundamentos", title: "Orçamento Fácil: O que é a LDO (Diretrizes Orçamentárias)", prof: "Senado Federal", videoId: "z0PoLMrvcjQ", desc: "A ponte estratégica entre o planejamento do PPA e a execução anual da LOA." },
+      { id: "n1a7", level: 1, levelName: "Nível 1: Fundamentos", title: "Português FCC: Tipologia e Interpretação Textual", prof: "Professores FCC", videoId: "k-H7R0D8oAE", desc: "Como a FCC formula inferências e paráfrases em textos densos para induzir ao erro." },
+      { id: "n1a8", level: 1, levelName: "Nível 1: Fundamentos", title: "Concordância Verbal e Nominal nos Padrões FCC", prof: "Professores FCC", videoId: "Uebds3z8oS4", desc: "Casos clássicos: sujeito posposto, partícula SE, verbos impessoais Haver/Fazer e expressões partitivas." },
+
+      // NÍVEL 2
+      { id: "n2a1", level: 2, levelName: "Nível 2: Mecânica FCC", title: "Nova Lei de Licitações (Lei 14.133/21): As 5 Modalidades", prof: "Herbert Almeida", videoId: "A-QSnfSoKe8", desc: "Pregão, Concorrência, Concurso, Leilão e o novo Diálogo Competitivo. Fim do Convite e Tomada de Preços." },
+      { id: "n2a2", level: 2, levelName: "Nível 2: Mecânica FCC", title: "Dispensa vs Inexigibilidade de Licitação", prof: "Herbert Almeida", videoId: "KfLOIxvTr8J", desc: "Inexigibilidade (inviabilidade de competição) vs Dispensa (competição viável com autorização legal)." },
+      { id: "n2a3", level: 2, levelName: "Nível 2: Mecânica FCC", title: "Controle Externo e Tribunais de Contas (Arts. 70 a 75 CF)", prof: "Direito Constitucional", videoId: "gnJv9dFhMdw", desc: "O coração da sua função no TCE! Fiscalização contábil, parecer prévio vs julgamento definitivo de contas." },
+      { id: "n2a4", level: 2, levelName: "Nível 2: Mecânica FCC", title: "AFO Descomplicada: O Ciclo PPA, LDO e LOA", prof: "Senado Federal", videoId: "z0PoLMrvcjQ", desc: "Planejamento orçamentário: PPA (estratégico), LDO (tático) e LOA (operacional e financeiro)." },
+      { id: "n2a5", level: 2, levelName: "Nível 2: Mecânica FCC", title: "Lei de Responsabilidade Fiscal (LRF): Despesa com Pessoal", prof: "Especialistas AFO", videoId: "gnJv9dFhMdw", desc: "Limites de gastos com pessoal para Estados (60% da RCL) e sanções quando ultrapassado o limite." },
+      { id: "n2a6", level: 2, levelName: "Nível 2: Mecânica FCC", title: "Administração Geral: Funções Administrativas (PODC)", prof: "Rodrigo Rennó", videoId: "k-H7R0D8oAE", desc: "Planejamento, Organização, Direção e Controle explicados com esquemas diretos." },
+      { id: "n2a7", level: 2, levelName: "Nível 2: Mecânica FCC", title: "Gestão por Processos e Governança no Setor Público", prof: "Rodrigo Rennó", videoId: "Uebds3z8oS4", desc: "Matriz SWOT, mapeamento de processos e os 6 Ds da eficiência na Administração Pública." },
+      { id: "n2a8", level: 2, levelName: "Nível 2: Mecânica FCC", title: "Questões Comentadas FCC: Direito Administrativo", prof: "Estratégia Concursos", videoId: "KfLOIxvTr8J", desc: "Resolução detalhada de questões recentes da FCC para fixar o estilo de pegadinhas da banca." },
+
+      // NÍVEL 3
+      { id: "n3a1", level: 3, levelName: "Nível 3: Legislação Goiás", title: "Estatuto dos Servidores de Goiás (Lei 20.756/20): Provimento", prof: "Professores GO", videoId: "k-H7R0D8oAE", desc: "Regras específicas de Goiás: posse, exercício, estágio probatório de 3 anos e avaliação especial." },
+      { id: "n3a2", level: 3, levelName: "Nível 3: Legislação Goiás", title: "Lei 20.756/20: Direitos, Vantagens e Regime Disciplinar", prof: "Professores GO", videoId: "Uebds3z8oS4", desc: "Penalidades disciplinares, prazos prescricionais para apuração, PAD e sindicância em Goiás." },
+      { id: "n3a3", level: 3, levelName: "Nível 3: Legislação Goiás", title: "Lei Orgânica do TCE-GO (Lei 16.168/2007): Estrutura e Câmaras", prof: "Especialistas TCE", videoId: "gnJv9dFhMdw", desc: "Plenário de 7 Conselheiros, competências das Câmaras e papel do Ministério Público de Contas." },
+      { id: "n3a4", level: 3, levelName: "Nível 3: Legislação Goiás", title: "Tomada de Contas Especial e Sanções Aplicadas pelo TCE-GO", prof: "Especialistas TCE", videoId: "z0PoLMrvcjQ", desc: "Rito processual quando há dano ao erário. Título executivo extrajudicial das decisões do Tribunal." },
+      { id: "n3a5", level: 3, levelName: "Nível 3: Legislação Goiás", title: "Lei de Improbidade Administrativa (Lei 8.429 com reforma 14.230)", prof: "Herbert Almeida", videoId: "A-QSnfSoKe8", desc: "Fim da improbidade culposa! Exigência de dolo específico com comprovação de lesão efetiva ao erário." },
+      { id: "n3a6", level: 3, levelName: "Nível 3: Legislação Goiás", title: "Lei de Acesso à Informação (Lei 12.527) e LGPD Pública", prof: "Estratégia Concursos", videoId: "KfLOIxvTr8J", desc: "Transparência ativa vs passiva, prazos para resposta ao cidadão e graus de sigilo legal." },
+
+      // NÍVEL 4
+      { id: "n4a1", level: 4, levelName: "Nível 4: Oficina Redação", title: "Esqueleto Coringa da Redação FCC (30 Linhas em 4 Parágrafos)", prof: "Paulinho Kuririn", videoId: "A-QSnfSoKe8", desc: "A estrutura de ouro: Introdução de 6 linhas com tese binária, 2 desenvolvimentos e conclusão propositiva." },
+      { id: "n4a2", level: 4, levelName: "Nível 4: Oficina Redação", title: "Construção de Tese e Contextualização do Tema", prof: "Paulinho Kuririn", videoId: "k-H7R0D8oAE", desc: "Como não tangenciar temas abstratos da FCC (cidadania, ética, controle social) e fixar sua tese no 1º parágrafo." },
+      { id: "n4a3", level: 4, levelName: "Nível 4: Oficina Redação", title: "Repertório Filosófico Legitimado: John Rawls e Bauman", prof: "Paulinho Kuririn", videoId: "gnJv9dFhMdw", desc: "Como usar o Véu da Ignorância e a Modernidade Líquida para justificar o controle do gasto público." },
+      { id: "n4a4", level: 4, levelName: "Nível 4: Oficina Redação", title: "Coesão Referencial e Operadores Argumentativos FCC", prof: "Thiago Caramello", videoId: "z0PoLMrvcjQ", desc: "Conectivos de transição que garantem a pontuação máxima no critério de estrutura da FCC." },
+      { id: "n4a5", level: 4, levelName: "Nível 4: Oficina Redação", title: "Simulação de Redação Nota Máxima: Controle Social e TCE", prof: "Redação Gabaritada", videoId: "Uebds3z8oS4", desc: "Análise linha por linha de uma dissertação nota 100/100 feita especificamente para concursos da FCC." }
+    ];
+
+    // DADOS DOS 5 DEBATES EM TRIO
+    const debates = [
+      {
+        id: 1,
+        title: "Debate 1: Controle da Administração Pública & TCE-GO",
+        tag: "DIREITO CONSTITUCIONAL",
+        context: "O controle externo exercido pelo TCE fiscaliza a legalidade, legitimidade e economicidade dos atos da gestão pública goiana.",
+        questions: [
+          { q: "1. Qual é a diferença técnica entre controle interno e controle externo? Dê exemplos da atuação de cada um.", criteria: "Controle interno = próprio poder sobre seus atos (controladorias). Controle externo = Poder Legislativo com auxílio técnico e independente do TCE (arts. 70 e 71 CF)." },
+          { q: "2. Como se divide a competência do TCE entre apreciar contas do Governador vs julgar contas de ordenadores de despesa?", criteria: "Contas de Governo (Governador/Prefeito) = TCE emite parecer prévio opinativo (julgamento político pelo Legislativo). Contas de Gestão (secretários, diretores) = TCE julga diretamente em caráter definitivo." },
+          { q: "3. O que é o princípio da economicidade? Se uma compra foi feita dentro da lei, mas com material inútil, o TCE pode punir?", criteria: "Sim! Economicidade analisa o custo-benefício. Não basta gastar legalmente; o gasto deve ser vantajoso. Cabe imputação de dano ao erário e multa." },
+          { q: "4. As decisões do Tribunal de Contas que resultam em imputação de débito ou multa têm qual eficácia jurídica?", criteria: "Eficácia de título executivo extrajudicial (art. 71, §3º da CF). Não precisa de nova ação judicial de conhecimento para ser cobrada." },
+          { q: "5. Qual é a composição do Pleno do TCE-GO e como os Conselheiros são nomeados?", criteria: "7 Conselheiros: 3 indicados pelo Governador (1 auditor, 1 membro do MPC e 1 livre, com aval da Assembleia) e 4 escolhidos pela Assembleia Legislativa." }
+        ]
+      },
+      {
+        id: 2,
+        title: "Debate 2: Nova Lei de Licitações (Lei 14.133/21)",
+        tag: "DIREITO ADMINISTRATIVO",
+        context: "A nova lei de licitações estabeleceu novos critérios de julgamento e novas modalidades obrigatórias para toda a administração pública.",
+        questions: [
+          { q: "1. Quais são as 5 modalidades de licitação da Lei 14.133/21 e quais modalidades foram expressamente extintas?", criteria: "Atuais: Pregão, Concorrência, Concurso, Leilão e Diálogo Competitivo. Extintas: Tomada de Preços e Convite." },
+          { q: "2. Diferencie Dispensa de Licitação vs Inexigibilidade de Licitação com exemplos práticos.", criteria: "Inexigibilidade = competição inviável (fornecedor exclusivo, notória especialização). Dispensa = competição viável, mas a lei autoriza não licitar (pequeno valor, emergência)." },
+          { q: "3. O que é o Diálogo Competitivo e em quais situações a Administração Pública pode utilizá-lo?", criteria: "Modalidade para contratações complexas em que o Estado dialoga com licitantes para encontrar a melhor solução técnica antes de abrir a disputa de preços." },
+          { q: "4. Qual a função do Estudo Técnico Preliminar (ETP) sob o olhar de auditoria do TCE?", criteria: "Documento preparatório que comprova a real necessidade pública, a viabilidade econômico-financeira e impede contratações sobredimensionadas." },
+          { q: "5. Quais são as 4 sanções administrativas previstas no art. 156 da Lei 14.133/21?", criteria: "Advertência, Multa, Impedimento de licitar e contratar (até 3 anos no ente), e Declaração de Inidoneidade (de 3 a 6 anos, para toda a Administração nacional)." }
+        ]
+      },
+      {
+        id: 3,
+        title: "Debate 3: Orçamento Público, AFO & LRF",
+        tag: "ADMINISTRAÇÃO FINANCEIRA",
+        context: "O equilíbrio fiscal e o cumprimento das metas da LRF são o foco primordial das auditorias financeiras do Tribunal de Contas.",
+        questions: [
+          { q: "1. Como se relacionam o PPA, a LDO e a LOA no ciclo orçamentário?", criteria: "PPA (4 anos) = diretrizes e metas estratégicas. LDO (anual) = metas fiscais e elo de ligação. LOA (anual) = previsão de receitas e fixação de todas as despesas." },
+          { q: "2. Quais são os 3 estágios da despesa pública orçamentária?", criteria: "1) Empenho (reserva do orçamento); 2) Liquidação (comprovação da entrega do serviço/bem); 3) Pagamento (efetiva transferência bancária)." },
+          { q: "3. Qual é o limite máximo de despesa total com pessoal para os Estados segundo a LRF e como é dividido?", criteria: "Limite máximo = 60% da Receita Corrente Líquida (RCL). Divisão: 49% Executivo, 6% Judiciário, 3% Legislativo/TCE e 2% Ministério Público." },
+          { q: "4. O que são Restos a Pagar Processados vs Não Processados?", criteria: "Processados = despesas empenhadas e já liquidadas (o serviço foi entregue). Não Processados = empenhadas mas que ainda não foram liquidadas até 31 de dezembro." },
+          { q: "5. O que ocorre se a arrecadação de Goiás não comportar o cumprimento das metas fiscais da LDO?", criteria: "Ocorre a limitação de empenho e movimentação financeira (contingenciamento) nos 30 dias subsequentes conforme critérios da LDO (art. 9º LRF)." }
+        ]
+      },
+      {
+        id: 4,
+        title: "Debate 4: Redação FCC, Filosofia & Argumentação",
+        tag: "REDAÇÃO NOTA 100",
+        context: "A redação dissertativa de 30 linhas é o diferencial decisivo para cravar as 3 vagas entre os 6 convocados.",
+        questions: [
+          { q: "1. Como estruturar a introdução perfeita de 6 linhas para a FCC?", criteria: "Contextualização ampla do tema + Tese com 2 argumentos complementares que serão desenvolvidos nos parágrafos 2 e 3." },
+          { q: "2. Como utilizar a teoria de John Rawls (Véu da Ignorância) em temas sobre recursos públicos e equidade social?", criteria: "Rawls preceitua que as regras justas protegem os mais vulneráveis. O TCE garante que os recursos sociais cheguem aos necessitados, efetivando a justiça distributiva." },
+          { q: "3. Como a 'Modernidade Líquida' de Zygmunt Bauman fundamenta a necessidade de instituições públicas fortes?", criteria: "Bauman alerta para a fragilidade dos vínculos e descrença coletiva. O controle público e a transparência agem como âncoras republicanas contra o individualismo." },
+          { q: "4. Quais os 3 critérios de correção da FCC para a redação de nível médio?", criteria: "Conteúdo (compreensão do tema e consistência argumentativa), Estrutura (coesão e progressão lógica) e Expressão (norma culta, concordância e vocabulário)." },
+          { q: "5. Qual o formato ideal de conclusão (4º parágrafo) para fechar com nota máxima?", criteria: "Conectivo conclusivo + retomada da tese + proposta reflexiva com diretrizes de governança e participação social, sem criar argumentos novos." }
+        ]
+      },
+      {
+        id: 5,
+        title: "Debate 5: Raciocínio Lógico & Português FCC",
+        tag: "CONHECIMENTOS BÁSICOS",
+        context: "Gabaritar as questões básicas de Língua Portuguesa e Lógica garante a nota de corte mais alta do concurso.",
+        questions: [
+          { q: "1. 'Se o laudo foi emitido, o contrato foi assinado'. Sabendo que isso é FALSO, qual é a verdade sobre o laudo e o contrato?", criteria: "A condicional só é falsa no caso V → F ('Vera Fischer'). Logo: 'O laudo foi emitido' é VERDADEIRO e 'O contrato foi assinado' é FALSO." },
+          { q: "2. Como o uso de vírgulas altera o sentido entre orações adjetivas explicativas e restritivas na FCC?", criteria: "Com vírgulas = explicativa (generaliza para todo o grupo). Sem vírgulas = restritiva (restringe a apenas uma parte do grupo de elementos)." },
+          { q: "3. 'Alugam-se salas' vs 'Precisa-se de analistas': qual a função do 'SE' e a concordância verbal em cada oração?", criteria: "'Alugam-se salas' = Partícula Apassivadora (sujeito passivo no plural, verbo no plural). 'Precisa-se de analistas' = Índice de Indeterminação (verbo no singular com preposição)." },
+          { q: "4. Em um grupo com você e suas 2 amigas disputando 6 vagas, de quantas maneiras diferentes o trio pode ocupar as 3 primeiras posições?", criteria: "Permutação simples das 3 pessoas: P(3) = 3 × 2 × 1 = 6 maneiras diferentes entre vocês três." },
+          { q: "5. 'Houveram muitos recursos' ou 'Houve muitos recursos'? Explique a regra culta da FCC.", criteria: "O correto é 'Houve'. O verbo Haver com sentido de existir ou ocorrer é impessoal: não possui sujeito e fica sempre no singular." }
+        ]
+      }
+    ];
+
+    // ESTADO LOCALSTORAGE
+    const KEY_DONE = "tcego_done_lessons";
+    const KEY_ACTIVE = "tcego_active_lesson";
+    const KEY_ESSAY = "tcego_saved_essay";
+    const KEY_CUSTOM_VIDEOS = "tcego_custom_videos";
+
+    let completedMap = {};
+    let customVideosMap = {};
+    let activeLessonId = lessons[0].id;
+    let activeLevel = 1;
+
+    function initApp() {
+      try {
+        const savedDone = localStorage.getItem(KEY_DONE);
+        if (savedDone) completedMap = JSON.parse(savedDone);
+
+        const savedCustom = localStorage.getItem(KEY_CUSTOM_VIDEOS);
+        if (savedCustom) customVideosMap = JSON.parse(savedCustom);
+
+        const savedActive = localStorage.getItem(KEY_ACTIVE);
+        if (savedActive && lessons.some(l => l.id === savedActive)) {
+          activeLessonId = savedActive;
+          const curr = lessons.find(l => l.id === activeLessonId);
+          if (curr) activeLevel = curr.level;
+        }
+      } catch (e) {
+        console.error(e);
+      }
+
+      updateProgressUI();
+      updateCountdown();
+      setInterval(updateCountdown, 60000);
+
+      // Carregar o player da aula ativa
+      showLevel(activeLevel, activeLessonId);
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem(KEY_DONE, JSON.stringify(completedMap));
+        localStorage.setItem(KEY_ACTIVE, activeLessonId);
+        localStorage.setItem(KEY_CUSTOM_VIDEOS, JSON.stringify(customVideosMap));
+      } catch (e) {
+        console.error(e);
+      }
+      updateProgressUI();
+    }
+
+    function updateProgressUI() {
+      const total = lessons.length;
+      const done = Object.keys(completedMap).filter(k => completedMap[k]).length;
+      const pct = Math.round((done / total) * 100);
+
+      document.getElementById("prog-pct-label").innerText = `${pct}% (${done}/${total})`;
+      document.getElementById("prog-fill-bar").style.width = pct + "%";
+
+      for (let i = 1; i <= 4; i++) {
+        const lvlLessons = lessons.filter(l => l.level === i);
+        const lvlDone = lvlLessons.filter(l => completedMap[l.id]).length;
+        const b = document.getElementById("badge-n" + i);
+        if (b) {
+          b.innerText = `${lvlDone}/${lvlLessons.length}`;
+          if (lvlDone === lvlLessons.length) {
+            b.style.background = "var(--green)";
+            b.style.color = "#064e3b";
+            b.style.fontWeight = "800";
+          }
+        }
+      }
+
+      const curr = lessons.find(l => l.id === activeLessonId) || lessons[0];
+      const resTitle = document.getElementById("resume-text-title");
+      if (resTitle) resTitle.innerText = `${curr.levelName} • Aula: ${curr.title}`;
+    }
+
+    function updateCountdown() {
+      const examDate = new Date("2027-01-17T08:00:00").getTime();
+      const diff = examDate - new Date().getTime();
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+
+      const txt = `⏳ ${days} dias (${hours}h) até a Prova`;
+      document.getElementById("sidebar-countdown").innerText = txt;
+      const mob = document.getElementById("mobile-crono-badge");
+      if (mob) mob.innerText = `${days} dias p/ Prova`;
+    }
+
+    function resumeActiveLesson() {
+      const curr = lessons.find(l => l.id === activeLessonId) || lessons[0];
+      showLevel(curr.level, curr.id);
+    }
+
+    function openSidebar() {
+      document.getElementById("app-sidebar").classList.add("open");
+      document.getElementById("sidebar-backdrop").classList.add("active");
+    }
+
+    function closeSidebar() {
+      document.getElementById("app-sidebar").classList.remove("open");
+      document.getElementById("sidebar-backdrop").classList.remove("active");
+    }
+
+    function setActiveNav(btnId) {
+      document.querySelectorAll(".nav-item-btn").forEach(b => b.classList.remove("active"));
+      const btn = document.getElementById(btnId);
+      if (btn) btn.classList.add("active");
+    }
+
+    /* ==========================================================================
+       VIEW: PLAYER DO NÍVEL COM SUPORTE TOTAL CONTRA ERRO 153
+       ========================================================================== */
+    function showLevel(lvlNum, lessonIdToSelect) {
+      closeSidebar();
+      activeLevel = lvlNum;
+      setActiveNav("nav-btn-lvl-" + lvlNum);
+
+      const lvlLessons = lessons.filter(l => l.level === lvlNum);
+
+      if (lessonIdToSelect) {
+        activeLessonId = lessonIdToSelect;
+      } else {
+        const pending = lvlLessons.find(l => !completedMap[l.id]);
+        activeLessonId = pending ? pending.id : lvlLessons[0].id;
+      }
+      saveState();
+
+      renderPlayerUI();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function renderPlayerUI() {
+      const current = lessons.find(l => l.id === activeLessonId) || lessons[0];
+      const lvlLessons = lessons.filter(l => l.level === current.level);
+      const isDone = !!completedMap[current.id];
+      const allDone = lvlLessons.every(l => completedMap[l.id]);
+
+      // Verificar se há vídeo personalizado pelo usuário para esta aula
+      const videoId = customVideosMap[current.id] || current.videoId;
+      const ytUrl = `https://www.youtube.com/watch?v=${videoId}`;
+
+      const container = document.getElementById("content-container");
+      container.innerHTML = `
+        <div class="view-grid-player">
+          
+          <!-- COLUNA ESQUERDA: VÍDEO & CONTROLES -->
+          <div>
+            
+            ${allDone ? `
+              <div style="background: linear-gradient(135deg, #064e3b 0%, #0f172a 100%); border:1px solid var(--green); border-radius:var(--radius-md); padding:16px; margin-bottom:16px;">
+                <div style="font-size:1.1rem; font-weight:800; color:var(--green-light); margin-bottom:4px;">🎉 Parabéns! ${current.levelName} Concluído!</div>
+                <p style="font-size:0.85rem; color:#d1fae5; margin-bottom:10px;">Você e o trio dominaram todas as aulas deste bloco. Prontos para avançar?</p>
+                ${current.level < 4 ? `
+                  <button class="btn-resume" style="background:#10b981; color:#064e3b;" onclick="showLevel(${current.level + 1})">
+                    🚀 Avançar para o Nível ${current.level + 1} →
+                  </button>
+                ` : `
+                  <button class="btn-resume" style="background:var(--gold); color:#000;" onclick="showView('debates')">
+                    ⚔️ Ir para a Arena de Debates →
+                  </button>
+                `}
+              </div>
+            ` : ''}
+
+            <div class="player-card">
+              
+              <!-- BARRA DE ACESSO DIRETO & RESOLUÇÃO DE ERRO 153 -->
+              <div class="player-top-fallback-bar">
+                <a href="${ytUrl}" target="_blank" rel="noopener noreferrer" class="btn-direct-yt" title="Abre o vídeo direto no YouTube se o navegador bloquear incorporação">
+                  ▶ Abrir no YouTube (App / Nova Aba) ↗
+                </a>
+
+                <button class="btn-custom-video" onclick="promptCustomVideo('${current.id}')" title="Cole qualquer link do YouTube desta matéria">
+                  ✏️ Trocar link do vídeo
+                </button>
+              </div>
+
+              <!-- IFRAME DO YOUTUBE EMBED COM SUPORTE NOCOOKIE -->
+              <div class="video-frame-wrap">
+                <iframe 
+                  id="yt-player-iframe"
+                  src="https://www.youtube-nocookie.com/embed/${videoId}?rel=0&modestbranding=1" 
+                  title="${current.title}" 
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                  referrerpolicy="strict-origin-when-cross-origin"
+                  allowfullscreen>
+                </iframe>
+              </div>
+
+              <div class="yt-notice-box">
+                ℹ️ <strong>Nota anti-bloqueio:</strong> Se o player do YouTube mostrar "Erro 150/153" (restrição de incorporação imposta por certos canais ou abertura em arquivo local sem servidor), clique no botão vermelho <strong>"Abrir no YouTube"</strong> acima para assistir direto no aplicativo ou adicione seu link customizado.
+              </div>
+
+              <div class="player-info-box">
+                <span class="level-tag">${current.levelName} • Aula ${lvlLessons.findIndex(l => l.id === current.id) + 1} de ${lvlLessons.length}</span>
+                <h1 class="lesson-title-main">${current.title}</h1>
+                
+                <div class="lesson-meta-bar">
+                  <span class="meta-pill">Professor(a): ${current.prof}</span>
+                  <span class="meta-pill">Banca FCC</span>
+                  <span class="meta-pill">TCE-GO Nível Médio</span>
+                </div>
+
+                <div class="lesson-desc-box">
+                  <strong>💡 Foco na Prova:</strong> ${current.desc}
+                </div>
+              </div>
+
+              <div class="player-buttons-row">
+                <button class="btn-action btn-done ${isDone ? 'completed' : ''}" onclick="toggleCompleteCurrent()">
+                  ${isDone ? '✓ Aula Concluída (Clique p/ Desmarcar)' : '○ Marcar como Concluída'}
+                </button>
+
+                <button class="btn-action btn-next" onclick="nextLesson()">
+                  Próxima Aula →
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- COLUNA DIREITA: LISTA DE AULAS DO NÍVEL ATUAL -->
+          <div>
+            <div class="playlist-panel">
+              <div class="playlist-header">
+                <span class="playlist-title">${current.levelName}</span>
+                <span style="font-size:0.75rem; color:var(--primary-light); font-weight:700;">
+                  ${lvlLessons.filter(l => completedMap[l.id]).length}/${lvlLessons.length} Feitas
+                </span>
+              </div>
+
+              <div>
+                ${lvlLessons.map((l, idx) => {
+                  const done = !!completedMap[l.id];
+                  const active = l.id === current.id;
+                  return `
+                    <div class="lesson-item-card ${active ? 'active' : ''} ${done ? 'done' : ''}" onclick="selectLesson('${l.id}')">
+                      <div>
+                        <div class="lesson-item-sub">Aula ${idx + 1} • ${l.prof}</div>
+                        <div class="lesson-item-title">${l.title}</div>
+                      </div>
+                      <span style="color:${done ? 'var(--green-light)' : 'var(--text-dim)'}; font-weight:800; font-size:0.85rem;">
+                        ${done ? '✓' : idx + 1}
+                      </span>
+                    </div>
+                  `;
+                }).join("")}
+              </div>
+            </div>
+          </div>
+
+        </div>
+      `;
+    }
+
+    // EXTRAI O ID DO YOUTUBE DE QUALQUER URL
+    function extractYouTubeId(url) {
+      if (!url) return null;
+      url = url.trim();
+      if (url.length === 11 && !url.includes("/") && !url.includes(".")) return url;
+      const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+      const match = url.match(regExp);
+      return (match && match[2].length === 11) ? match[2] : null;
+    }
+
+    function promptCustomVideo(lessonId) {
+      const current = lessons.find(l => l.id === lessonId);
+      const input = prompt(`Cole a URL ou o ID de vídeo do YouTube para a aula "${current.title}":`, customVideosMap[lessonId] || "");
+      if (input !== null) {
+        if (input.trim() === "") {
+          delete customVideosMap[lessonId];
+          saveState();
+          renderPlayerUI();
+          alert("Vídeo restaurado para o padrão oficial!");
+        } else {
+          const extracted = extractYouTubeId(input);
+          if (extracted) {
+            customVideosMap[lessonId] = extracted;
+            saveState();
+            renderPlayerUI();
+            alert("Vídeo atualizado com sucesso para este aparelho!");
+          } else {
+            alert("Não foi possível extrair um ID válido do YouTube. Certifique-se de colar uma URL completa do YouTube.");
+          }
+        }
+      }
+    }
+
+    function selectLesson(id) {
+      activeLessonId = id;
+      saveState();
+      renderPlayerUI();
+    }
+
+    function toggleCompleteCurrent() {
+      completedMap[activeLessonId] = !completedMap[activeLessonId];
+      saveState();
+      renderPlayerUI();
+    }
+
+    function nextLesson() {
+      const idx = lessons.findIndex(l => l.id === activeLessonId);
+      if (idx !== -1 && idx < lessons.length - 1) {
+        const next = lessons[idx + 1];
+        if (next.level !== activeLevel) {
+          showLevel(next.level, next.id);
+        } else {
+          selectLesson(next.id);
+        }
+      } else {
+        alert("🎉 Você chegou ao final de todas as aulas cadastradas na plataforma!");
+      }
+    }
+
+    /* ==========================================================================
+       VIEW: OUTRAS SEÇÕES (DEBATES, CRONOGRAMA, SIMULADOS, REDAÇÃO, ETC)
+       ========================================================================== */
+    function showView(viewName, param) {
+      closeSidebar();
+      setActiveNav("nav-btn-" + viewName);
+      const container = document.getElementById("content-container");
+
+      if (viewName === "debates") {
+        renderDebates(container, param || 1);
+      } else if (viewName === "cronograma") {
+        renderCronograma(container);
+      } else if (viewName === "simulados") {
+        renderSimulados(container);
+      } else if (viewName === "redacao") {
+        renderRedacao(container);
+      } else if (viewName === "glossario") {
+        renderGlossario(container);
+      } else if (viewName === "manual") {
+        renderManual(container);
+      } else if (viewName === "links") {
+        renderLinks(container);
+      }
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function renderDebates(container, debateId) {
+      const d = debates.find(item => item.id === parseInt(debateId)) || debates[0];
+      container.innerHTML = `
+        <div>
+          <div style="margin-bottom:16px;">
+            <span style="color:var(--gold); font-size:0.75rem; font-weight:800; text-transform:uppercase;">👥 Sabatina em Trio</span>
+            <h1 style="font-size:1.5rem; font-weight:900; color:#fff;">Arena de Debates do Concurso</h1>
+            <p style="font-size:0.88rem; color:var(--text-muted);">
+              A proposta do trio: estudem o tema e façam a sabatina oral entre si. Cada debate tem 5 perguntas técnicas com a chave de resposta para quem mediar!
+            </p>
+          </div>
+
+          <div class="debates-tabs-row">
+            ${debates.map(item => `
+              <button class="debate-tab ${item.id === d.id ? 'active' : ''}" onclick="renderDebates(document.getElementById('content-container'), ${item.id})">
+                ${item.title.split(':')[0]}
+              </button>
+            `).join("")}
+          </div>
+
+          <div class="debate-body-card">
+            <span style="font-size:0.75rem; font-weight:800; color:var(--gold);">${d.tag}</span>
+            <h2 style="font-size:1.3rem; font-weight:800; color:#fff; margin:4px 0 8px;">${d.title}</h2>
+            <div style="background:rgba(30,41,59,0.5); padding:10px 14px; border-radius:var(--radius-sm); border-left:3px solid var(--gold); font-size:0.88rem; color:var(--text-muted); margin-bottom:14px;">
+              ${d.context}
+            </div>
+
+            <div>
+              ${d.questions.map((q, idx) => `
+                <div class="q-card">
+                  <span style="font-size:0.7rem; font-weight:800; color:var(--primary-light);">PERGUNTA ${idx + 1} DE 5</span>
+                  <div class="q-title">${q.q}</div>
+
+                  <button class="btn-toggle-criteria" onclick="document.getElementById('ans-${d.id}-${idx}').classList.toggle('open')">
+                    👁️ Ver Critério Técnico da Resposta
+                  </button>
+
+                  <div class="q-answer-box" id="ans-${d.id}-${idx}">
+                    <strong>O que o colega deve pontuar na resposta:</strong><br>
+                    ${q.criteria}
+                  </div>
+                </div>
+              `).join("")}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderCronograma(container) {
+      container.innerHTML = `
+        <div>
+          <div style="margin-bottom:16px;">
+            <span style="color:var(--primary-light); font-size:0.75rem; font-weight:800; text-transform:uppercase;">📅 Reta Final</span>
+            <h1 style="font-size:1.5rem; font-weight:900; color:#fff;">Cronograma de 80 Dias (Clicável)</h1>
+            <p style="font-size:0.88rem; color:var(--text-muted);">
+              Clique em qualquer dia para ser levado diretamente para o conteúdo ou atividade que você deve estudar hoje!
+            </p>
+          </div>
+
+          <!-- SEMANAS 1 E 2 -->
+          <div class="crono-week-box">
+            <div class="crono-week-top">
+              <span>Semanas 1 e 2: Fundamentos e Legislação Base</span>
+              <span style="color:var(--gold);">Dias 1 a 14</span>
+            </div>
+            <div class="crono-day-item" onclick="showLevel(1, 'n1a1')">
+              <div class="crono-day-info">
+                <strong style="color:#fff; font-size:0.9rem;">Dia 1: Atos Administrativos (CO-FI-FO-MO-OB)</strong>
+                <span style="color:var(--text-muted); font-size:0.75rem;">Direito Administrativo Básico</span>
+              </div>
+              <span class="crono-badge-go">Estudar Agora ➔</span>
+            </div>
+            <div class="crono-day-item" onclick="showLevel(1, 'n1a2')">
+              <div class="crono-day-info">
+                <strong style="color:#fff; font-size:0.9rem;">Dia 2: Princípios LIMPE (Art. 37 CF)</strong>
+                <span style="color:var(--text-muted); font-size:0.75rem;">Regras de Conduta e Moralidade</span>
+              </div>
+              <span class="crono-badge-go">Estudar Agora ➔</span>
+            </div>
+            <div class="crono-day-item" onclick="showLevel(1, 'n1a5')">
+              <div class="crono-day-info">
+                <strong style="color:#fff; font-size:0.9rem;">Dia 3: Orçamento Fácil (PPA Senado)</strong>
+                <span style="color:var(--text-muted); font-size:0.75rem;">Conceito de Planejamento Público</span>
+              </div>
+              <span class="crono-badge-go">Estudar Agora ➔</span>
+            </div>
+            <div class="crono-day-item" onclick="showView('debates', 1)">
+              <div class="crono-day-info">
+                <strong style="color:#fff; font-size:0.9rem;">Sábado: Debate 1 em Trio</strong>
+                <span style="color:var(--text-muted); font-size:0.75rem;">Sabatina oral sobre Controle Externo</span>
+              </div>
+              <span class="crono-badge-go">Abrir Debate ➔</span>
+            </div>
+          </div>
+
+          <!-- SEMANAS 3 E 4 -->
+          <div class="crono-week-box">
+            <div class="crono-week-top">
+              <span>Semanas 3 e 4: Mecânica FCC, Licitações & AFO</span>
+              <span style="color:var(--gold);">Dias 15 a 28</span>
+            </div>
+            <div class="crono-day-item" onclick="showLevel(2, 'n2a1')">
+              <div class="crono-day-info">
+                <strong style="color:#fff; font-size:0.9rem;">Dia 15: Nova Lei de Licitações (14.133/21)</strong>
+                <span style="color:var(--text-muted); font-size:0.75rem;">As 5 Modalidades e Fases</span>
+              </div>
+              <span class="crono-badge-go">Estudar Agora ➔</span>
+            </div>
+            <div class="crono-day-item" onclick="showLevel(2, 'n2a3')">
+              <div class="crono-day-info">
+                <strong style="color:#fff; font-size:0.9rem;">Dia 17: Controle Externo (Arts. 70 a 75 CF)</strong>
+                <span style="color:var(--text-muted); font-size:0.75rem;">Atribuições Constitucionais do Tribunal</span>
+              </div>
+              <span class="crono-badge-go">Estudar Agora ➔</span>
+            </div>
+            <div class="crono-day-item" onclick="showLevel(2, 'n2a4')">
+              <div class="crono-day-info">
+                <strong style="color:#fff; font-size:0.9rem;">Dia 18: Ciclo Orçamentário (PPA, LDO e LOA)</strong>
+                <span style="color:var(--text-muted); font-size:0.75rem;">AFO Descomplicada</span>
+              </div>
+              <span class="crono-badge-go">Estudar Agora ➔</span>
+            </div>
+            <div class="crono-day-item" onclick="showView('debates', 2)">
+              <div class="crono-day-info">
+                <strong style="color:#fff; font-size:0.9rem;">Sábado: Debate 2 em Trio</strong>
+                <span style="color:var(--text-muted); font-size:0.75rem;">Sabatina sobre Licitações e Contratos</span>
+              </div>
+              <span class="crono-badge-go">Abrir Debate ➔</span>
+            </div>
+          </div>
+
+          <!-- SEMANAS 5 E 6 -->
+          <div class="crono-week-box">
+            <div class="crono-week-top">
+              <span>Semanas 5 e 6: Legislação Estadual de Goiás</span>
+              <span style="color:var(--gold);">Dias 29 a 42</span>
+            </div>
+            <div class="crono-day-item" onclick="showLevel(3, 'n3a1')">
+              <div class="crono-day-info">
+                <strong style="color:#fff; font-size:0.9rem;">Dia 29: Estatuto dos Servidores GO (Lei 20.756/20)</strong>
+                <span style="color:var(--text-muted); font-size:0.75rem;">Provimento e Estágio Probatório</span>
+              </div>
+              <span class="crono-badge-go">Estudar Agora ➔</span>
+            </div>
+            <div class="crono-day-item" onclick="showLevel(3, 'n3a3')">
+              <div class="crono-day-info">
+                <strong style="color:#fff; font-size:0.9rem;">Dia 31: Lei Orgânica do TCE-GO (Lei 16.168/07)</strong>
+                <span style="color:var(--text-muted); font-size:0.75rem;">Organização e Competências</span>
+              </div>
+              <span class="crono-badge-go">Estudar Agora ➔</span>
+            </div>
+            <div class="crono-day-item" onclick="showView('debates', 3)">
+              <div class="crono-day-info">
+                <strong style="color:#fff; font-size:0.9rem;">Sábado: Debate 3 em Trio</strong>
+                <span style="color:var(--text-muted); font-size:0.75rem;">Sabatina sobre Finanças e LRF</span>
+              </div>
+              <span class="crono-badge-go">Abrir Debate ➔</span>
+            </div>
+          </div>
+
+          <!-- SEMANAS 7 E 8 -->
+          <div class="crono-week-box">
+            <div class="crono-week-top">
+              <span>Semanas 7 e 8: Redação FCC & Simulados</span>
+              <span style="color:var(--gold);">Dias 43 a 80</span>
+            </div>
+            <div class="crono-day-item" onclick="showLevel(4, 'n4a1')">
+              <div class="crono-day-info">
+                <strong style="color:#fff; font-size:0.9rem;">Dia 43: Esqueleto Coringa da Redação FCC</strong>
+                <span style="color:var(--text-muted); font-size:0.75rem;">30 Linhas em 4 Parágrafos</span>
+              </div>
+              <span class="crono-badge-go">Estudar Agora ➔</span>
+            </div>
+            <div class="crono-day-item" onclick="showView('redacao')">
+              <div class="crono-day-info">
+                <strong style="color:#fff; font-size:0.9rem;">Dia 45: Treino de Redação no Editor</strong>
+                <span style="color:var(--text-muted); font-size:0.75rem;">Redação com repertório de John Rawls</span>
+              </div>
+              <span class="crono-badge-go">Abrir Editor ➔</span>
+            </div>
+            <div class="crono-day-item" onclick="showView('simulados')">
+              <div class="crono-day-info">
+                <strong style="color:#fff; font-size:0.9rem;">Dia 47: Bateria de Simulados FCC</strong>
+                <span style="color:var(--text-muted); font-size:0.75rem;">Questões comentadas com gabarito</span>
+              </div>
+              <span class="crono-badge-go">Fazer Simulado ➔</span>
+            </div>
+          </div>
+
+        </div>
+      `;
+    }
+
+    function renderSimulados(container) {
+      container.innerHTML = `
+        <div style="background:var(--bg-card); border:1px solid var(--border-color); border-radius:var(--radius-lg); padding:20px;">
+          <h1 style="font-size:1.5rem; font-weight:800; color:#fff; margin-bottom:4px;">Simulado FCC de Fixação</h1>
+          <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:16px;">Teste seus conhecimentos com questões no formato da banca.</p>
+
+          <div style="background:#090e1a; border:1px solid var(--border-color); border-radius:var(--radius-md); padding:16px; margin-bottom:14px;">
+            <span style="font-size:0.72rem; font-weight:800; color:var(--primary-light);">QUESTÃO 1 • DIREITO ADMINISTRATIVO</span>
+            <p style="color:#fff; margin:8px 0; font-size:0.95rem;">
+              Em relação aos requisitos ou elementos do ato administrativo, assinale a opção correta:
+            </p>
+            <div style="display:flex; flex-direction:column; gap:6px;">
+              <button class="nav-item-btn" style="background:var(--bg-surface);" onclick="alert('Incorreto. A competência em regra é irrenunciável.')">A) A competência é sempre discricionária e delegável irrestritamente.</button>
+              <button class="nav-item-btn" style="background:var(--bg-surface);" onclick="alert('Incorreto. A forma é em regra vinculada.')">B) A forma é elemento livre e de livre escolha do gestor.</button>
+              <button class="nav-item-btn" style="background:rgba(16,185,129,0.2); border:1px solid var(--green); color:var(--green-light); font-weight:800;" onclick="alert('CORRETO! A competência e a finalidade são elementos estritamente vinculados do ato.')">C) A competência e a finalidade são elementos sempre vinculados. (CORRETA)</button>
+              <button class="nav-item-btn" style="background:var(--bg-surface);" onclick="alert('Incorreto. O vício de competência relativa admite convalidação.')">D) Nenhum ato com vício admite convalidação pela Administração.</button>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderRedacao(container) {
+      const saved = localStorage.getItem(KEY_ESSAY) || "";
+      container.innerHTML = `
+        <div style="background:var(--bg-card); border:1px solid var(--border-color); border-radius:var(--radius-lg); padding:20px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:8px;">
+            <h1 style="font-size:1.5rem; font-weight:800; color:#fff;">Editor de Redação FCC (30 Linhas)</h1>
+            <span id="lines-badge" style="background:var(--bg-surface); padding:4px 12px; border-radius:999px; font-weight:800; color:var(--primary-light);">0 / 30 Linhas</span>
+          </div>
+          <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:12px;">Escreva ou cole seu rascunho. O texto fica salvo automaticamente no seu aparelho.</p>
+
+          <textarea class="essay-box" id="essay-text" placeholder="Comece sua redação aqui..." oninput="onEssayChange()">${saved}</textarea>
+
+          <div style="display:flex; gap:10px; margin-top:12px;">
+            <button class="btn-resume" onclick="localStorage.setItem(KEY_ESSAY, document.getElementById('essay-text').value); alert('Salvo no dispositivo com sucesso!')">💾 Salvar Rascunho</button>
+            <button class="btn-resume" style="background:var(--bg-surface); color:#fff; border:1px solid var(--border-color);" onclick="document.getElementById('essay-text').value = ''; onEssayChange();">🗑️ Limpar</button>
+          </div>
+        </div>
+      `;
+      onEssayChange();
+    }
+
+    function onEssayChange() {
+      const t = document.getElementById("essay-text");
+      const b = document.getElementById("lines-badge");
+      if (!t || !b) return;
+      const count = t.value.split("\n").length;
+      b.innerText = `${count} / 30 Linhas`;
+      if (count >= 25 && count <= 30) {
+        b.style.background = "var(--green)";
+        b.style.color = "#064e3b";
+      } else {
+        b.style.background = "var(--bg-surface)";
+        b.style.color = "var(--primary-light)";
+      }
+      localStorage.setItem(KEY_ESSAY, t.value);
+    }
+
+    function renderGlossario(container) {
+      container.innerHTML = `
+        <div style="background:var(--bg-card); border:1px solid var(--border-color); border-radius:var(--radius-lg); padding:20px;">
+          <h1 style="font-size:1.5rem; font-weight:800; color:#fff; margin-bottom:8px;">Glossário Jurídico Descomplicado</h1>
+          <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:16px;">Mnemônicos e termos fundamentais para não errar termos técnicos.</p>
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <div style="background:#090e1a; padding:12px; border-radius:var(--radius-sm); border:1px solid var(--border-color);">
+              <strong style="color:var(--primary-light);">CO-FI-FO-MO-OB:</strong> Elementos do Ato (Competência, Finalidade, Forma, Motivo, Objeto).
+            </div>
+            <div style="background:#090e1a; padding:12px; border-radius:var(--radius-sm); border:1px solid var(--border-color);">
+              <strong style="color:var(--gold);">LIMPE:</strong> Princípios Constitucionais (Legalidade, Impessoalidade, Moralidade, Publicidade, Eficiência - Art. 37 CF).
+            </div>
+            <div style="background:#090e1a; padding:12px; border-radius:var(--radius-sm); border:1px solid var(--border-color);">
+              <strong style="color:var(--green-light);">PATI:</strong> Atributos do Ato (Presunção de Legitimidade, Autoexecutoriedade, Tipicidade, Imperatividade).
+            </div>
+            <div style="background:#090e1a; padding:12px; border-radius:var(--radius-sm); border:1px solid var(--border-color);">
+              <strong style="color:var(--purple);">PODC:</strong> Funções Administrativas (Planejamento, Organização, Direção e Controle).
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderManual(container) {
+      container.innerHTML = `
+        <div style="background:var(--bg-card); border:1px solid var(--border-color); border-radius:var(--radius-lg); padding:20px;">
+          <h1 style="font-size:1.5rem; font-weight:800; color:#fff; margin-bottom:8px;">Manual do Zero (Padeiro ao TCE-GO)</h1>
+          <p style="font-size:0.9rem; color:#cbd5e1; line-height:1.6; margin-bottom:14px;">
+            Você não precisa de faculdade de Direito para ser aprovado. Siga o roteiro passo a passo: comece pelo Nível 1, assista uma aula por dia com o caderno na mão, faça a sabatina do debate com o seu grupo no fim de semana e treine uma redação semanalmente no laboratório.
+          </p>
+          <button class="btn-resume" onclick="showLevel(1)">▶ Começar Agora no Nível 1</button>
+        </div>
+      `;
+    }
+
+    function renderLinks(container) {
+      container.innerHTML = `
+        <div style="background:var(--bg-card); border:1px solid var(--border-color); border-radius:var(--radius-lg); padding:20px;">
+          <h1 style="font-size:1.5rem; font-weight:800; color:#fff; margin-bottom:12px;">Links Oficiais do Concurso</h1>
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            <a href="https://www.concursosfcc.com.br/concursos/tcego125/edital_de_abertura_versaex771_o_15_09_2026_-_consolidado_com_retificacoes__1_.pdf" target="_blank" class="nav-item-btn" style="background:#090e1a; color:#fff;">📄 Edital Consolidado FCC (PDF) ↗</a>
+            <a href="https://legisla.casacivil.go.gov.br/pesquisa_legislacao/102047/lei-20756" target="_blank" class="nav-item-btn" style="background:#090e1a; color:#fff;">⚖️ Estatuto dos Servidores de GO (Lei 20.756) ↗</a>
+            <a href="https://legisla.casacivil.go.gov.br/pesquisa_legislacao/82155/lei-16168" target="_blank" class="nav-item-btn" style="background:#090e1a; color:#fff;">⚖️ Lei Orgânica do TCE-GO (Lei 16.168) ↗</a>
+          </div>
+        </div>
+      `;
+    }
+
+    // INICIALIZAÇÃO
+    window.addEventListener("DOMContentLoaded", initApp);
+  </script>
+</body>
+</html>
