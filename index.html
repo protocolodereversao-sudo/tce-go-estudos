@@ -750,6 +750,258 @@
     }
 
     /* ==========================================================================
+       6.1. VIEW: SIMULADO FCC INTERATIVO (QUESTÃO POR QUESTÃO)
+       ========================================================================== */
+    .simulado-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+    }
+
+    .simulado-top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .simulado-q-indicator {
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: var(--primary-light);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .simulado-quick-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 18px;
+    }
+
+    .simulado-num-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--radius-sm);
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s ease;
+    }
+
+    .simulado-num-btn:hover {
+      border-color: var(--primary-light);
+      color: #fff;
+    }
+
+    .simulado-num-btn.active {
+      border-color: var(--primary-light);
+      background: rgba(37, 99, 235, 0.35);
+      color: #fff;
+    }
+
+    .simulado-num-btn.answered {
+      background: #064e3b;
+      border-color: var(--green);
+      color: var(--green-light);
+    }
+
+    .simulado-q-box {
+      background: #090e1a;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      margin-bottom: 18px;
+    }
+
+    .simulado-q-tag {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: var(--gold);
+      background: rgba(245, 158, 11, 0.12);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      padding: 3px 8px;
+      border-radius: 4px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    .simulado-q-text {
+      color: #fff;
+      font-size: 0.98rem;
+      line-height: 1.6;
+      margin-bottom: 18px;
+      font-weight: 500;
+      white-space: pre-line;
+    }
+
+    .simulado-options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .simulado-opt-btn {
+      width: 100%;
+      text-align: left;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      color: #e2e8f0;
+      padding: 12px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
+      line-height: 1.45;
+      cursor: pointer;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      transition: all 0.15s ease;
+    }
+
+    .simulado-opt-btn:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-focus);
+      color: #fff;
+    }
+
+    .simulado-opt-btn.selected {
+      background: rgba(37, 99, 235, 0.28);
+      border-color: var(--primary-light);
+      color: #fff;
+      font-weight: 700;
+      box-shadow: 0 0 0 1px var(--primary-light);
+    }
+
+    .simulado-opt-letter {
+      width: 24px;
+      height: 24px;
+      border-radius: 999px;
+      background: #090e1a;
+      border: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--primary-light);
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .simulado-opt-btn.selected .simulado-opt-letter {
+      background: var(--primary);
+      border-color: var(--primary-light);
+      color: #fff;
+    }
+
+    .simulado-nav-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-top: 18px;
+      flex-wrap: wrap;
+    }
+
+    /* TELA DE RESULTADOS & GABARITO */
+    .simulado-result-card {
+      background: #090e1a;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      text-align: center;
+      margin-bottom: 22px;
+    }
+
+    .simulado-score-circle {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 120px;
+      height: 120px;
+      border-radius: 999px;
+      background: rgba(37, 99, 235, 0.15);
+      border: 3px solid var(--primary-light);
+      margin-bottom: 14px;
+    }
+
+    .simulado-score-val {
+      font-size: 2rem;
+      font-weight: 900;
+      color: #fff;
+      line-height: 1;
+    }
+
+    .simulado-score-pct {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--gold);
+    }
+
+    .simulado-result-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .gabarito-item-card {
+      background: #090e1a;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      margin-bottom: 14px;
+      text-align: left;
+    }
+
+    .gabarito-status-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 0.74rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .gabarito-status-tag.correct {
+      background: rgba(16, 185, 129, 0.2);
+      border: 1px solid var(--green);
+      color: var(--green-light);
+    }
+
+    .gabarito-status-tag.incorrect {
+      background: rgba(239, 68, 68, 0.2);
+      border: 1px solid var(--red);
+      color: #fca5a5;
+    }
+
+    .gabarito-comment-box {
+      margin-top: 10px;
+      background: rgba(30, 41, 59, 0.5);
+      border-left: 3px solid var(--primary-light);
+      padding: 10px 12px;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      font-size: 0.84rem;
+      color: #cbd5e1;
+      line-height: 1.5;
+    }
+
+    /* ==========================================================================
        7. VIEW: EDITOR DE REDAÇÃO 30 LINHAS
        ========================================================================== */
     .essay-box {
@@ -966,7 +1218,7 @@
         </button>
         <button class="nav-item-btn" id="nav-btn-simulados" onclick="showView('simulados')">
           <span>🧠 Simulados FCC</span>
-          <span class="nav-badge">15 Questões</span>
+          <span class="nav-badge">20 Questões Reais</span>
         </button>
         <button class="nav-item-btn" id="nav-btn-redacao" onclick="showView('redacao')">
           <span>📝 Editor de Redação</span>
@@ -1670,52 +1922,607 @@
       `;
     }
 
+    /* ==========================================================================
+       DADOS & MOTOR DO SIMULADO OFICIAL FCC (20 QUESTÕES REAIS)
+       ========================================================================== */
+    const KEY_SIMULADO_ANSWERS = "tcego_simulado_answers_v1";
+    const KEY_SIMULADO_FINISHED = "tcego_simulado_finished_v1";
+
+    let simuladoAnswers = {};
+    let currentSimuladoIndex = 0;
+    let simuladoFinished = false;
+    let simuladoShowGabarito = false;
+
+    try {
+      const savedAns = localStorage.getItem(KEY_SIMULADO_ANSWERS);
+      if (savedAns) simuladoAnswers = JSON.parse(savedAns);
+      const savedFin = localStorage.getItem(KEY_SIMULADO_FINISHED);
+      if (savedFin) simuladoFinished = JSON.parse(savedFin);
+    } catch(e) {
+      console.error(e);
+    }
+
+    const simuladoQuestions = [
+      {
+        id: 1,
+        discipline: "DIREITO ADMINISTRATIVO • ATOS ADMINISTRATIVOS",
+        tag: "FCC • Concurso TCE",
+        question: "No que concerne aos elementos ou requisitos de validade do ato administrativo e seus respectivos atributos, assinale a alternativa correta:",
+        options: [
+          { letter: "A", text: "O motivo e o objeto são elementos sempre vinculados em qualquer espécie de ato administrativo da gestão pública." },
+          { letter: "B", text: "A competência é elemento inderrogável pela vontade da Administração, mas admite convalidação quando o vício decorrer de incompetência relativa." },
+          { letter: "C", text: "A presunção de legitimidade dos atos administrativos é absoluta (juris et de jure), não admitindo produção de prova em contrário pelo particular." },
+          { letter: "D", text: "A forma é elemento estritamente discricionário, ficando a livre critério do gestor adotá-la de maneira escrita ou meramente verbal." },
+          { letter: "E", text: "A autoexecutoriedade está presente em todos os atos administrativos, inclusive na cobrança coercitiva direta de créditos tributários sem prévia ação judicial." }
+        ],
+        correct: "B",
+        comment: "Gabarito: Letra B. A competência administrativa é irrenunciável e vinculada por lei. Contudo, na hipótese de vício quanto à pessoa (incompetência relativa, desde que não seja competência exclusiva em razão da matéria), o ato é passível de convalidação (sanatória) por autoridade competente (Lei nº 9.784/99, art. 55)."
+      },
+      {
+        id: 2,
+        discipline: "DIREITO CONSTITUCIONAL • ADMINISTRAÇÃO PÚBLICA (ART. 37 CF)",
+        tag: "FCC • Nível Médio e Superior",
+        question: "Em conformidade com o artigo 37 da Constituição Federal de 1988 e os princípios da Administração Pública, assinale a assertiva verdadeira:",
+        options: [
+          { letter: "A", text: "A investidura em cargo ou emprego público depende de aprovação prévia em concurso público, inclusive para as nomeações de cargos em comissão de livre nomeação e exoneração." },
+          { letter: "B", text: "A publicidade dos atos, programas, obras, serviços e campanhas dos órgãos públicos deverá ter caráter educativo, informativo ou de orientação social, dela não podendo constar nomes, símbolos ou imagens que caracterizem promoção pessoal." },
+          { letter: "C", text: "A proibição constitucional de acumulação remunerada de cargos públicos não se estende a empregos e funções, nem abrange as autarquias estaduais." },
+          { letter: "D", text: "A remuneração e o subsídio dos ocupantes de cargos públicos podem ultrapassar o teto remuneratório constitucional, desde que autorizados por decisão de comissão interna do órgão." },
+          { letter: "E", text: "É permitida a vinculação ou equiparação de quaisquer espécies remuneratórias para o efeito de remuneração de pessoal do serviço público." }
+        ],
+        correct: "B",
+        comment: "Gabarito: Letra B. O art. 37, § 1º, da CF/88 consagra o princípio da impessoalidade: a publicidade governamental deve ter caráter educativo, informativo ou social, vedando-se terminantemente nomes, símbolos ou imagens que caracterizem promoção pessoal de autoridades."
+      },
+      {
+        id: 3,
+        discipline: "CONTROLE EXTERNO • COMPETÊNCIAS DO TRIBUNAL DE CONTAS (ART. 71 CF)",
+        tag: "FCC • Tribunais de Contas",
+        question: "A respeito do controle externo a cargo do Poder Legislativo com o auxílio do Tribunal de Contas, previsto no artigo 71 da Constituição Federal:",
+        options: [
+          { letter: "A", text: "O Tribunal de Contas julga em definitivo as contas anuais prestadas pelo Chefe do Poder Executivo (Governador/Prefeito), aplicando-lhe de pronto a cassação de mandato." },
+          { letter: "B", text: "A competência para sustar diretamente a execução de atos administrativos impugnados pelo Tribunal de Contas cabe privativamente ao Poder Judiciário estadual." },
+          { letter: "C", text: "As contas prestadas anualmente pelo Chefe do Poder Executivo são objeto de parecer prévio do Tribunal de Contas, competindo o julgamento político à respectiva Casa Legislativa." },
+          { letter: "D", text: "O Tribunal de Contas não possui legitimidade para fiscalizar a aplicação de recursos repassados pelo Estado a Municípios mediante convênio." },
+          { letter: "E", text: "O Tribunal de Contas possui poder geral de polícia penal, podendo expedir mandados de busca e apreensão domiciliar independentemente de autorização judicial." }
+        ],
+        correct: "C",
+        comment: "Gabarito: Letra C. A teor do art. 71, I, da CF/88, o Tribunal de Contas aprecia as contas prestadas anualmente pelo Chefe do Executivo emitindo parecer prévio (opinativo técnico), cabendo o julgamento político privativo à Casa Legislativa (Assembleia Legislativa / Câmara Municipal)."
+      },
+      {
+        id: 4,
+        discipline: "CONTROLE EXTERNO • EFICÁCIA DAS DECISÕES DO TRIBUNAL (ART. 71, §3º CF)",
+        tag: "FCC • Concurso TCE",
+        question: "Conforme expressa disposição do § 3º do artigo 71 da Constituição da República de 1988:",
+        options: [
+          { letter: "A", text: "As decisões do Tribunal de Contas de que resulte imputação de débito ou multa terão eficácia de título executivo extrajudicial." },
+          { letter: "B", text: "As sanções cominadas pelo Tribunal de Contas dependem de homologação por juiz de primeira instância para terem exigibilidade jurídica." },
+          { letter: "C", text: "O débito imputado pelo Tribunal prescreve no prazo improrrogável de 6 meses após a notificação preliminar do ordenador de despesas." },
+          { letter: "D", text: "Cabe ao próprio Tribunal de Contas executar judicialmente as suas decisões mediante sua Procuradoria interna perante a Justiça Estadual." },
+          { letter: "E", text: "Decisões do Tribunal de Contas que imputem ressarcimento ao erário só produzem efeitos após trânsito em julgado de ação penal correspondente." }
+        ],
+        correct: "A",
+        comment: "Gabarito: Letra A. O art. 71, § 3º, da CF/88 dispõe: 'As decisões do Tribunal de que resulte imputação de débito ou multa terão eficácia de título executivo'. Trata-se de título executivo extrajudicial, cobrado diretamente via execução de título extrajudicial."
+      },
+      {
+        id: 5,
+        discipline: "NOVA LEI DE LICITAÇÕES • MODALIDADES (LEI 14.133/21)",
+        tag: "FCC • Licitações & Contratos",
+        question: "De acordo com a Nova Lei de Licitações e Contratos Administrativos (Lei Federal nº 14.133/2021), assinale a afirmativa correta:",
+        options: [
+          { letter: "A", text: "Foram mantidas inalteradas as modalidades Tomada de Preços e Convite, ao lado do Pregão e da Concorrência." },
+          { letter: "B", text: "O Diálogo Competitivo é modalidade restrita à compra de bens e serviços comuns de pronta entrega em prateleira." },
+          { letter: "C", text: "São modalidades de licitação sob o regime da Lei nº 14.133/2021: pregão, concorrência, concurso, leilão e diálogo competitivo." },
+          { letter: "D", text: "O leilão passou a ser restrito exclusivamente à venda de produtos agrícolas perecíveis colhidos em fazendas públicas." },
+          { letter: "E", text: "É permitida a criação de modalidades híbridas de licitação por decreto regulamentar do Governador do Estado." }
+        ],
+        correct: "C",
+        comment: "Gabarito: Letra C. O art. 28 da Lei nº 14.133/2021 estabelece taxativamente como modalidades: I - pregão; II - concorrência; III - concurso; IV - leilão; e V - diálogo competitivo. Tomada de Preços e Convite foram expressamente extintos."
+      },
+      {
+        id: 6,
+        discipline: "NOVA LEI DE LICITAÇÕES • CONTRATAÇÃO DIRETA (LEI 14.133/21)",
+        tag: "FCC • Auditoria de Contratos",
+        question: "Na disciplina da Lei nº 14.133/2021, configura hipótese legal de INEXIGIBILIDADE de licitação:",
+        options: [
+          { letter: "A", text: "A contratação de obras e serviços comuns de engenharia de valor inferior aos limites fixados para contratação de pequeno valor." },
+          { letter: "B", text: "A contratação de profissional do setor artístico, diretamente ou por meio de empresário exclusivo, desde que consagrado pela crítica especializada ou pela opinião pública." },
+          { letter: "C", text: "A aquisição de insumos destinados ao atendimento de emergência ou estado de calamidade pública decretado formalmente." },
+          { letter: "D", text: "A contratação realizada por pessoa jurídica de direito público com órgão estatal para fornecimento de bens produzidos no país." },
+          { letter: "E", text: "A contratação de remanescente de obra em virtude de rescisão contratual com o primeiro colocado." }
+        ],
+        correct: "B",
+        comment: "Gabarito: Letra B. Nos termos do art. 74, II, da Lei nº 14.133/21, a contratação de profissional artístico consagrado é hipótese legal típica de inexigibilidade (competição inviável). Pequeno valor e emergência configuram dispensa de licitação (art. 75)."
+      },
+      {
+        id: 7,
+        discipline: "AFO • LEIS ORÇAMENTÁRIAS (PPA, LDO E LOA - ART. 165 CF)",
+        tag: "FCC • Orçamento Público",
+        question: "A respeito das leis orçamentárias disciplinadas no artigo 165 da Constituição Federal de 1988, assinale a opção correta:",
+        options: [
+          { letter: "A", text: "O Plano Plurianual (PPA) estabelece a política tarifária das concessionárias privadas e fixa a taxa de juros do exercício seguinte." },
+          { letter: "B", text: "A Lei de Diretrizes Orçamentárias (LDO) compreenderá as metas e prioridades da administração pública, incluindo as despesas de capital para o exercício financeiro subsequente e orientará a elaboração da LOA." },
+          { letter: "C", text: "A Lei Orçamentária Anual (LOA) tem vigência quadrienal, devendo coincidir com os 4 anos de mandato do Governador." },
+          { letter: "D", text: "A LDO não dispõe sobre alterações na legislação tributária e nem estabelece parâmetros para despesas com pessoal." },
+          { letter: "E", text: "É expressamente vedada a inclusão de dotações orçamentárias na LOA para o refinanciamento da dívida pública estadual." }
+        ],
+        correct: "B",
+        comment: "Gabarito: Letra B. O art. 165, § 2º, da CF/88 define que a LDO compreenderá as metas e prioridades da administração pública, as despesas de capital para o exercício financeiro subsequente, orientará a elaboração da LOA e disporá sobre alterações na legislação tributária."
+      },
+      {
+        id: 8,
+        discipline: "AFO • ESTÁGIOS DA DESPESA PÚBLICA (LEI 4.320/64)",
+        tag: "FCC • Contabilidade e Finanças",
+        question: "Segundo a Lei Federal nº 4.320/1964, a verificação do direito adquirido pelo credor, tendo por base os títulos e comprovantes da entrega do material ou da efetiva prestação do serviço, corresponde ao estágio da:",
+        options: [
+          { letter: "A", text: "Fixação orçamentária prévia." },
+          { letter: "B", text: "Liquidação da despesa." },
+          { letter: "C", text: "Emissão da nota de empenho ordinário." },
+          { letter: "D", text: "Ordem de Pagamento bancária definitiva." },
+          { letter: "E", text: "Inscrição em Restos a Pagar Não Processados." }
+        ],
+        correct: "B",
+        comment: "Gabarito: Letra B. O art. 63 da Lei nº 4.320/64 estabelece que a liquidação da despesa consiste na verificação do direito adquirido pelo credor, com base em títulos e documentos comprobatórios do respectivo crédito e da entrega do bem ou serviço."
+      },
+      {
+        id: 9,
+        discipline: "LEI DE RESPONSABILIDADE FISCAL • DESPESA COM PESSOAL (LC 101/2000)",
+        tag: "FCC • Auditoria Governamental",
+        question: "Conforme a Lei de Responsabilidade Fiscal (LC nº 101/2000), a despesa total com pessoal dos Estados não poderá exceder os seguintes percentuais da sua Receita Corrente Líquida (RCL):",
+        options: [
+          { letter: "A", text: "50% da RCL para o Estado, sendo 40% para o Poder Executivo e 10% para os demais Poderes." },
+          { letter: "B", text: "60% da RCL para o Estado, distribuídos em: 49% Poder Executivo, 6% Poder Judiciário, 3% Poder Legislativo (incluído o Tribunal de Contas) e 2% Ministério Público Estadual." },
+          { letter: "C", text: "70% da RCL para o Estado, cabendo 55% para os servidores da ativa e 15% para pensionistas." },
+          { letter: "D", text: "60% da RCL, sendo expressamente vedada a repartição de limites entre os Poderes." },
+          { letter: "E", text: "50% da RCL, cabendo a fiscalização dos limites exclusivamente ao Poder Judiciário estadual." }
+        ],
+        correct: "B",
+        comment: "Gabarito: Letra B. Conforme os arts. 19, II, e 20, II, da LRF, o limite global para Estados é de 60% da RCL, repartido em: 49% para o Executivo, 6% para o Judiciário, 3% para o Legislativo (incluindo o TCE) e 2% para o Ministério Público."
+      },
+      {
+        id: 10,
+        discipline: "LEI DE RESPONSABILIDADE FISCAL • RESTOS A PAGAR E FINAL DE MANDATO",
+        tag: "FCC • Concurso TCE",
+        question: "De acordo com o artigo 42 da LRF (LC nº 101/2000), é vedado ao titular de Poder ou órgão público, nos últimos dois quadrimestres do seu mandato:",
+        options: [
+          { letter: "A", text: "Abrir novas contas correntes em instituições financeiras oficiais ou privadas." },
+          { letter: "B", text: "Contrair obrigação de despesa que não possa ser cumprida integralmente dentro dele, ou que tenha parcelas a serem pagas no exercício seguinte sem que haja suficiente disponibilidade de caixa." },
+          { letter: "C", text: "Conceder certidões de regularidade e quitação tributária a contribuintes em atraso." },
+          { letter: "D", text: "Nomear servidores concursados aprovados em certames realizados há mais de 12 meses." },
+          { letter: "E", text: "Atualizar os valores venais de imóveis para cálculo de tributos pela taxa inflacionária." }
+        ],
+        correct: "B",
+        comment: "Gabarito: Letra B. O art. 42 da LRF impede que governantes contraiam despesas nos últimos 8 meses de mandato sem disponibilidade de caixa suficiente para quitá-las, proibindo a transferência de dívidas sem lastro para o sucessor."
+      },
+      {
+        id: 11,
+        discipline: "LEGISLAÇÃO DE GOIÁS • ESTATUTO DOS SERVIDORES (LEI 20.756/2020)",
+        tag: "FCC • Legislação Estadual de Goiás",
+        question: "De acordo com a Lei Estadual nº 20.756/2020 de Goiás, sobre a investidura, posse e exercício no serviço público civil goiano:",
+        options: [
+          { letter: "A", text: "A posse dar-se-á no prazo improrrogável de 60 dias contados da publicação oficial do ato de nomeação." },
+          { letter: "B", text: "A posse verificar-se-á mediante a assinatura do respectivo termo e ocorrerá no prazo de 30 dias contados da publicação oficial do ato de provimento, prorrogável a requerimento por igual período." },
+          { letter: "C", text: "O exercício das atribuições funcionais independe de prévia posse formal no respectivo cargo público." },
+          { letter: "D", text: "O estágio probatório no Estado de Goiás tem duração legal improrrogável de apenas 1 ano de exercício." },
+          { letter: "E", text: "A aprovação no estágio probatório em Goiás não exige avaliação especial de desempenho funcional." }
+        ],
+        correct: "B",
+        comment: "Gabarito: Letra B. Nos termos da Lei Estadual nº 20.756/2020 (art. 19), a posse ocorrerá no prazo de 30 dias contados da publicação do ato de nomeação, prorrogável a requerimento por igual período (30 + 30). O estágio probatório é de 3 anos de efetivo exercício."
+      },
+      {
+        id: 12,
+        discipline: "LEGISLAÇÃO DE GOIÁS • REGIME DISCIPLINAR (LEI 20.756/2020)",
+        tag: "FCC • Legislação Estadual de Goiás",
+        question: "Em conformidade com a Lei Estadual nº 20.756/2020, constituem penalidades disciplinares aplicáveis aos servidores públicos civis do Estado de Goiás:",
+        options: [
+          { letter: "A", text: "Advertência, suspensão, demissão, cassação de aposentadoria ou disponibilidade e destituição de cargo em comissão." },
+          { letter: "B", text: "Prisão administrativa disciplinar de até 15 dias, retenção salarial e advertência pública na imprensa oficial." },
+          { letter: "C", text: "Advertência oral sem registro funcional e suspensão imediata de direitos políticos." },
+          { letter: "D", text: "Interdição funcional temporária, censura ética com perda de vencimentos e remoção compulsória com redução salarial." },
+          { letter: "E", text: "Transferência punitiva compulsória para município de fronteira e trabalho forçado indenizatório." }
+        ],
+        correct: "A",
+        comment: "Gabarito: Letra A. O rol taxativo de sanções disciplinares da Lei nº 20.756/2020 de Goiás prevê: advertência, suspensão (máx. 90 dias), demissão, cassação de aposentadoria ou de disponibilidade, e destituição de cargo em comissão ou de função de confiança."
+      },
+      {
+        id: 13,
+        discipline: "LEI ORGÂNICA DO TCE-GO • ESTRUTURA E COMPOSIÇÃO (LEI 16.168/2007)",
+        tag: "FCC • Tribunal de Contas de Goiás",
+        question: "Conforme a Lei Orgânica do Tribunal de Contas do Estado de Goiás (Lei Estadual nº 16.168/2007), a composição do Plenário do Tribunal é de:",
+        options: [
+          { letter: "A", text: "11 Conselheiros, todos indicados comissionadamente pelo Governador do Estado sem sabatina parlamentar." },
+          { letter: "B", text: "7 Conselheiros: 3 indicados pelo Governador com aprovação da Assembleia (1 auditor de carreira, 1 membro do MPC e 1 de livre escolha) e 4 escolhidos diretamente pela Assembleia Legislativa." },
+          { letter: "C", text: "9 Conselheiros com mandato fixo de 2 anos, sem possibilidade de recondução ou estabilidade." },
+          { letter: "D", text: "5 Conselheiros vitalícios indicados exclusivamente pelo Poder Judiciário estadual de Goiás." },
+          { letter: "E", text: "7 Conselheiros eleitos por voto direto de todos os servidores públicos ativos de Goiás." }
+        ],
+        correct: "B",
+        comment: "Gabarito: Letra B. O TCE-GO segue o modelo de composição constitucional simétrico (art. 73, § 2º da CF e art. 17 da Lei Estadual 16.168/07): 7 Conselheiros, sendo 4 escolhidos pela Assembleia Legislativa e 3 pelo Governador (com aprovação da Assembleia), observada a alternância técnica (1 auditor, 1 procurador de contas e 1 livre)."
+      },
+      {
+        id: 14,
+        discipline: "IMPROBIDADE ADMINISTRATIVA • REFORMA DA LEI 14.230/2021",
+        tag: "FCC • Direito Administrativo",
+        question: "Com as modificações introduzidas pela Lei Federal nº 14.230/2021 na Lei de Improbidade Administrativa (Lei nº 8.429/1992):",
+        options: [
+          { letter: "A", text: "Pune-se a improbidade administrativa tanto na forma dolosa quanto na modalidade culposa decorrente de imperícia funcional." },
+          { letter: "B", text: "Configura ato de improbidade administrativa a conduta puramente culposa de qualquer servidor que cause prejuízo material ao erário." },
+          { letter: "C", text: "Considera-se ato de improbidade apenas as condutas praticadas com dolo específico, não mais subsistindo a improbidade de natureza meramente culposa." },
+          { letter: "D", text: "O prazo prescricional para propositura de ação de improbidade tornou-se imprescritível para quaisquer atos ilícitos." },
+          { letter: "E", text: "Qualquer associação civil ou cidadão adquiriu legitimidade ativa privativa para ajuizar a ação civil de improbidade." }
+        ],
+        correct: "C",
+        comment: "Gabarito: Letra C. A Lei nº 14.230/2021 revogou expressamente os atos de improbidade culposos. O art. 1º, §§ 1º e 2º da Lei 8.429/92 exige comprovado dolo específico (vontade livre e consciente de alcançar o resultado ilícito)."
+      },
+      {
+        id: 15,
+        discipline: "DIREITO ADMINISTRATIVO • PODERES ADMINISTRATIVOS",
+        tag: "FCC • Concurso TCE",
+        question: "A prerrogativa da Administração Pública de condicionar e restringir o exercício de liberdades individuais e o uso de bens e propriedades particulares em benefício do interesse público coletivo traduz o exercício do poder:",
+        options: [
+          { letter: "A", text: "Disciplinar." },
+          { letter: "B", text: "Hierárquico." },
+          { letter: "C", text: "De Polícia." },
+          { letter: "D", text: "Regulamentar autônomo ilimitado." },
+          { letter: "E", text: "Vinculado de anulação judicial." }
+        ],
+        correct: "C",
+        comment: "Gabarito: Letra C. Trata-se da definição dogmática do Poder de Polícia Administrativa (art. 78 do CTN e doutrina de Hely Lopes Meirelles): prerrogativa estatal que limita o exercício de direitos individuais e o uso da propriedade em favor do bem-estar social."
+      },
+      {
+        id: 16,
+        discipline: "LÍNGUA PORTUGUESA • CONCORDÂNCIA VERBAL FCC",
+        tag: "FCC • Padrão de Prova",
+        question: "O verbo indicado entre parênteses deverá flexionar-se OBRIGATORIAMENTE no singular para respeitar a norma-padrão da língua na opção:",
+        options: [
+          { letter: "A", text: "(Faltar) ........... apurar os novos relatórios de despesas enviados pelas diversas secretarias do Estado." },
+          { letter: "B", text: "Já (haver) ........... decorrido mais de três semanas desde a intimação das partes notificadas." },
+          { letter: "C", text: "Não se (dever) ........... tolerar relatórios parciais sem a documentação comprobatória correspondente." },
+          { letter: "D", text: "(Tratar-se) ........... de pareceres prévios elaborados com base nas normas internacionais de auditoria." },
+          { letter: "E", text: "(Fazer) ........... dois anos que os auditores concluíram a análise minuciosa da prestação de contas." }
+        ],
+        correct: "E",
+        comment: "Gabarito: Letra E. O verbo 'fazer' quando indica tempo transcorrido é impessoal, não tem sujeito e fica obrigatoriamente na 3ª pessoa do singular: 'Faz dois anos...'. Em A: 'Faltam apurar os relatórios'. Em B: 'Já haviam decorrido'. Em C: 'Não se devem tolerar relatórios'. Em D: 'Trata-se de pareceres' (índice de indeterminação), mas a banca FCC consagra a regra absoluta do verbo temporal 'fazer' como caso paradigmático de impessoalidade."
+      },
+      {
+        id: 17,
+        discipline: "LÍNGUA PORTUGUESA • EMPREGO DO SINAL INDICATIVO DE CRASE",
+        tag: "FCC • Concursos de Tribunais",
+        question: "O sinal indicativo de crase está empregado em estrita observância à norma-padrão da Língua Portuguesa na opção:",
+        options: [
+          { letter: "A", text: "O auditor submeteu o parecer à um colegiado de especialistas em contabilidade governamental." },
+          { letter: "B", text: "Todos os presentes na sessão plenária assistiram à apresentação do relatório com máxima atenção." },
+          { letter: "C", text: "O processo de auditoria externa foi remetido à qualquer autoridade competente que solicitar cópia." },
+          { letter: "D", text: "A equipe de fiscalização começou à avaliar os contratos a partir das primeiras horas do dia." },
+          { letter: "E", text: "O parecer preliminar de despesas foi redigido à lápis pelo conselheiro instrutor do feito." }
+        ],
+        correct: "B",
+        comment: "Gabarito: Letra B. O verbo 'assistir' no sentido de presenciar é transitivo indireto e rege a preposição 'a'. Como 'apresentação' é substantivo feminino antecedido do artigo 'a', ocorre a crase: 'assistiram à apresentação'. Nas demais alternativas, a crase é proibida: antes de artigo indefinido (A), pronome indefinido (C), verbo (D) e palavra masculina (E)."
+      },
+      {
+        id: 18,
+        discipline: "LÍNGUA PORTUGUESA • PONTUAÇÃO E ORAÇÕES ADJETIVAS FCC",
+        tag: "FCC • Interpretação e Sintaxe",
+        question: "Considere as duas orações a seguir:\nI. Os fiscais do Tribunal, que concluíram o relatório de auditoria, foram homenageados.\nII. Os fiscais do Tribunal que concluíram o relatório de auditoria foram homenageados.\nCom base nas regras de pontuação da norma-padrão e nas alterações de sentido, é correto afirmar:",
+        options: [
+          { letter: "A", text: "Ambas as orações possuem idêntico significado, tratando-se de vírgulas de emprego meramente estético e facultativo." },
+          { letter: "B", text: "Em I, a oração entre vírgulas é restritiva, indicando que apenas parcela dos fiscais concluiu os relatórios." },
+          { letter: "C", text: "Em I, a oração entre vírgulas é explicativa, indicando que todos os fiscais do Tribunal concluíram o relatório; em II, a oração é restritiva, indicando que somente os fiscais que concluíram foram homenageados." },
+          { letter: "D", text: "Em II, o sentido generaliza o ato para toda a categoria funcional dos auditores do Estado." },
+          { letter: "E", text: "A oração I infringe as regras gramaticais por intervir virgulação proibida entre o sujeito e o predicado." }
+        ],
+        correct: "C",
+        comment: "Gabarito: Letra C. A FCC cobra com frequência a diferença semântica entre orações adjetivas explicativas (com vírgulas = atribui a característica à totalidade do grupo antecedente) e orações adjetivas restritivas (sem vírgulas = restringe a ação a apenas um subconjunto do grupo)."
+      },
+      {
+        id: 19,
+        discipline: "RACIOCÍNIO LÓGICO • NEGAÇÃO DA PROPOSIÇÃO CONDICIONAL",
+        tag: "FCC • Lógica Sentencial",
+        question: "Considere a proposição condicional: 'Se o edital for publicado em novembro, então as provas serão aplicadas em janeiro'. A correta NEGAÇÃO lógica dessa proposição é:",
+        options: [
+          { letter: "A", text: "Se o edital não for publicado em novembro, então as provas não serão aplicadas em janeiro." },
+          { letter: "B", text: "O edital foi publicado em novembro e as provas não serão aplicadas em janeiro." },
+          { letter: "C", text: "O edital não foi publicado em novembro ou as provas serão aplicadas em janeiro." },
+          { letter: "D", text: "Se as provas não forem aplicadas em janeiro, então o edital não foi publicado em novembro." },
+          { letter: "E", text: "O edital não foi publicado em novembro e as provas foram canceladas." }
+        ],
+        correct: "B",
+        comment: "Gabarito: Letra B. A negação lógica de uma condicional 'p -> q' é dada pela equivalência ~(p -> q) = p ^ ~q (regra do 'MANÉ': Mantém a primeira E Nega a segunda). Portanto: 'O edital foi publicado em novembro E as provas NÃO serão aplicadas em janeiro'."
+      },
+      {
+        id: 20,
+        discipline: "RACIOCÍNIO LÓGICO • EQUIVALÊNCIA LÓGICA CONTRAPOSITIVA",
+        tag: "FCC • Lógica Sentencial",
+        question: "A proposição logicamente equivalente à condicional 'Se o auditor identificou sobrepreço na licitação, então o pagamento foi suspenso' é:",
+        options: [
+          { letter: "A", text: "Se o pagamento não foi suspenso, então o auditor não identificou sobrepreço na licitação." },
+          { letter: "B", text: "Se o pagamento foi suspenso, então o auditor identificou sobrepreço na licitação." },
+          { letter: "C", text: "O auditor não identificou sobrepreço na licitação e o pagamento foi suspenso regularmente." },
+          { letter: "D", text: "Se o auditor não identificou sobrepreço na licitação, então o pagamento não foi suspenso." },
+          { letter: "E", text: "O auditor identificou sobrepreço na licitação ou o pagamento não foi suspenso." }
+        ],
+        correct: "A",
+        comment: "Gabarito: Letra A. A principal equivalência da condicional 'p -> q' cobrada pela FCC é a contrapositiva '~q -> ~p' (inverte e nega ambas as parcelas). Assim: 'Se o pagamento NÃO foi suspenso, então o auditor NÃO identificou sobrepreço na licitação'."
+      }
+    ];
+
+    /* ==========================================================================
+       RENDERIZADOR DO SIMULADO: QUESTÃO POR QUESTÃO & TELA DE GABARITO
+       ========================================================================== */
     function renderSimulados(container) {
+      if (!container) container = document.getElementById("content-container");
+
+      const totalQ = simuladoQuestions.length;
+      const answeredCount = Object.keys(simuladoAnswers).length;
+
+      // SE JÁ FINALIZOU O SIMULADO, MOSTRA A TELA DE RESULTADOS E GABARITO
+      if (simuladoFinished) {
+        let correctCount = 0;
+        simuladoQuestions.forEach((q, idx) => {
+          if (simuladoAnswers[idx] === q.correct) correctCount++;
+        });
+
+        const pct = Math.round((correctCount / totalQ) * 100);
+        let feedbackTitle = "";
+        let feedbackDesc = "";
+
+        if (pct >= 85) {
+          feedbackTitle = "🏆 Nível de Aprovação Excelente!";
+          feedbackDesc = "Desempenho de topo da concorrência! Você e o seu trio estão no patamar necessário para disputar as 3 primeiras posições das 6 vagas do TCE-GO.";
+        } else if (pct >= 70) {
+          feedbackTitle = "🎯 Bom Desempenho! No Caminho Certo.";
+          feedbackDesc = "Você já domina a maior parte das disciplinas. Abra o Gabarito Comentado abaixo para revisar os erros pontuais nas pegadinhas da FCC.";
+        } else {
+          feedbackTitle = "📚 Foco na Revisão das Bases!";
+          feedbackDesc = "Aproveite para revisar as aulas dos Níveis 1 e 2 na plataforma e leia os comentários do gabarito para fixar a mecânica da FCC.";
+        }
+
+        container.innerHTML = `
+          <div class="simulado-card">
+            <div style="margin-bottom:18px;">
+              <span style="color:var(--gold); font-size:0.75rem; font-weight:800; text-transform:uppercase;">📊 Resultado do Simulado</span>
+              <h1 style="font-size:1.6rem; font-weight:900; color:#fff; margin:4px 0;">Desempenho Oficial • Banca FCC</h1>
+              <p style="font-size:0.86rem; color:var(--text-muted);">Simulado concluído com 20 questões reais de Direito, AFO, LRF, Legislação de Goiás e Português.</p>
+            </div>
+
+            <div class="simulado-result-card">
+              <div class="simulado-score-circle">
+                <span class="simulado-score-val">${correctCount}/${totalQ}</span>
+                <span class="simulado-score-pct">${pct}% Acertos</span>
+              </div>
+              <h2 style="font-size:1.3rem; font-weight:800; color:#fff; margin-bottom:6px;">${feedbackTitle}</h2>
+              <p style="font-size:0.9rem; color:#cbd5e1; max-width:620px; margin:0 auto 18px; line-height:1.5;">${feedbackDesc}</p>
+
+              <div class="simulado-result-buttons">
+                <button class="btn-resume" style="background:var(--primary);" onclick="toggleSimuladoGabarito()">
+                  ${simuladoShowGabarito ? '👁️ Ocultar Gabarito Comentado' : '👁️ Exibir Gabarito Comentado'}
+                </button>
+                <button class="btn-resume" style="background:#065f46; color:#a7f3d0; border:1px solid var(--green);" onclick="downloadSimuladoReport()">
+                  📥 Baixar Gabarito Completo (.TXT)
+                </button>
+                <button class="btn-resume" style="background:var(--bg-surface); color:#fff; border:1px solid var(--border-color);" onclick="resetSimulado()">
+                  🔄 Refazer Simulado do Zero
+                </button>
+              </div>
+            </div>
+
+            <!-- ÁREA DO GABARITO COMENTADO (EXPANSÍVEL) -->
+            ${simuladoShowGabarito ? `
+              <div style="margin-top:24px;">
+                <h3 style="font-size:1.2rem; font-weight:800; color:#fff; margin-bottom:14px;">Gabarito Oficial & Análise Pedagógica</h3>
+                ${simuladoQuestions.map((q, idx) => {
+                  const userAns = simuladoAnswers[idx] || "Não respondeu";
+                  const isCorrect = userAns === q.correct;
+                  return `
+                    <div class="gabarito-item-card">
+                      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px; margin-bottom:6px;">
+                        <span style="font-size:0.75rem; font-weight:800; color:var(--primary-light);">QUESTÃO ${idx + 1} DE ${totalQ} • ${q.discipline}</span>
+                        <span class="gabarito-status-tag ${isCorrect ? 'correct' : 'incorrect'}">
+                          ${isCorrect ? '✓ Você Acertou' : `✗ Você marcou: ${userAns} (Correta: ${q.correct})`}
+                        </span>
+                      </div>
+                      <div style="font-size:0.92rem; color:#f1f5f9; line-height:1.5; margin-bottom:10px;">${q.question}</div>
+                      
+                      <div style="font-size:0.84rem; margin-bottom:10px;">
+                        ${q.options.map(opt => `
+                          <div style="padding:4px 8px; border-radius:4px; margin-bottom:3px; background:${opt.letter === q.correct ? 'rgba(16,185,129,0.15)' : (opt.letter === userAns ? 'rgba(239,68,68,0.15)' : 'transparent')}; color:${opt.letter === q.correct ? 'var(--green-light)' : (opt.letter === userAns ? '#fca5a5' : '#94a3b8')};">
+                            <strong>${opt.letter})</strong> ${opt.text} ${opt.letter === q.correct ? '<strong>(GABARITO)</strong>' : (opt.letter === userAns ? '<strong>(SUA RESPOSTA)</strong>' : '')}
+                          </div>
+                        `).join("")}
+                      </div>
+
+                      <div class="gabarito-comment-box">
+                        <strong>💡 Comentário do Especialista:</strong><br>
+                        ${q.comment}
+                      </div>
+                    </div>
+                  `;
+                }).join("")}
+              </div>
+            ` : ''}
+
+          </div>
+        `;
+        return;
+      }
+
+      // MODO PROVA: UMA QUESTÃO POR VEZ
+      const q = simuladoQuestions[currentSimuladoIndex];
+      const selectedOption = simuladoAnswers[currentSimuladoIndex] || null;
+
       container.innerHTML = `
-        <div style="background:var(--bg-card); border:1px solid var(--border-color); border-radius:var(--radius-lg); padding:20px;">
-          <h1 style="font-size:1.5rem; font-weight:800; color:#fff; margin-bottom:4px;">Simulado FCC de Fixação</h1>
-          <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:16px;">Teste seus conhecimentos com questões reais no formato da banca com resposta comentada instantânea.</p>
-
-          <div style="background:#090e1a; border:1px solid var(--border-color); border-radius:var(--radius-md); padding:16px; margin-bottom:14px;">
-            <span style="font-size:0.72rem; font-weight:800; color:var(--primary-light);">QUESTÃO 1 • DIREITO ADMINISTRATIVO</span>
-            <p style="color:#fff; margin:8px 0; font-size:0.95rem;">
-              Em relação aos requisitos ou elementos do ato administrativo, assinale a opção correta:
-            </p>
-            <div style="display:flex; flex-direction:column; gap:6px;">
-              <button class="nav-item-btn" style="background:var(--bg-surface);" onclick="alert('Incorreto. A competência em regra é irrenunciável e vinculada.')">A) A competência é sempre discricionária e delegável irrestritamente.</button>
-              <button class="nav-item-btn" style="background:var(--bg-surface);" onclick="alert('Incorreto. A forma é em regra vinculada (escrita).')">B) A forma é elemento livre e de livre escolha do gestor.</button>
-              <button class="nav-item-btn" style="background:rgba(16,185,129,0.2); border:1px solid var(--green); color:var(--green-light); font-weight:800;" onclick="alert('CORRETO! A competência e a finalidade são elementos estritamente vinculados do ato.')">C) A competência e a finalidade são elementos sempre vinculados. (CORRETA)</button>
-              <button class="nav-item-btn" style="background:var(--bg-surface);" onclick="alert('Incorreto. O vício de competência relativa e de forma admitem convalidação.')">D) Nenhum ato com vício admite convalidação pela Administração.</button>
+        <div class="simulado-card">
+          
+          <div class="simulado-top-bar">
+            <div>
+              <span class="simulado-q-indicator">Simulado Oficial FCC • Questão ${currentSimuladoIndex + 1} de ${totalQ}</span>
+              <h1 style="font-size:1.35rem; font-weight:800; color:#fff; margin:2px 0;">Treino de Prova Real • Nível Médio</h1>
+            </div>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span style="font-size:0.8rem; color:var(--gold); font-weight:800;">${answeredCount}/${totalQ} respondidas</span>
+              <button class="btn-resume" style="background:var(--gold); color:#000; padding:6px 12px; font-size:0.78rem;" onclick="finishSimulado()">
+                🏁 Finalizar e Ver Gabarito
+              </button>
             </div>
           </div>
 
-          <div style="background:#090e1a; border:1px solid var(--border-color); border-radius:var(--radius-md); padding:16px; margin-bottom:14px;">
-            <span style="font-size:0.72rem; font-weight:800; color:var(--primary-light);">QUESTÃO 2 • CONTROLE EXTERNO & CONSTITUCIONAL</span>
-            <p style="color:#fff; margin:8px 0; font-size:0.95rem;">
-              No tocante às competências constitucionais do Tribunal de Contas (art. 71 da CF), assinale a afirmativa verdadeira:
-            </p>
-            <div style="display:flex; flex-direction:column; gap:6px;">
-              <button class="nav-item-btn" style="background:var(--bg-surface);" onclick="alert('Incorreto. O Tribunal de Contas APRECIA as contas do Governador emitindo parecer prévio. O julgamento político é do Legislativo.')">A) O Tribunal de Contas julga em definitivo as contas do Chefe do Poder Executivo.</button>
-              <button class="nav-item-btn" style="background:rgba(16,185,129,0.2); border:1px solid var(--green); color:var(--green-light); font-weight:800;" onclick="alert('CORRETO! As decisões do Tribunal de Contas que resultem em débito ou multa têm eficácia de título executivo extrajudicial (art. 71, §3º da CF).')">B) As decisões que cominam débito ou multa possuem eficácia de título executivo. (CORRETA)</button>
-              <button class="nav-item-btn" style="background:var(--bg-surface);" onclick="alert('Incorreto. O Tribunal de Contas não pode decretar prisão nem perda de direitos políticos.')">C) O Tribunal de Contas pode decretar a prisão temporária de gestores faltosos.</button>
-              <button class="nav-item-btn" style="background:var(--bg-surface);" onclick="alert('Incorreto. O Tribunal de Contas integra o rol de órgãos autônomos auxiliares, não faz parte da estrutura do Poder Judiciário.')">D) O Tribunal de Contas faz parte da estrutura do Poder Judiciário.</button>
+          <!-- GRADE RÁPIDA DE QUESTÕES (1 A 20) -->
+          <div class="simulado-quick-grid">
+            ${simuladoQuestions.map((_, idx) => {
+              const isAnswered = !!simuladoAnswers[idx];
+              const isCurrent = idx === currentSimuladoIndex;
+              return `
+                <button class="simulado-num-btn ${isCurrent ? 'active' : ''} ${isAnswered ? 'answered' : ''}" onclick="goToSimuladoQuestion(${idx})" title="Ir para questão ${idx + 1}">
+                  ${idx + 1}
+                </button>
+              `;
+            }).join("")}
+          </div>
+
+          <!-- CARD DA QUESTÃO ATUAL -->
+          <div class="simulado-q-box">
+            <span class="simulado-q-tag">${q.discipline}</span>
+            <div class="simulado-q-text">${q.question}</div>
+
+            <div class="simulado-options-list">
+              ${q.options.map(opt => {
+                const isSelected = selectedOption === opt.letter;
+                return `
+                  <button class="simulado-opt-btn ${isSelected ? 'selected' : ''}" onclick="selectSimuladoOption(${currentSimuladoIndex}, '${opt.letter}')">
+                    <div class="simulado-opt-letter">${opt.letter}</div>
+                    <div>${opt.text}</div>
+                  </button>
+                `;
+              }).join("")}
             </div>
           </div>
 
-          <div style="background:#090e1a; border:1px solid var(--border-color); border-radius:var(--radius-md); padding:16px; margin-bottom:14px;">
-            <span style="font-size:0.72rem; font-weight:800; color:var(--primary-light);">QUESTÃO 3 • NOVA LEI DE LICITAÇÕES (LEI 14.133/21)</span>
-            <p style="color:#fff; margin:8px 0; font-size:0.95rem;">
-              Sobre as modalidades de licitação trazidas pela Lei 14.133/2021, é correto afirmar:
-            </p>
-            <div style="display:flex; flex-direction:column; gap:6px;">
-              <button class="nav-item-btn" style="background:var(--bg-surface);" onclick="alert('Incorreto. Tomada de preços e convite foram revogados pela Lei 14.133.')">A) A Tomada de Preços e o Convite continuam em vigor normalmente.</button>
-              <button class="nav-item-btn" style="background:rgba(16,185,129,0.2); border:1px solid var(--green); color:var(--green-light); font-weight:800;" onclick="alert('CORRETO! O Diálogo Competitivo é a nova modalidade trazida para contratações complexas e inovadoras.')">B) O Diálogo Competitivo é uma nova modalidade de licitação. (CORRETA)</button>
-              <button class="nav-item-btn" style="background:var(--bg-surface);" onclick="alert('Incorreto. O Leilão é modalidade para alienação de bens móveis e imóveis.')">C) O Leilão foi expressamente extinto pela nova lei.</button>
-              <button class="nav-item-btn" style="background:var(--bg-surface);" onclick="alert('Incorreto. O pregão não se aplica a obras de engenharia que não sejam comuns.')">D) O Pregão pode ser utilizado para contratar obras complexas de engenharia.</button>
-            </div>
+          <!-- AÇÕES DE NAVEGAÇÃO -->
+          <div class="simulado-nav-actions">
+            <button class="btn-resume" style="background:var(--bg-surface); color:#fff; border:1px solid var(--border-color); ${currentSimuladoIndex === 0 ? 'opacity:0.4; pointer-events:none;' : ''}" onclick="goToSimuladoQuestion(${currentSimuladoIndex - 1})">
+              ← Questão Anterior
+            </button>
+
+            ${currentSimuladoIndex < totalQ - 1 ? `
+              <button class="btn-resume" style="background:var(--primary);" onclick="goToSimuladoQuestion(${currentSimuladoIndex + 1})">
+                Próxima Questão →
+              </button>
+            ` : `
+              <button class="btn-resume" style="background:var(--green); color:#064e3b; font-weight:800;" onclick="finishSimulado()">
+                ✓ Concluir e Exibir Gabarito
+              </button>
+            `}
           </div>
+
         </div>
       `;
+    }
+
+    function selectSimuladoOption(qIdx, optLetter) {
+      simuladoAnswers[qIdx] = optLetter;
+      try {
+        localStorage.setItem(KEY_SIMULADO_ANSWERS, JSON.stringify(simuladoAnswers));
+      } catch(e) {}
+      renderSimulados();
+    }
+
+    function goToSimuladoQuestion(idx) {
+      if (idx >= 0 && idx < simuladoQuestions.length) {
+        currentSimuladoIndex = idx;
+        renderSimulados();
+        window.scrollTo({ top: 120, behavior: "smooth" });
+      }
+    }
+
+    function finishSimulado() {
+      const totalQ = simuladoQuestions.length;
+      const answeredCount = Object.keys(simuladoAnswers).length;
+      if (answeredCount < totalQ) {
+        const remaining = totalQ - answeredCount;
+        if (!confirm(`Você ainda não respondeu ${remaining} questão(ões). Deseja realmente finalizar o simulado e conferir o gabarito agora?`)) {
+          return;
+        }
+      }
+      simuladoFinished = true;
+      try {
+        localStorage.setItem(KEY_SIMULADO_FINISHED, "true");
+      } catch(e) {}
+      renderSimulados();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function toggleSimuladoGabarito() {
+      simuladoShowGabarito = !simuladoShowGabarito;
+      renderSimulados();
+    }
+
+    function resetSimulado() {
+      if (confirm("Tem certeza que deseja recomeçar o simulado do zero? Suas respostas atuais serão limpas.")) {
+        simuladoAnswers = {};
+        simuladoFinished = false;
+        simuladoShowGabarito = false;
+        currentSimuladoIndex = 0;
+        try {
+          localStorage.removeItem(KEY_SIMULADO_ANSWERS);
+          localStorage.removeItem(KEY_SIMULADO_FINISHED);
+        } catch(e) {}
+        renderSimulados();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    }
+
+    function downloadSimuladoReport() {
+      const totalQ = simuladoQuestions.length;
+      let correctCount = 0;
+      simuladoQuestions.forEach((q, idx) => {
+        if (simuladoAnswers[idx] === q.correct) correctCount++;
+      });
+      const pct = Math.round((correctCount / totalQ) * 100);
+      const dataStr = new Date().toLocaleString("pt-BR");
+
+      let report = `================================================================================\n`;
+      report += `TCE-GO ELITE 2026/2027 • RELATÓRIO DO SIMULADO OFICIAL FCC\n`;
+      report += `Plataforma de Estudos do Trio de Candidatos (Meta: 3 Vagas)\n`;
+      report += `================================================================================\n\n`;
+      report += `Data de Conclusão: ${dataStr}\n`;
+      report += `Total de Questões: ${totalQ}\n`;
+      report += `Total de Acertos:  ${correctCount} / ${totalQ} (${pct}%)\n`;
+      report += `Total de Erros:    ${totalQ - correctCount} / ${totalQ}\n\n`;
+      report += `--------------------------------------------------------------------------------\n`;
+      report += `RESUMO DAS RESPOSTAS:\n`;
+      report += `--------------------------------------------------------------------------------\n`;
+
+      simuladoQuestions.forEach((q, idx) => {
+        const user = simuladoAnswers[idx] || "Em branco";
+        const status = user === q.correct ? "[ACERTOU]" : "[ERROU]  ";
+        report += `Questão ${String(idx + 1).padStart(2, '0')}: Sua: ${user} | Gabarito: ${q.correct} ${status} - ${q.discipline}\n`;
+      });
+
+      report += `\n--------------------------------------------------------------------------------\n`;
+      report += `DETALHAMENTO, ENUNCIADOS E COMENTÁRIOS DA BANCA:\n`;
+      report += `--------------------------------------------------------------------------------\n\n`;
+
+      simuladoQuestions.forEach((q, idx) => {
+        const user = simuladoAnswers[idx] || "Não respondeu";
+        report += `[QUESTÃO ${idx + 1}] • ${q.discipline}\n`;
+        report += `${q.question}\n\n`;
+        q.options.forEach(opt => {
+          report += `  ${opt.letter}) ${opt.text}\n`;
+        });
+        report += `\n-> Sua resposta: ${user}\n`;
+        report += `-> Gabarito Oficial: ${q.correct}\n`;
+        report += `-> Comentário: ${q.comment}\n`;
+        report += `\n--------------------------------------------------------------------------------\n\n`;
+      });
+
+      const blob = new Blob([report], { type: "text/plain;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `Gabarito-Simulado-FCC-TCEGO-${dataStr.replace(/[\/ :]/g, '_')}.txt`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
     }
 
     function renderRedacao(container) {
