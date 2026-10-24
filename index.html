@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>TCE-GO Elite 2026/2027 | Plataforma de Estudos</title>
   <style>
     /* ==========================================================================
@@ -39,6 +39,19 @@
       margin: 0;
       padding: 0;
       -webkit-tap-highlight-color: transparent;
+      /* Desativa seleção de texto em toda a página */
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    /* Permite seleção apenas em campos editáveis */
+    textarea, input, [contenteditable] {
+      -webkit-user-select: text;
+      -moz-user-select: text;
+      -ms-user-select: text;
+      user-select: text;
     }
 
     body {
@@ -773,7 +786,11 @@
       }
 
       .app-sidebar {
+        /* Em mobile a sidebar ocupa 80% da largura, máx 300px */
+        width: min(80vw, 300px);
         transform: translateX(-100%);
+        /* garante que não vaze em telas muito pequenas */
+        overflow-x: hidden;
       }
 
       .app-sidebar.open {
@@ -787,6 +804,90 @@
       .main-viewport {
         margin-left: 0;
         padding: calc(var(--header-height) + 14px) 14px 60px;
+      }
+
+      /* Header da sidebar mais compacto em mobile */
+      .sidebar-header {
+        padding: 12px;
+      }
+
+      .logo-title {
+        font-size: 1rem;
+      }
+
+      .logo-sub {
+        font-size: 0.7rem;
+      }
+
+      .trio-goal-box {
+        padding: 6px 8px;
+        font-size: 0.74rem;
+      }
+
+      /* Nav items ligeiramente maiores para toque */
+      .nav-item-btn {
+        padding: 11px 12px;
+        font-size: 0.88rem;
+      }
+
+      /* Cronograma: badge "Estudar Agora" não quebra */
+      .crono-badge-go {
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+
+      .crono-day-item {
+        gap: 8px;
+      }
+
+      /* Debates: tabs em coluna no mobile */
+      .debates-tabs-row {
+        flex-wrap: wrap;
+      }
+
+      .debate-tab {
+        font-size: 0.8rem;
+        padding: 7px 10px;
+      }
+
+      /* Player: padding menor */
+      .player-info-box {
+        padding: 14px;
+      }
+
+      .lesson-title-main {
+        font-size: 1.05rem;
+      }
+    }
+
+    /* Telas muito pequenas (≤480px) */
+    @media (max-width: 480px) {
+      .main-viewport {
+        padding: calc(var(--header-height) + 10px) 10px 50px;
+      }
+
+      .quick-resume-banner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .player-top-fallback-bar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .lesson-action-row {
+        flex-direction: column;
+      }
+
+      .btn-next-lesson {
+        margin-left: 0;
+      }
+
+      .crono-week-top {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2px;
       }
     }
   </style>
@@ -1712,6 +1813,15 @@
 
     // INICIALIZAÇÃO
     window.addEventListener("DOMContentLoaded", initApp);
+
+    // Bloqueia pinch-to-zoom em dispositivos touch
+    document.addEventListener("touchmove", function(e) {
+      if (e.touches.length > 1) e.preventDefault();
+    }, { passive: false });
+
+    document.addEventListener("gesturestart", function(e) {
+      e.preventDefault();
+    }, { passive: false });
   </script>
 </body>
 </html>
