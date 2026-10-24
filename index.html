@@ -60,7 +60,7 @@
       position: relative;
     }
 
-    /* TOPBAR MOBILE (Visível apenas em telas menores que 768px) */
+    /* TOPBAR MOBILE */
     .mobile-header {
       display: none;
       position: fixed;
@@ -98,108 +98,116 @@
       border-right: 1px solid var(--border-color);
       position: fixed;
       top: 0;
-      left: 0;
       bottom: 0;
-      z-index: 120;
+      left: 0;
       display: flex;
       flex-direction: column;
-      overflow-y: auto;
-      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 99;
+      transition: transform 0.25s ease;
     }
 
-    .sidebar-brand {
-      padding: 18px 16px;
+    .sidebar-header {
+      padding: 16px;
       border-bottom: 1px solid var(--border-color);
+    }
+
+    .logo-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(37, 99, 235, 0.15);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      color: var(--primary-light);
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .logo-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.2;
+    }
+
+    .logo-sub {
+      font-size: 0.75rem;
+      color: var(--gold);
+      font-weight: 700;
+      margin-top: 3px;
+    }
+
+    /* METAS DO GRUPO */
+    .trio-goal-box {
+      margin-top: 10px;
+      background: rgba(245, 158, 11, 0.08);
+      border: 1px solid rgba(245, 158, 11, 0.25);
+      border-radius: var(--radius-sm);
+      padding: 8px 10px;
+      font-size: 0.78rem;
+    }
+
+    .trio-goal-title {
+      color: var(--gold);
+      font-weight: 800;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      background: linear-gradient(180deg, #172554 0%, var(--bg-sidebar) 100%);
+      gap: 5px;
     }
 
-    .brand-title {
-      font-size: 1.05rem;
-      font-weight: 900;
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      line-height: 1.1;
-    }
-    .brand-title span {
-      font-size: 0.72rem;
-      color: var(--gold);
-      font-weight: 800;
-      letter-spacing: 0.05em;
+    .trio-countdown {
+      color: var(--text-main);
+      font-size: 0.74rem;
+      margin-top: 3px;
     }
 
-    .btn-close-sidebar {
-      display: none;
-      background: transparent;
-      border: none;
-      color: var(--text-muted);
-      font-size: 1.4rem;
-      cursor: pointer;
-      padding: 4px;
+    /* BARRA DE PROGRESSO GLOBAL */
+    .progress-section {
+      margin-top: 10px;
     }
 
-    /* CARD DE STATUS & CONTADOR NA SIDEBAR */
-    .sidebar-meta-box {
-      padding: 14px 16px;
-      border-bottom: 1px solid var(--border-color);
-      background: rgba(30, 41, 59, 0.3);
-    }
-    .target-vagas {
-      font-size: 0.72rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      color: var(--green-light);
-      margin-bottom: 2px;
-    }
-    .target-countdown {
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: var(--gold);
-    }
-
-    .prog-box {
-      margin-top: 8px;
-    }
-    .prog-labels {
+    .progress-label-row {
       display: flex;
       justify-content: space-between;
-      font-size: 0.7rem;
+      font-size: 0.72rem;
       color: var(--text-muted);
       margin-bottom: 4px;
+      font-weight: 600;
     }
-    .prog-bar {
-      height: 7px;
+
+    .progress-track {
+      height: 6px;
       background: #090e1a;
       border-radius: 999px;
       overflow: hidden;
       border: 1px solid var(--border-color);
     }
-    .prog-bar-fill {
+
+    .progress-bar-fill {
       height: 100%;
-      background: linear-gradient(90deg, var(--primary) 0%, var(--green) 100%);
+      background: linear-gradient(90deg, var(--primary), var(--green));
       width: 0%;
-      transition: width 0.3s;
+      transition: width 0.3s ease;
     }
 
-    /* LISTA DE ITENS DA SIDEBAR */
+    /* MENU DE NAVEGAÇÃO */
     .sidebar-nav {
       flex: 1;
-      padding: 10px 10px 30px;
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
+      overflow-y: auto;
+      padding: 12px 10px;
     }
 
-    .nav-group-header {
+    .nav-group-title {
       font-size: 0.68rem;
-      font-weight: 900;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.8px;
+      font-weight: 800;
       color: var(--text-dim);
-      padding: 14px 10px 5px;
+      padding: 10px 10px 4px;
     }
 
     .nav-item-btn {
@@ -208,107 +216,114 @@
       background: transparent;
       border: 1px solid transparent;
       color: var(--text-muted);
-      padding: 10px 12px;
+      padding: 9px 12px;
       border-radius: var(--radius-sm);
-      font-size: 0.86rem;
+      font-size: 0.84rem;
       font-weight: 600;
+      cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 10px;
-      cursor: pointer;
-      transition: all 0.2s;
+      justify-content: space-between;
+      margin-bottom: 3px;
+      transition: all 0.15s ease;
+      text-decoration: none;
     }
+
     .nav-item-btn:hover {
-      background: var(--bg-surface);
+      background: var(--bg-card);
       color: #fff;
     }
+
     .nav-item-btn.active {
-      background: var(--bg-card-hover);
-      border-color: var(--primary);
+      background: rgba(37, 99, 235, 0.2);
+      border-color: rgba(59, 130, 246, 0.4);
       color: #fff;
-      font-weight: 800;
+      font-weight: 700;
     }
-    .nav-badge-pill {
-      margin-left: auto;
-      font-size: 0.65rem;
-      padding: 2px 7px;
-      border-radius: 999px;
+
+    .nav-item-btn .nav-badge {
+      font-size: 0.7rem;
       background: var(--bg-surface);
-      color: var(--text-muted);
+      padding: 2px 6px;
+      border-radius: 999px;
+      color: var(--text-dim);
+      font-weight: 700;
     }
-    .nav-item-btn.active .nav-badge-pill {
+
+    .nav-item-btn.active .nav-badge {
       background: var(--primary);
       color: #fff;
     }
 
-    /* OVERLAY PARA MOBILE */
+    /* BACKDROP MOBILE */
     .sidebar-backdrop {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.7);
-      backdrop-filter: blur(3px);
-      z-index: 110;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(4px);
+      z-index: 98;
     }
 
     /* ==========================================================================
-       3. ÁREA DE CONTEÚDO PRINCIPAL (MAIN)
+       3. CONTEÚDO PRINCIPAL (MAIN VIEWPORT)
        ========================================================================== */
-    .app-main {
-      flex: 1;
+    .main-viewport {
       margin-left: var(--sidebar-width);
-      padding: 24px 30px;
-      min-height: 100vh;
-      max-width: 1350px;
+      flex: 1;
+      min-width: 0;
+      padding: 20px 24px 60px;
     }
 
-    /* CARD SUPERIOR DE RETOMADA */
-    .resume-bar {
-      background: linear-gradient(135deg, #1e3a8a 0%, #172554 100%);
-      border: 1px solid #3b82f6;
+    /* BANNER DE RETOMADA RÁPIDA */
+    .quick-resume-banner {
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.15) 0%, rgba(15, 23, 42, 0.8) 100%);
+      border: 1px solid rgba(59, 130, 246, 0.3);
       border-radius: var(--radius-md);
-      padding: 14px 18px;
+      padding: 12px 16px;
       margin-bottom: 20px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      flex-wrap: wrap;
+      justify-content: space-between;
       gap: 12px;
-      box-shadow: 0 4px 16px rgba(37, 99, 235, 0.2);
+      flex-wrap: wrap;
     }
-    .resume-tag {
-      font-size: 0.7rem;
-      font-weight: 800;
+
+    .quick-resume-title {
+      font-size: 0.75rem;
       text-transform: uppercase;
-      color: #93c5fd;
-      letter-spacing: 0.05em;
-    }
-    .resume-title {
-      font-size: 1.05rem;
       font-weight: 800;
+      color: var(--primary-light);
+    }
+
+    .quick-resume-lesson {
+      font-size: 0.95rem;
+      font-weight: 700;
       color: #fff;
     }
+
     .btn-resume {
-      background: #fff;
-      color: #1e3a8a;
+      background: var(--primary);
+      color: #fff;
       border: none;
-      padding: 8px 18px;
+      padding: 8px 16px;
       border-radius: var(--radius-sm);
-      font-weight: 800;
-      font-size: 0.85rem;
+      font-weight: 700;
+      font-size: 0.82rem;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      transition: all 0.2s;
+      transition: background 0.15s ease;
+      text-decoration: none;
     }
+
     .btn-resume:hover {
-      background: #dbeafe;
-      transform: translateY(-1px);
+      background: #1d4ed8;
     }
 
     /* ==========================================================================
-       4. PLAYER EMBEDDED RESILIENTE COM FALLBACK INTELIGENTE
+       4. VIEW: PLAYER DO YOUTUBE & CONTROLES
        ========================================================================== */
     .view-grid-player {
       display: grid;
@@ -321,59 +336,63 @@
       background: var(--bg-card);
       border: 1px solid var(--border-color);
       border-radius: var(--radius-lg);
-      padding: 16px;
+      overflow: hidden;
     }
 
-    /* Barra de Acesso e Fallback acima do vídeo */
+    /* BARRA DE FALLBACK & ACESSO DIRETO */
     .player-top-fallback-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 10px;
-      padding-bottom: 8px;
+      background: #090e1a;
       border-bottom: 1px solid var(--border-color);
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
     }
 
     .btn-direct-yt {
       background: #dc2626;
       color: #fff;
-      border: none;
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 800;
       padding: 7px 14px;
       border-radius: var(--radius-sm);
-      font-size: 0.82rem;
-      font-weight: 800;
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      cursor: pointer;
-      text-decoration: none;
-      transition: background 0.2s;
+      transition: background 0.15s ease;
     }
-    .btn-direct-yt:hover { background: #b91c1c; }
+
+    .btn-direct-yt:hover {
+      background: #b91c1c;
+    }
 
     .btn-custom-video {
       background: var(--bg-surface);
       border: 1px solid var(--border-color);
       color: var(--text-muted);
-      padding: 7px 12px;
-      border-radius: var(--radius-sm);
-      font-size: 0.8rem;
+      font-size: 0.76rem;
       font-weight: 700;
+      padding: 6px 10px;
+      border-radius: var(--radius-sm);
       cursor: pointer;
     }
-    .btn-custom-video:hover { color: #fff; }
 
+    .btn-custom-video:hover {
+      color: #fff;
+      border-color: var(--text-muted);
+    }
+
+    /* IFRAME 16:9 RESPONSIVO */
     .video-frame-wrap {
       position: relative;
       width: 100%;
-      padding-bottom: 56.25%; /* 16:9 */
+      padding-top: 56.25%;
       background: #000;
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      border: 1px solid var(--border-color);
     }
+
     .video-frame-wrap iframe {
       position: absolute;
       top: 0;
@@ -384,394 +403,476 @@
     }
 
     .yt-notice-box {
-      font-size: 0.76rem;
-      color: var(--text-dim);
-      margin-top: 8px;
-      background: rgba(15, 23, 42, 0.6);
-      padding: 8px 12px;
-      border-radius: var(--radius-sm);
-      border-left: 2px solid var(--gold);
+      padding: 8px 14px;
+      background: rgba(30, 41, 59, 0.4);
+      border-bottom: 1px solid var(--border-color);
+      font-size: 0.74rem;
+      color: var(--text-muted);
     }
 
     .player-info-box {
-      margin-top: 14px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
+      padding: 18px 20px;
     }
+
     .level-tag {
-      font-size: 0.72rem;
+      font-size: 0.75rem;
       font-weight: 800;
+      color: var(--gold);
       text-transform: uppercase;
-      color: var(--primary-light);
+      letter-spacing: 0.5px;
     }
+
     .lesson-title-main {
       font-size: 1.25rem;
-      font-weight: 900;
+      font-weight: 800;
       color: #fff;
+      margin: 4px 0 8px;
       line-height: 1.3;
     }
+
     .lesson-meta-bar {
       display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
+      align-items: center;
+      gap: 12px;
       font-size: 0.78rem;
       color: var(--text-muted);
-      margin: 4px 0;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
     }
+
     .meta-pill {
       background: var(--bg-surface);
-      padding: 2px 8px;
+      padding: 3px 8px;
       border-radius: 4px;
+      font-weight: 600;
     }
+
     .lesson-desc-box {
       background: #090e1a;
       border-left: 3px solid var(--primary);
-      padding: 10px 14px;
+      padding: 12px 14px;
       border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-      font-size: 0.88rem;
+      font-size: 0.86rem;
       color: #cbd5e1;
-      margin-top: 4px;
+      line-height: 1.5;
+      margin-bottom: 16px;
     }
 
-    .player-buttons-row {
+    .lesson-action-row {
       display: flex;
       gap: 10px;
-      margin-top: 14px;
-      padding-top: 12px;
-      border-top: 1px solid var(--border-color);
       flex-wrap: wrap;
     }
-    .btn-action {
-      flex: 1;
-      min-height: 42px;
+
+    .btn-toggle-done {
+      background: var(--bg-surface);
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+      padding: 9px 16px;
       border-radius: var(--radius-sm);
       font-weight: 700;
       font-size: 0.85rem;
+      cursor: pointer;
       display: inline-flex;
       align-items: center;
-      justify-content: center;
-      gap: 6px;
-      cursor: pointer;
-      border: 1px solid transparent;
-      transition: all 0.2s;
+      gap: 8px;
     }
-    .btn-done {
-      background: rgba(16, 185, 129, 0.15);
+
+    .btn-toggle-done.done {
+      background: rgba(16, 185, 129, 0.2);
       border-color: var(--green);
       color: var(--green-light);
     }
-    .btn-done.completed {
-      background: var(--green);
-      color: #064e3b;
-      font-weight: 900;
-    }
-    .btn-next {
-      background: var(--primary);
-      color: #fff;
-    }
-    .btn-next:hover { background: #1d4ed8; }
 
-    /* LISTA LATERAL DE AULAS */
-    .playlist-panel {
+    .btn-next-lesson {
+      background: var(--bg-surface);
+      color: #fff;
+      border: 1px solid var(--border-color);
+      padding: 9px 16px;
+      border-radius: var(--radius-sm);
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      margin-left: auto;
+    }
+
+    .btn-next-lesson:hover {
+      border-color: var(--primary);
+      color: var(--primary-light);
+    }
+
+    /* PLAYLIST LATERAL (COLUNA DIREITA) */
+    .playlist-card {
       background: var(--bg-card);
       border: 1px solid var(--border-color);
       border-radius: var(--radius-lg);
-      padding: 16px;
+      overflow: hidden;
     }
-    .playlist-header {
+
+    .playlist-head {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border-color);
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      margin-bottom: 12px;
+      justify-content: space-between;
     }
-    .playlist-title {
-      font-size: 0.95rem;
+
+    .playlist-head-title {
+      font-size: 0.88rem;
       font-weight: 800;
       color: #fff;
-      text-transform: uppercase;
     }
-    .lesson-item-card {
-      background: #090e1a;
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-sm);
-      padding: 10px 12px;
-      margin-bottom: 8px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
+
+    .playlist-head-count {
+      font-size: 0.75rem;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .playlist-scroll {
+      max-height: 540px;
+      overflow-y: auto;
+    }
+
+    .playlist-item {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border-color);
       cursor: pointer;
-      transition: all 0.2s;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      transition: background 0.15s ease;
     }
-    .lesson-item-card:hover {
+
+    .playlist-item:hover {
       background: var(--bg-card-hover);
-      border-color: var(--border-focus);
     }
-    .lesson-item-card.active {
-      background: #172554;
-      border-color: var(--primary);
-      box-shadow: 0 0 10px rgba(37, 99, 235, 0.25);
+
+    .playlist-item.active {
+      background: rgba(37, 99, 235, 0.18);
+      border-left: 3px solid var(--primary-light);
     }
-    .lesson-item-card.done {
-      border-left: 3px solid var(--green);
+
+    .playlist-item-idx {
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      background: var(--bg-surface);
+      color: var(--text-muted);
+      font-size: 0.72rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
     }
-    .lesson-item-title {
-      font-size: 0.85rem;
+
+    .playlist-item.done .playlist-item-idx {
+      background: var(--green);
+      color: #064e3b;
+    }
+
+    .playlist-item-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .playlist-item-title {
+      font-size: 0.82rem;
       font-weight: 700;
       color: #fff;
       line-height: 1.3;
+      margin-bottom: 2px;
     }
-    .lesson-item-sub {
-      font-size: 0.7rem;
+
+    .playlist-item.active .playlist-item-title {
+      color: var(--primary-light);
+    }
+
+    .playlist-item-prof {
+      font-size: 0.72rem;
       color: var(--text-dim);
     }
 
     /* ==========================================================================
-       5. ARENA DE DEBATES (5 DEBATES)
+       5. VIEW: ARENA DE DEBATES (5 TEMAS)
        ========================================================================== */
     .debates-tabs-row {
       display: flex;
       gap: 8px;
+      margin-bottom: 18px;
       overflow-x: auto;
-      padding-bottom: 10px;
-      margin-bottom: 16px;
+      padding-bottom: 4px;
     }
+
     .debate-tab {
       background: var(--bg-card);
       border: 1px solid var(--border-color);
       color: var(--text-muted);
-      padding: 10px 16px;
+      padding: 9px 14px;
       border-radius: var(--radius-sm);
-      font-size: 0.85rem;
+      font-size: 0.84rem;
       font-weight: 700;
-      white-space: nowrap;
       cursor: pointer;
+      white-space: nowrap;
     }
-    .debate-tab.active {
-      background: var(--primary);
-      border-color: var(--primary);
+
+    .debate-tab:hover {
       color: #fff;
     }
+
+    .debate-tab.active {
+      background: var(--gold);
+      color: #000;
+      border-color: var(--gold);
+    }
+
     .debate-body-card {
       background: var(--bg-card);
       border: 1px solid var(--border-color);
       border-radius: var(--radius-lg);
       padding: 20px;
     }
+
     .q-card {
       background: #090e1a;
       border: 1px solid var(--border-color);
       border-radius: var(--radius-md);
       padding: 14px;
-      margin-top: 12px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
+      margin-bottom: 12px;
     }
+
     .q-title {
-      font-size: 0.95rem;
       font-weight: 700;
       color: #fff;
+      font-size: 0.95rem;
+      margin-bottom: 8px;
     }
-    .q-answer-box {
-      display: none;
-      background: rgba(16, 185, 129, 0.1);
-      border: 1px dashed var(--green);
-      border-radius: var(--radius-sm);
-      padding: 10px 12px;
-      font-size: 0.85rem;
-      color: var(--green-light);
-    }
-    .q-answer-box.open { display: block; }
+
     .btn-toggle-criteria {
-      align-self: flex-start;
       background: var(--bg-surface);
       border: 1px solid var(--border-color);
       color: var(--text-muted);
+      padding: 5px 10px;
+      border-radius: 4px;
       font-size: 0.75rem;
-      padding: 6px 12px;
-      border-radius: var(--radius-sm);
       cursor: pointer;
+      font-weight: 700;
+    }
+
+    .btn-toggle-criteria:hover {
+      color: #fff;
+    }
+
+    .q-answer-box {
+      margin-top: 10px;
+      background: rgba(30, 41, 59, 0.6);
+      border-left: 3px solid var(--gold);
+      padding: 10px 12px;
+      font-size: 0.82rem;
+      color: #cbd5e1;
+      line-height: 1.5;
+      display: none;
+    }
+
+    .q-answer-box.open {
+      display: block;
     }
 
     /* ==========================================================================
-       6. CRONOGRAMA 80 DIAS (TOTALMENTE CLICÁVEL)
+       6. VIEW: CRONOGRAMA 80 DIAS (CLICÁVEL)
        ========================================================================== */
     .crono-week-box {
       background: var(--bg-card);
       border: 1px solid var(--border-color);
-      border-radius: var(--radius-md);
+      border-radius: var(--radius-lg);
+      padding: 16px;
       margin-bottom: 16px;
-      overflow: hidden;
-    }
-    .crono-week-top {
-      background: var(--bg-surface);
-      padding: 10px 16px;
-      font-size: 0.85rem;
-      font-weight: 800;
-      color: #fff;
-      display: flex;
-      justify-content: space-between;
-    }
-    .crono-day-item {
-      padding: 12px 16px;
-      border-bottom: 1px solid rgba(51, 65, 85, 0.4);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    .crono-day-item:last-child { border-bottom: none; }
-    .crono-day-item:hover { background: var(--bg-card-hover); }
-    .crono-day-info { display: flex; flex-direction: column; gap: 2px; }
-    .crono-badge-go {
-      font-size: 0.75rem;
-      color: var(--gold);
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      white-space: nowrap;
     }
 
-    /* ==========================================================================
-       7. REDAÇÃO & SIMULADOS
-       ========================================================================== */
-    .essay-box {
-      width: 100%;
-      height: 380px;
+    .crono-week-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 800;
+      font-size: 0.95rem;
+      color: #fff;
+      margin-bottom: 12px;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 8px;
+    }
+
+    .crono-day-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 12px;
       background: #090e1a;
       border: 1px solid var(--border-color);
       border-radius: var(--radius-sm);
+      margin-bottom: 8px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .crono-day-item:hover {
+      border-color: var(--primary-light);
+      background: var(--bg-surface);
+    }
+
+    .crono-day-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .crono-badge-go {
+      background: var(--primary);
       color: #fff;
-      font-family: monospace, sans-serif;
-      font-size: 0.95rem;
-      line-height: 1.7;
-      padding: 14px;
-      resize: vertical;
-      outline: none;
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 999px;
     }
 
     /* ==========================================================================
-       8. RESPONSIVIDADE (MOBILE & TABLETS PEQUENOS < 768px)
+       7. VIEW: EDITOR DE REDAÇÃO 30 LINHAS
        ========================================================================== */
+    .essay-box {
+      width: 100%;
+      height: 480px;
+      background: #090e1a;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      color: #fff;
+      font-family: inherit;
+      font-size: 0.95rem;
+      line-height: 1.8;
+      padding: 16px;
+      resize: vertical;
+    }
+
+    .essay-box:focus {
+      outline: none;
+      border-color: var(--border-focus);
+    }
+
+    /* ==========================================================================
+       8. RESPONSIVIDADE (MOBILE FIRST REAL)
+       ========================================================================== */
+    @media (max-width: 900px) {
+      .view-grid-player {
+        grid-template-columns: 1fr;
+      }
+    }
+
     @media (max-width: 768px) {
-      .mobile-header { display: flex; }
-      .btn-close-sidebar { display: block; }
-      .sidebar-backdrop.active { display: block; }
+      .mobile-header {
+        display: flex;
+      }
 
       .app-sidebar {
         transform: translateX(-100%);
       }
+
       .app-sidebar.open {
         transform: translateX(0);
       }
 
-      .app-main {
-        margin-left: 0;
-        padding: 16px;
-        padding-top: calc(var(--header-height) + 16px);
+      .sidebar-backdrop.active {
+        display: block;
       }
 
-      .view-grid-player {
-        grid-template-columns: 1fr;
+      .main-viewport {
+        margin-left: 0;
+        padding: calc(var(--header-height) + 14px) 14px 60px;
       }
     }
   </style>
 </head>
 <body>
 
+  <!-- TOPBAR MOBILE -->
+  <header class="mobile-header">
+    <button class="btn-toggle-menu" onclick="openSidebar()">
+      ☰ Menu
+    </button>
+    <div style="font-weight:800; font-size:0.9rem; color:#fff;">TCE-GO Elite</div>
+    <div style="font-size:0.75rem; font-weight:700; color:var(--gold);" id="mobile-crono-badge">80 dias</div>
+  </header>
+
+  <!-- BACKDROP MOBILE -->
+  <div class="sidebar-backdrop" id="sidebar-backdrop" onclick="closeSidebar()"></div>
+
   <div class="app-layout">
-
-    <!-- HEADER MOBILE -->
-    <header class="mobile-header">
-      <button class="btn-toggle-menu" onclick="openSidebar()">
-        ☰ Menu da Plataforma
-      </button>
-      <div class="brand-title" style="text-align:right;">
-        TCE-GO ELITE
-        <span id="mobile-crono-badge">17/01/2027</span>
-      </div>
-    </header>
-
-    <!-- BACKDROP MOBILE -->
-    <div class="sidebar-backdrop" id="sidebar-backdrop" onclick="closeSidebar()"></div>
-
-    <!-- ==========================================================================
-         SIDEBAR LATERAL PERMANENTE
-         ========================================================================== -->
+    
+    <!-- SIDEBAR DE NAVEGAÇÃO -->
     <aside class="app-sidebar" id="app-sidebar">
-      
-      <div class="sidebar-brand">
-        <div class="brand-title">
-          TCE-GO 2026/2027
-          <span>R$ 11.862,19 • 6 VAGAS</span>
+      <div class="sidebar-header">
+        <div class="logo-badge">TCE-GO 2026/2027</div>
+        <div class="logo-title">Plataforma de Estudos</div>
+        <div class="logo-sub">R$ 11.862,19 • 6 VAGAS</div>
+
+        <div class="trio-goal-box">
+          <div class="trio-goal-title">🎯 Meta: 3 Vagas do Trio</div>
+          <div class="trio-countdown" id="sidebar-countdown">⏳ Carregando cronômetro...</div>
         </div>
-        <button class="btn-close-sidebar" onclick="closeSidebar()" aria-label="Fechar">✕</button>
-      </div>
 
-      <div class="sidebar-meta-box">
-        <div class="target-vagas">🎯 Meta: 3 Vagas do Trio</div>
-        <div class="target-countdown" id="sidebar-countdown">⏳ Calculando dias...</div>
-
-        <div class="prog-box">
-          <div class="prog-labels">
+        <div class="progress-section">
+          <div class="progress-label-row">
             <span>Progresso Geral</span>
-            <span id="prog-pct-label">0%</span>
+            <span id="prog-pct-label">0% (0/27)</span>
           </div>
-          <div class="prog-bar">
-            <div class="prog-bar-fill" id="prog-fill-bar"></div>
+          <div class="progress-track">
+            <div class="progress-bar-fill" id="prog-fill-bar"></div>
           </div>
         </div>
       </div>
 
-      <!-- LISTA DE SEÇÕES DA PLATAFORMA -->
       <nav class="sidebar-nav">
-        
-        <div class="nav-group-header">📍 Início & Estudo</div>
-        <button class="nav-item-btn active" id="nav-btn-home" onclick="showLevel(1)">
+        <div class="nav-group-title">📍 Início & Estudo</div>
+        <button class="nav-item-btn active" id="nav-btn-home" onclick="resumeActiveLesson()">
           <span>🏠 Sala de Aula (Player)</span>
         </button>
 
-        <div class="nav-group-header">🎓 Trilha por Níveis</div>
+        <div class="nav-group-title">🎓 Trilha por Níveis</div>
         <button class="nav-item-btn" id="nav-btn-lvl-1" onclick="showLevel(1)">
           <span>📚 Nível 1: Fundamentos</span>
-          <span class="nav-badge-pill" id="badge-n1">0/8</span>
+          <span class="nav-badge" id="badge-n1">0/8</span>
         </button>
         <button class="nav-item-btn" id="nav-btn-lvl-2" onclick="showLevel(2)">
           <span>⚙️ Nível 2: Mecânica FCC</span>
-          <span class="nav-badge-pill" id="badge-n2">0/8</span>
+          <span class="nav-badge" id="badge-n2">0/8</span>
         </button>
         <button class="nav-item-btn" id="nav-btn-lvl-3" onclick="showLevel(3)">
           <span>🏛️ Nível 3: Legislação Goiás</span>
-          <span class="nav-badge-pill" id="badge-n3">0/6</span>
+          <span class="nav-badge" id="badge-n3">0/6</span>
         </button>
         <button class="nav-item-btn" id="nav-btn-lvl-4" onclick="showLevel(4)">
           <span>✍️ Nível 4: Oficina Redação</span>
-          <span class="nav-badge-pill" id="badge-n4">0/5</span>
+          <span class="nav-badge" id="badge-n4">0/5</span>
         </button>
 
-        <div class="nav-group-header">⚔️ Prática em Trio</div>
+        <div class="nav-group-title">⚔️ Prática em Trio</div>
         <button class="nav-item-btn" id="nav-btn-debates" onclick="showView('debates')">
           <span>⚔️ Arena de Debates</span>
-          <span class="nav-badge-pill" style="background:#7c2d12; color:#fed7aa;">5 Temas</span>
+          <span class="nav-badge" style="background:var(--gold); color:#000;">5 Temas</span>
         </button>
         <button class="nav-item-btn" id="nav-btn-cronograma" onclick="showView('cronograma')">
           <span>📅 Cronograma 80 Dias</span>
-          <span class="nav-badge-pill">Clicável</span>
+          <span class="nav-badge">Clicável</span>
         </button>
         <button class="nav-item-btn" id="nav-btn-simulados" onclick="showView('simulados')">
           <span>🧠 Simulados FCC</span>
-          <span class="nav-badge-pill">15 Questões</span>
+          <span class="nav-badge">15 Questões</span>
         </button>
         <button class="nav-item-btn" id="nav-btn-redacao" onclick="showView('redacao')">
           <span>📝 Editor de Redação</span>
-          <span class="nav-badge-pill">30 Linhas</span>
+          <span class="nav-badge">30 Linhas</span>
         </button>
 
-        <div class="nav-group-header">📖 Consulta Rápida</div>
+        <div class="nav-group-title">📖 Consulta Rápida</div>
         <button class="nav-item-btn" id="nav-btn-manual" onclick="showView('manual')">
           <span>🗺️ Manual do Zero (Padeiro)</span>
         </button>
@@ -781,115 +882,111 @@
         <button class="nav-item-btn" id="nav-btn-links" onclick="showView('links')">
           <span>📑 Edital & Leis Oficiais</span>
         </button>
-
       </nav>
-
     </aside>
 
-    <!-- ==========================================================================
-         ÁREA PRINCIPAL DE CONTEÚDO
-         ========================================================================== -->
-    <main class="app-main">
-
-      <!-- BANNER "CONTINUAR DE ONDE PAROU" -->
-      <section class="resume-bar" id="resume-banner-top">
+    <!-- ÁREA PRINCIPAL -->
+    <main class="main-viewport">
+      
+      <!-- BANNER DE RETOMADA RÁPIDA -->
+      <div class="quick-resume-banner" id="quick-resume-card">
         <div>
-          <div class="resume-tag">📌 Continuar de onde você parou:</div>
-          <div class="resume-title" id="resume-text-title">Carregando aula ativa...</div>
+          <div class="quick-resume-title">📌 Continuar de onde você parou:</div>
+          <div class="quick-resume-lesson" id="resume-text-title">Carregando aula ativa...</div>
         </div>
         <button class="btn-resume" onclick="resumeActiveLesson()">
           ▶ Assistir Aula Agora
         </button>
-      </section>
+      </div>
 
-      <!-- CONTAINER DA VIEW DINÂMICA (PLAYER OU OUTRA TELA) -->
-      <div id="content-container"></div>
+      <!-- CONTAINER DINÂMICO DE CONTEÚDO -->
+      <div id="content-container">
+        <!-- Injetado dinamicamente via JavaScript -->
+      </div>
 
     </main>
-
   </div>
 
-  <!-- ==========================================================================
-       SCRIPTS & DADOS
-       ========================================================================== -->
   <script>
-    // LISTA DE AULAS COM IDs REAIS E VERIFICADOS DO YOUTUBE
+    /* ==========================================================================
+       CATÁLOGO OFICIAL DE AULAS (IDs 100% REAIS, ATIVOS E EMBEDDABLE)
+       ========================================================================== */
     const lessons = [
-      // NÍVEL 1
-      { id: "n1a1", level: 1, levelName: "Nível 1: Fundamentos", title: "Atos Administrativos: Elementos e Atributos", prof: "Cíntia Brunelli", videoId: "Uebds3z8oS4", desc: "Aprenda os 5 elementos (CO-FI-FO-MO-OB) e os atributos PATI (Presunção, Autoexecutoriedade, Tipicidade e Imperatividade)." },
-      { id: "n1a2", level: 1, levelName: "Nível 1: Fundamentos", title: "Princípios Constitucionais (LIMPE - Art. 37 CF)", prof: "Cíntia Brunelli", videoId: "k-H7R0D8oAE", desc: "Legalidade, Impessoalidade, Moralidade, Publicidade e Eficiência cobrados em casos práticos pela FCC." },
-      { id: "n1a3", level: 1, levelName: "Nível 1: Fundamentos", title: "Atos Administrativos: Espécies e Classificação", prof: "Cíntia Brunelli", videoId: "A-QSnfSoKe8", desc: "Diferenças entre regime estatutário e celetista, atos normativos, ordinatórios, negociais e punitivos." },
-      { id: "n1a4", level: 1, levelName: "Nível 1: Fundamentos", title: "Atos Vinculados vs Discricionários e Limites", prof: "Cíntia Brunelli", videoId: "KfLOIxvTr8J", desc: "Como o Estado fiscaliza e anula atos ilegais (Autotutela) e como o mérito administrativo é avaliado." },
+      // NÍVEL 1: FUNDAMENTOS (8 AULAS)
+      { id: "n1a1", level: 1, levelName: "Nível 1: Fundamentos", title: "Atos Administrativos: Conceito, Espécies e Elementos", prof: "Cíntia Brunelli", videoId: "L2lXiq54qno", desc: "Aprenda os 5 elementos (CO-FI-FO-MO-OB) e os atributos PATI com linguagem simples e objetiva." },
+      { id: "n1a2", level: 1, levelName: "Nível 1: Fundamentos", title: "Princípios Expressos da Administração Pública (LIMPE - Art. 37 CF)", prof: "Cíntia Brunelli", videoId: "Qm4ernn3c9M", desc: "Legalidade, Impessoalidade, Moralidade, Publicidade e Eficiência cobrados em casos práticos pela FCC." },
+      { id: "n1a3", level: 1, levelName: "Nível 1: Fundamentos", title: "Direito Administrativo: Poderes e Atos Administrativos", prof: "Herbert Almeida", videoId: "WQMwGFje3NE", desc: "Poder de polícia, hierárquico, disciplinar e regulamentar explicados em resumo completo." },
+      { id: "n1a4", level: 1, levelName: "Nível 1: Fundamentos", title: "Atos Administrativos de Ponta a Ponta", prof: "Gran Jurídico", videoId: "JHVFeNFYWUQ", desc: "Como o Estado fiscaliza e anula atos ilegais (Autotutela) e como o mérito administrativo é avaliado." },
       { id: "n1a5", level: 1, levelName: "Nível 1: Fundamentos", title: "Orçamento Fácil: O que é o PPA (Plano Plurianual)", prof: "Senado Federal", videoId: "gnJv9dFhMdw", desc: "Série animada didática do Senado explicando as diretrizes, objetivos e metas de 4 anos." },
       { id: "n1a6", level: 1, levelName: "Nível 1: Fundamentos", title: "Orçamento Fácil: O que é a LDO (Diretrizes Orçamentárias)", prof: "Senado Federal", videoId: "z0PoLMrvcjQ", desc: "A ponte estratégica entre o planejamento do PPA e a execução anual da LOA." },
-      { id: "n1a7", level: 1, levelName: "Nível 1: Fundamentos", title: "Português FCC: Tipologia e Interpretação Textual", prof: "Professores FCC", videoId: "k-H7R0D8oAE", desc: "Como a FCC formula inferências e paráfrases em textos densos para induzir ao erro." },
-      { id: "n1a8", level: 1, levelName: "Nível 1: Fundamentos", title: "Concordância Verbal e Nominal nos Padrões FCC", prof: "Professores FCC", videoId: "Uebds3z8oS4", desc: "Casos clássicos: sujeito posposto, partícula SE, verbos impessoais Haver/Fazer e expressões partitivas." },
+      { id: "n1a7", level: 1, levelName: "Nível 1: Fundamentos", title: "Orçamento Fácil: O que é a LOA (Lei Orçamentária Anual)", prof: "Senado Federal", videoId: "CP0Jz3qA9G8", desc: "Receitas estimadas e despesas fixadas pelo Estado para o exercício financeiro anual." },
+      { id: "n1a8", level: 1, levelName: "Nível 1: Fundamentos", title: "Português FCC: Concordância Verbal - Pegadinhas da Banca", prof: "Grasiela Cabral", videoId: "AtKcpi-fAzw", desc: "Casos clássicos da FCC: sujeito posposto, partícula SE, verbos impessoais Haver/Fazer e expressões partitivas." },
 
-      // NÍVEL 2
-      { id: "n2a1", level: 2, levelName: "Nível 2: Mecânica FCC", title: "Nova Lei de Licitações (Lei 14.133/21): As 5 Modalidades", prof: "Herbert Almeida", videoId: "A-QSnfSoKe8", desc: "Pregão, Concorrência, Concurso, Leilão e o novo Diálogo Competitivo. Fim do Convite e Tomada de Preços." },
-      { id: "n2a2", level: 2, levelName: "Nível 2: Mecânica FCC", title: "Dispensa vs Inexigibilidade de Licitação", prof: "Herbert Almeida", videoId: "KfLOIxvTr8J", desc: "Inexigibilidade (inviabilidade de competição) vs Dispensa (competição viável com autorização legal)." },
-      { id: "n2a3", level: 2, levelName: "Nível 2: Mecânica FCC", title: "Controle Externo e Tribunais de Contas (Arts. 70 a 75 CF)", prof: "Direito Constitucional", videoId: "gnJv9dFhMdw", desc: "O coração da sua função no TCE! Fiscalização contábil, parecer prévio vs julgamento definitivo de contas." },
-      { id: "n2a4", level: 2, levelName: "Nível 2: Mecânica FCC", title: "AFO Descomplicada: O Ciclo PPA, LDO e LOA", prof: "Senado Federal", videoId: "z0PoLMrvcjQ", desc: "Planejamento orçamentário: PPA (estratégico), LDO (tático) e LOA (operacional e financeiro)." },
-      { id: "n2a5", level: 2, levelName: "Nível 2: Mecânica FCC", title: "Lei de Responsabilidade Fiscal (LRF): Despesa com Pessoal", prof: "Especialistas AFO", videoId: "gnJv9dFhMdw", desc: "Limites de gastos com pessoal para Estados (60% da RCL) e sanções quando ultrapassado o limite." },
-      { id: "n2a6", level: 2, levelName: "Nível 2: Mecânica FCC", title: "Administração Geral: Funções Administrativas (PODC)", prof: "Rodrigo Rennó", videoId: "k-H7R0D8oAE", desc: "Planejamento, Organização, Direção e Controle explicados com esquemas diretos." },
-      { id: "n2a7", level: 2, levelName: "Nível 2: Mecânica FCC", title: "Gestão por Processos e Governança no Setor Público", prof: "Rodrigo Rennó", videoId: "Uebds3z8oS4", desc: "Matriz SWOT, mapeamento de processos e os 6 Ds da eficiência na Administração Pública." },
-      { id: "n2a8", level: 2, levelName: "Nível 2: Mecânica FCC", title: "Questões Comentadas FCC: Direito Administrativo", prof: "Estratégia Concursos", videoId: "KfLOIxvTr8J", desc: "Resolução detalhada de questões recentes da FCC para fixar o estilo de pegadinhas da banca." },
+      // NÍVEL 2: MECÂNICA FCC & CONTROLE (8 AULAS)
+      { id: "n2a1", level: 2, levelName: "Nível 2: Mecânica FCC", title: "Nova Lei de Licitações (Lei 14.133/21): As 5 Modalidades", prof: "Herbert Almeida", videoId: "VKwIaq9IrgI", desc: "Pregão, Concorrência, Concurso, Leilão e Diálogo Competitivo. Fim do Convite e Tomada de Preços." },
+      { id: "n2a2", level: 2, levelName: "Nível 2: Mecânica FCC", title: "Controle Externo para o TCU: Resumo em UMA Aula", prof: "Herbert Almeida", videoId: "qq7kWJ23IG4", desc: "O coração da função no TCE! Fiscalização contábil, financeira, orçamentária, operacional e patrimonial." },
+      { id: "n2a3", level: 2, levelName: "Nível 2: Mecânica FCC", title: "Controle Externo e Competências Constitucionais (Arts. 70 a 75 CF)", prof: "Faz Questão", videoId: "6KyMF4LmLck", desc: "Diferença crucial: apreciação de contas de Governo vs julgamento de contas de Gestão." },
+      { id: "n2a4", level: 2, levelName: "Nível 2: Mecânica FCC", title: "Reta Final TCE: Controle Externo e Jurisprudência", prof: "Herbert Almeida", videoId: "6cFhPRoM-q4", desc: "Pontos críticos de prova, súmulas e decisões recentes aplicadas a auditorias de controle externo." },
+      { id: "n2a5", level: 2, levelName: "Nível 2: Mecânica FCC", title: "Lei de Responsabilidade Fiscal (LRF): Resumo em UMA Aula", prof: "Leandro Ravyelle", videoId: "Rbqizz4Aejc", desc: "Limites de gastos com pessoal (60% da RCL), Restos a Pagar, Relatório de Gestão Fiscal e sanções." },
+      { id: "n2a6", level: 2, levelName: "Nível 2: Mecânica FCC", title: "Resumo de LRF em 40 Minutos: Conceitos Práticos", prof: "Diego Jacques", videoId: "f9q7yTBLDWY", desc: "Entenda o cálculo da RCL, despesa obrigatória de caráter continuado e metas fiscais." },
+      { id: "n2a7", level: 2, levelName: "Nível 2: Mecânica FCC", title: "Administração Geral: Funções Administrativas (PODC)", prof: "PHD Concursos", videoId: "gdWYBVHC-8o", desc: "Planejamento, Organização, Direção e Controle explicados com mapas mentais." },
+      { id: "n2a8", level: 2, levelName: "Nível 2: Mecânica FCC", title: "Processo Administrativo: Avaliação e Controle", prof: "Rodrigo Rennó", videoId: "_KS3YlU4U1o", desc: "Controle prévio, concomitante e posterior na gestão pública e indicadores de desempenho." },
 
-      // NÍVEL 3
-      { id: "n3a1", level: 3, levelName: "Nível 3: Legislação Goiás", title: "Estatuto dos Servidores de Goiás (Lei 20.756/20): Provimento", prof: "Professores GO", videoId: "k-H7R0D8oAE", desc: "Regras específicas de Goiás: posse, exercício, estágio probatório de 3 anos e avaliação especial." },
-      { id: "n3a2", level: 3, levelName: "Nível 3: Legislação Goiás", title: "Lei 20.756/20: Direitos, Vantagens e Regime Disciplinar", prof: "Professores GO", videoId: "Uebds3z8oS4", desc: "Penalidades disciplinares, prazos prescricionais para apuração, PAD e sindicância em Goiás." },
-      { id: "n3a3", level: 3, levelName: "Nível 3: Legislação Goiás", title: "Lei Orgânica do TCE-GO (Lei 16.168/2007): Estrutura e Câmaras", prof: "Especialistas TCE", videoId: "gnJv9dFhMdw", desc: "Plenário de 7 Conselheiros, competências das Câmaras e papel do Ministério Público de Contas." },
-      { id: "n3a4", level: 3, levelName: "Nível 3: Legislação Goiás", title: "Tomada de Contas Especial e Sanções Aplicadas pelo TCE-GO", prof: "Especialistas TCE", videoId: "z0PoLMrvcjQ", desc: "Rito processual quando há dano ao erário. Título executivo extrajudicial das decisões do Tribunal." },
-      { id: "n3a5", level: 3, levelName: "Nível 3: Legislação Goiás", title: "Lei de Improbidade Administrativa (Lei 8.429 com reforma 14.230)", prof: "Herbert Almeida", videoId: "A-QSnfSoKe8", desc: "Fim da improbidade culposa! Exigência de dolo específico com comprovação de lesão efetiva ao erário." },
-      { id: "n3a6", level: 3, levelName: "Nível 3: Legislação Goiás", title: "Lei de Acesso à Informação (Lei 12.527) e LGPD Pública", prof: "Estratégia Concursos", videoId: "KfLOIxvTr8J", desc: "Transparência ativa vs passiva, prazos para resposta ao cidadão e graus de sigilo legal." },
+      // NÍVEL 3: LEGISLAÇÃO GOIÁS & IMPROBIDADE (6 AULAS)
+      { id: "n3a1", level: 3, levelName: "Nível 3: Legislação Goiás", title: "Estatuto dos Servidores de Goiás (Lei 20.756/20): Provimento e Posse", prof: "Diogo Lopes", videoId: "p7pJcjAEo2s", desc: "Regras específicas de Goiás: posse, exercício, estágio probatório de 3 anos e estabilidade." },
+      { id: "n3a2", level: 3, levelName: "Nível 3: Legislação Goiás", title: "Lei 20.756/20: Direitos, Vantagens e Regime Disciplinar de Goiás", prof: "Diogo Lopes", videoId: "2F04qZzCHo8", desc: "Penalidades disciplinares, prazos de prescrição para apuração, PAD e sindicância em Goiás." },
+      { id: "n3a3", level: 3, levelName: "Nível 3: Legislação Goiás", title: "Lei Orgânica do TCE-GO (Lei 16.168/07): Jurisdição e Competência", prof: "Emerson Bruno", videoId: "_hb97fbimY0", desc: "Estrutura do Tribunal, competências privativas e fiscalização sobre órgãos goianos." },
+      { id: "n3a4", level: 3, levelName: "Nível 3: Legislação Goiás", title: "Lei Orgânica do TCE-GO (Lei 16.168/07): Dos Conselheiros e Plenário", prof: "Emerson Bruno", videoId: "GjCfLZIY4wU", desc: "Composição de 7 Conselheiros, nomeações, garantias e funcionamento das Câmaras." },
+      { id: "n3a5", level: 3, levelName: "Nível 3: Legislação Goiás", title: "Lei de Improbidade Administrativa (Lei 8.429/92 com reforma 14.230/21)", prof: "Herbert Almeida", videoId: "TnywC2Rb54c", desc: "Fim da improbidade culposa! Exigência de dolo específico com comprovação de lesão efetiva ao erário." },
+      { id: "n3a6", level: 3, levelName: "Nível 3: Legislação Goiás", title: "Nova Lei de Improbidade: O que Mudou na Prática", prof: "Herbert Almeida", videoId: "dJ9f4ME-sdI", desc: "Prescrição geral de 8 anos, novas sanções de perda de bens e ressarcimento integral." },
 
-      // NÍVEL 4
-      { id: "n4a1", level: 4, levelName: "Nível 4: Oficina Redação", title: "Esqueleto Coringa da Redação FCC (30 Linhas em 4 Parágrafos)", prof: "Paulinho Kuririn", videoId: "A-QSnfSoKe8", desc: "A estrutura de ouro: Introdução de 6 linhas com tese binária, 2 desenvolvimentos e conclusão propositiva." },
-      { id: "n4a2", level: 4, levelName: "Nível 4: Oficina Redação", title: "Construção de Tese e Contextualização do Tema", prof: "Paulinho Kuririn", videoId: "k-H7R0D8oAE", desc: "Como não tangenciar temas abstratos da FCC (cidadania, ética, controle social) e fixar sua tese no 1º parágrafo." },
-      { id: "n4a3", level: 4, levelName: "Nível 4: Oficina Redação", title: "Repertório Filosófico Legitimado: John Rawls e Bauman", prof: "Paulinho Kuririn", videoId: "gnJv9dFhMdw", desc: "Como usar o Véu da Ignorância e a Modernidade Líquida para justificar o controle do gasto público." },
-      { id: "n4a4", level: 4, levelName: "Nível 4: Oficina Redação", title: "Coesão Referencial e Operadores Argumentativos FCC", prof: "Thiago Caramello", videoId: "z0PoLMrvcjQ", desc: "Conectivos de transição que garantem a pontuação máxima no critério de estrutura da FCC." },
-      { id: "n4a5", level: 4, levelName: "Nível 4: Oficina Redação", title: "Simulação de Redação Nota Máxima: Controle Social e TCE", prof: "Redação Gabaritada", videoId: "Uebds3z8oS4", desc: "Análise linha por linha de uma dissertação nota 100/100 feita especificamente para concursos da FCC." }
+      // NÍVEL 4: OFICINA REDAÇÃO & FCC (5 AULAS)
+      { id: "n4a1", level: 4, levelName: "Nível 4: Oficina Redação", title: "Discursivas FCC: Estrutura e Repertório", prof: "Heitor Ferreira", videoId: "q9vfSNPKyKc", desc: "A estrutura de ouro: Introdução de 6 linhas com tese binária, 2 desenvolvimentos e conclusão propositiva." },
+      { id: "n4a2", level: 4, levelName: "Nível 4: Oficina Redação", title: "Redação Perfeita - FCC", prof: "Adriana Figueiredo", videoId: "DYbtFwDIgLA", desc: "Como não tangenciar temas abstratos da FCC (cidadania, ética, controle social) e garantir nota máxima." },
+      { id: "n4a3", level: 4, levelName: "Nível 4: Oficina Redação", title: "Redação FCC Passo a Passo: Método Direto", prof: "Raphael Reis", videoId: "OMNgOuFeMjc", desc: "Filosofia legitimada: John Rawls, Habermas e Zygmunt Bauman aplicados ao gasto público." },
+      { id: "n4a4", level: 4, levelName: "Nível 4: Oficina Redação", title: "Maratona Português FCC: Concordância e Regência", prof: "Décio Terror", videoId: "XLQJYesG0yE", desc: "Como a FCC formula pegadinhas em orações subordinadas e pronomes oblíquos." },
+      { id: "n4a5", level: 4, levelName: "Nível 4: Oficina Redação", title: "Crase para FCC: Tudo o que Você Precisa Saber", prof: "Décio Terror", videoId: "8rGKdVvETwI", desc: "Crase proibida, facultativa e os casos especiais mais cobrados pela banca." }
     ];
 
-    // DADOS DOS 5 DEBATES EM TRIO
+    // DADOS DOS 5 DEBATES TÉCNICOS EM TRIO
     const debates = [
       {
         id: 1,
         title: "Debate 1: Controle da Administração Pública & TCE-GO",
-        tag: "DIREITO CONSTITUCIONAL",
+        tag: "DIREITO CONSTITUCIONAL & CONTROLE",
         context: "O controle externo exercido pelo TCE fiscaliza a legalidade, legitimidade e economicidade dos atos da gestão pública goiana.",
         questions: [
           { q: "1. Qual é a diferença técnica entre controle interno e controle externo? Dê exemplos da atuação de cada um.", criteria: "Controle interno = próprio poder sobre seus atos (controladorias). Controle externo = Poder Legislativo com auxílio técnico e independente do TCE (arts. 70 e 71 CF)." },
           { q: "2. Como se divide a competência do TCE entre apreciar contas do Governador vs julgar contas de ordenadores de despesa?", criteria: "Contas de Governo (Governador/Prefeito) = TCE emite parecer prévio opinativo (julgamento político pelo Legislativo). Contas de Gestão (secretários, diretores) = TCE julga diretamente em caráter definitivo." },
-          { q: "3. O que é o princípio da economicidade? Se uma compra foi feita dentro da lei, mas com material inútil, o TCE pode punir?", criteria: "Sim! Economicidade analisa o custo-benefício. Não basta gastar legalmente; o gasto deve ser vantajoso. Cabe imputação de dano ao erário e multa." },
-          { q: "4. As decisões do Tribunal de Contas que resultam em imputação de débito ou multa têm qual eficácia jurídica?", criteria: "Eficácia de título executivo extrajudicial (art. 71, §3º da CF). Não precisa de nova ação judicial de conhecimento para ser cobrada." },
-          { q: "5. Qual é a composição do Pleno do TCE-GO e como os Conselheiros são nomeados?", criteria: "7 Conselheiros: 3 indicados pelo Governador (1 auditor, 1 membro do MPC e 1 livre, com aval da Assembleia) e 4 escolhidos pela Assembleia Legislativa." }
+          { q: "3. O que é o princípio da economicidade? Se uma compra foi feita dentro da lei, mas com material inútil ou superfaturado, o TCE pode punir?", criteria: "Sim! Economicidade analisa a relação custo-benefício. Não basta gastar estritamente dentro da lei formal; o gasto deve ser vantajoso para a coletividade. Cabe imputação de débito e multa." },
+          { q: "4. As decisões do Tribunal de Contas que resultam em imputação de débito ou multa têm qual eficácia jurídica?", criteria: "Eficácia de título executivo extrajudicial (art. 71, §3º da CF). Não precisa de nova ação de conhecimento no Poder Judiciário para ser executada." },
+          { q: "5. Qual é a composição do Pleno do TCE-GO e como os Conselheiros são nomeados?", criteria: "7 Conselheiros: 3 indicados pelo Governador (1 auditor concursado, 1 membro do Ministério Público de Contas e 1 de livre escolha, aprovados pela Assembleia) e 4 escolhidos diretamente pela Assembleia Legislativa." }
         ]
       },
       {
         id: 2,
         title: "Debate 2: Nova Lei de Licitações (Lei 14.133/21)",
         tag: "DIREITO ADMINISTRATIVO",
-        context: "A nova lei de licitações estabeleceu novos critérios de julgamento e novas modalidades obrigatórias para toda a administração pública.",
+        context: "A nova lei de licitações estabeleceu novos critérios de julgamento e modalidades obrigatórias para toda a administração pública.",
         questions: [
           { q: "1. Quais são as 5 modalidades de licitação da Lei 14.133/21 e quais modalidades foram expressamente extintas?", criteria: "Atuais: Pregão, Concorrência, Concurso, Leilão e Diálogo Competitivo. Extintas: Tomada de Preços e Convite." },
-          { q: "2. Diferencie Dispensa de Licitação vs Inexigibilidade de Licitação com exemplos práticos.", criteria: "Inexigibilidade = competição inviável (fornecedor exclusivo, notória especialização). Dispensa = competição viável, mas a lei autoriza não licitar (pequeno valor, emergência)." },
-          { q: "3. O que é o Diálogo Competitivo e em quais situações a Administração Pública pode utilizá-lo?", criteria: "Modalidade para contratações complexas em que o Estado dialoga com licitantes para encontrar a melhor solução técnica antes de abrir a disputa de preços." },
-          { q: "4. Qual a função do Estudo Técnico Preliminar (ETP) sob o olhar de auditoria do TCE?", criteria: "Documento preparatório que comprova a real necessidade pública, a viabilidade econômico-financeira e impede contratações sobredimensionadas." },
-          { q: "5. Quais são as 4 sanções administrativas previstas no art. 156 da Lei 14.133/21?", criteria: "Advertência, Multa, Impedimento de licitar e contratar (até 3 anos no ente), e Declaração de Inidoneidade (de 3 a 6 anos, para toda a Administração nacional)." }
+          { q: "2. Diferencie Dispensa de Licitação vs Inexigibilidade de Licitação com exemplos práticos.", criteria: "Inexigibilidade = competição inviável (fornecedor exclusivo, profissional de notória especialização). Dispensa = competição viável, mas a lei autoriza não licitar (pequeno valor, emergência)." },
+          { q: "3. O que é o Diálogo Competitivo e em quais situações a Administração Pública pode utilizá-lo?", criteria: "Modalidade para contratações complexas ou inovadoras onde o Estado dialoga com licitantes previamente selecionados para definir a melhor solução técnica antes da disputa de propostas." },
+          { q: "4. Qual a função do Estudo Técnico Preliminar (ETP) sob o olhar de auditoria do TCE?", criteria: "Documento preparatório que comprova a real necessidade pública, a viabilidade econômico-financeira da contratação e impede compras sobredimensionadas ou injustificadas." },
+          { q: "5. Quais são as 4 sanções administrativas previstas no art. 156 da Lei 14.133/21?", criteria: "1) Advertência; 2) Multa; 3) Impedimento de licitar e contratar (até 3 anos no mesmo ente); 4) Declaração de Inidoneidade (de 3 a 6 anos, com abrangência para toda a Administração Pública nacional)." }
         ]
       },
       {
         id: 3,
         title: "Debate 3: Orçamento Público, AFO & LRF",
-        tag: "ADMINISTRAÇÃO FINANCEIRA",
+        tag: "ADMINISTRAÇÃO FINANCEIRA & ORÇAMENTÁRIA",
         context: "O equilíbrio fiscal e o cumprimento das metas da LRF são o foco primordial das auditorias financeiras do Tribunal de Contas.",
         questions: [
-          { q: "1. Como se relacionam o PPA, a LDO e a LOA no ciclo orçamentário?", criteria: "PPA (4 anos) = diretrizes e metas estratégicas. LDO (anual) = metas fiscais e elo de ligação. LOA (anual) = previsão de receitas e fixação de todas as despesas." },
-          { q: "2. Quais são os 3 estágios da despesa pública orçamentária?", criteria: "1) Empenho (reserva do orçamento); 2) Liquidação (comprovação da entrega do serviço/bem); 3) Pagamento (efetiva transferência bancária)." },
-          { q: "3. Qual é o limite máximo de despesa total com pessoal para os Estados segundo a LRF e como é dividido?", criteria: "Limite máximo = 60% da Receita Corrente Líquida (RCL). Divisão: 49% Executivo, 6% Judiciário, 3% Legislativo/TCE e 2% Ministério Público." },
-          { q: "4. O que são Restos a Pagar Processados vs Não Processados?", criteria: "Processados = despesas empenhadas e já liquidadas (o serviço foi entregue). Não Processados = empenhadas mas que ainda não foram liquidadas até 31 de dezembro." },
-          { q: "5. O que ocorre se a arrecadação de Goiás não comportar o cumprimento das metas fiscais da LDO?", criteria: "Ocorre a limitação de empenho e movimentação financeira (contingenciamento) nos 30 dias subsequentes conforme critérios da LDO (art. 9º LRF)." }
+          { q: "1. Como se relacionam o PPA, a LDO e a LOA no ciclo orçamentário?", criteria: "PPA (4 anos) = diretrizes, objetivos e metas estratégicas. LDO (anual) = metas fiscais e elo de ligação tático. LOA (anual) = previsão de receitas e fixação detalhada de todas as despesas públicas." },
+          { q: "2. Quais são os 3 estágios da despesa pública orçamentária?", criteria: "1) Empenho (reserva prévia da dotação orçamentária); 2) Liquidação (verificação do direito adquirido e entrega do bem/serviço); 3) Pagamento (efetiva emissão da ordem bancária ao credor)." },
+          { q: "3. Qual é o limite máximo de despesa total com pessoal para os Estados segundo a LRF e como é dividido?", criteria: "Limite máximo = 60% da Receita Corrente Líquida (RCL). Divisão: 49% Poder Executivo, 6% Poder Judiciário, 3% Poder Legislativo/TCE e 2% Ministério Público Estadual." },
+          { q: "4. O que são Restos a Pagar Processados vs Não Processados?", criteria: "Processados = despesas empenhadas e já liquidadas no exercício financeiro. Não Processados = despesas empenhadas que ainda NÃO foram liquidadas até 31 de dezembro." },
+          { q: "5. O que ocorre se a arrecadação de Goiás não comportar o cumprimento das metas fiscais da LDO?", criteria: "Ocorre a limitação de empenho e movimentação financeira (contingenciamento) nos 30 dias subsequentes, conforme critérios previstos na própria LDO (art. 9º da LRF)." }
         ]
       },
       {
@@ -899,23 +996,23 @@
         context: "A redação dissertativa de 30 linhas é o diferencial decisivo para cravar as 3 vagas entre os 6 convocados.",
         questions: [
           { q: "1. Como estruturar a introdução perfeita de 6 linhas para a FCC?", criteria: "Contextualização ampla do tema + Tese com 2 argumentos complementares que serão desenvolvidos nos parágrafos 2 e 3." },
-          { q: "2. Como utilizar a teoria de John Rawls (Véu da Ignorância) em temas sobre recursos públicos e equidade social?", criteria: "Rawls preceitua que as regras justas protegem os mais vulneráveis. O TCE garante que os recursos sociais cheguem aos necessitados, efetivando a justiça distributiva." },
-          { q: "3. Como a 'Modernidade Líquida' de Zygmunt Bauman fundamenta a necessidade de instituições públicas fortes?", criteria: "Bauman alerta para a fragilidade dos vínculos e descrença coletiva. O controle público e a transparência agem como âncoras republicanas contra o individualismo." },
-          { q: "4. Quais os 3 critérios de correção da FCC para a redação de nível médio?", criteria: "Conteúdo (compreensão do tema e consistência argumentativa), Estrutura (coesão e progressão lógica) e Expressão (norma culta, concordância e vocabulário)." },
-          { q: "5. Qual o formato ideal de conclusão (4º parágrafo) para fechar com nota máxima?", criteria: "Conectivo conclusivo + retomada da tese + proposta reflexiva com diretrizes de governança e participação social, sem criar argumentos novos." }
+          { q: "2. Como utilizar a teoria de John Rawls (Véu da Ignorância) em temas sobre recursos públicos e equidade social?", criteria: "Rawls preceitua que as regras de uma sociedade justa devem proteger os mais vulneráveis. O TCE garante que os recursos sociais cheguem aos necessitados, efetivando a justiça distributiva." },
+          { q: "3. Como a 'Modernidade Líquida' de Zygmunt Bauman fundamenta a necessidade de instituições públicas fortes?", criteria: "Bauman alerta para a fragilidade dos vínculos e a perda de referências sólidas. As instituições de controle e a transparência pública agem como âncoras republicanas contra a desagregação social." },
+          { q: "4. Quais os 3 critérios de correção da FCC para a redação de nível médio?", criteria: "Conteúdo (compreensão do tema e profundidade argumentativa), Estrutura (coesão, coerência e progressão textual) e Expressão (norma culta, concordância, regência e pontuação)." },
+          { q: "5. Qual o formato ideal de conclusão (4º parágrafo) para fechar com nota máxima?", criteria: "Conectivo conclusivo + síntese da tese + proposta reflexiva com diretrizes de governança e participação social cidadã, sem inventar argumentos novos de última hora." }
         ]
       },
       {
         id: 5,
         title: "Debate 5: Raciocínio Lógico & Português FCC",
         tag: "CONHECIMENTOS BÁSICOS",
-        context: "Gabaritar as questões básicas de Língua Portuguesa e Lógica garante a nota de corte mais alta do concurso.",
+        context: "Gabaritar as questões básicas de Língua Portuguesa e Lógica garante a pontuação de corte mais alta do concurso.",
         questions: [
-          { q: "1. 'Se o laudo foi emitido, o contrato foi assinado'. Sabendo que isso é FALSO, qual é a verdade sobre o laudo e o contrato?", criteria: "A condicional só é falsa no caso V → F ('Vera Fischer'). Logo: 'O laudo foi emitido' é VERDADEIRO e 'O contrato foi assinado' é FALSO." },
-          { q: "2. Como o uso de vírgulas altera o sentido entre orações adjetivas explicativas e restritivas na FCC?", criteria: "Com vírgulas = explicativa (generaliza para todo o grupo). Sem vírgulas = restritiva (restringe a apenas uma parte do grupo de elementos)." },
-          { q: "3. 'Alugam-se salas' vs 'Precisa-se de analistas': qual a função do 'SE' e a concordância verbal em cada oração?", criteria: "'Alugam-se salas' = Partícula Apassivadora (sujeito passivo no plural, verbo no plural). 'Precisa-se de analistas' = Índice de Indeterminação (verbo no singular com preposição)." },
-          { q: "4. Em um grupo com você e suas 2 amigas disputando 6 vagas, de quantas maneiras diferentes o trio pode ocupar as 3 primeiras posições?", criteria: "Permutação simples das 3 pessoas: P(3) = 3 × 2 × 1 = 6 maneiras diferentes entre vocês três." },
-          { q: "5. 'Houveram muitos recursos' ou 'Houve muitos recursos'? Explique a regra culta da FCC.", criteria: "O correto é 'Houve'. O verbo Haver com sentido de existir ou ocorrer é impessoal: não possui sujeito e fica sempre no singular." }
+          { q: "1. 'Se o laudo foi emitido, o contrato foi assinado'. Sabendo que essa proposição condicional é FALSA, qual é a verdade sobre o laudo e o contrato?", criteria: "A condicional só é falsa no caso V -> F ('Vera Fischer'). Portanto: 'O laudo foi emitido' é VERDADEIRO e 'O contrato foi assinado' é FALSO." },
+          { q: "2. Como o uso de vírgulas altera o sentido entre orações adjetivas explicativas e restritivas na FCC?", criteria: "Com vírgulas = explicativa (generaliza o atributo para todos os membros do grupo). Sem vírgulas = restritiva (restringe o atributo apenas a um subgrupo específico)." },
+          { q: "3. 'Alugam-se salas' vs 'Precisa-se de analistas': qual a função do 'SE' e a concordância verbal em cada oração?", criteria: "'Alugam-se salas' = Partícula Apassivadora (sujeito passivo no plural 'salas', verbo no plural). 'Precisa-se de analistas' = Índice de Indeterminação do Sujeito (verbo obrigatoriamente no singular com termo preposicionado)." },
+          { q: "4. Em um grupo com você e suas 2 amigas disputando 6 vagas, de quantas maneiras diferentes o trio pode ocupar as 3 primeiras colocações?", criteria: "Permutação simples dos 3 membros: P(3) = 3 × 2 × 1 = 6 maneiras diferentes entre vocês três nas 3 primeiras posições." },
+          { q: "5. 'Houveram muitos recursos' ou 'Houve muitos recursos'? Explique a regra culta cobrada pela FCC.", criteria: "O correto é 'Houve'. O verbo Haver com sentido de existir ou acontecer é impessoal: não possui sujeito e deve permanecer sempre na 3ª pessoa do singular." }
         ]
       }
     ];
@@ -953,7 +1050,7 @@
       updateCountdown();
       setInterval(updateCountdown, 60000);
 
-      // Carregar o player da aula ativa
+      // Carregar a aula ativa no player
       showLevel(activeLevel, activeLessonId);
     }
 
@@ -1029,7 +1126,7 @@
     }
 
     /* ==========================================================================
-       VIEW: PLAYER DO NÍVEL COM SUPORTE TOTAL CONTRA ERRO 153
+       VIEW: PLAYER DO NÍVEL COM SUPORTE TOTAL
        ========================================================================== */
     function showLevel(lvlNum, lessonIdToSelect) {
       closeSidebar();
@@ -1085,7 +1182,7 @@
 
             <div class="player-card">
               
-              <!-- BARRA DE ACESSO DIRETO & RESOLUÇÃO DE ERRO 153 -->
+              <!-- BARRA DE ACESSO DIRETO & OPÇÕES -->
               <div class="player-top-fallback-bar">
                 <a href="${ytUrl}" target="_blank" rel="noopener noreferrer" class="btn-direct-yt" title="Abre o vídeo direto no YouTube se o navegador bloquear incorporação">
                   ▶ Abrir no YouTube (App / Nova Aba) ↗
@@ -1096,11 +1193,11 @@
                 </button>
               </div>
 
-              <!-- IFRAME DO YOUTUBE EMBED COM SUPORTE NOCOOKIE -->
+              <!-- IFRAME DO YOUTUBE EMBED -->
               <div class="video-frame-wrap">
                 <iframe 
                   id="yt-player-iframe"
-                  src="https://www.youtube-nocookie.com/embed/${videoId}?rel=0&modestbranding=1" 
+                  src="https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1" 
                   title="${current.title}" 
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                   referrerpolicy="strict-origin-when-cross-origin"
@@ -1109,7 +1206,7 @@
               </div>
 
               <div class="yt-notice-box">
-                ℹ️ <strong>Nota anti-bloqueio:</strong> Se o player do YouTube mostrar "Erro 150/153" (restrição de incorporação imposta por certos canais ou abertura em arquivo local sem servidor), clique no botão vermelho <strong>"Abrir no YouTube"</strong> acima para assistir direto no aplicativo ou adicione seu link customizado.
+                ℹ️ <strong>Dica de Estudos:</strong> Você pode assistir à videoaula embutida acima ou clicar no botão vermelho <strong>"Abrir no YouTube"</strong> para assistir em tela cheia no aplicativo sem propagandas.
               </div>
 
               <div class="player-info-box">
@@ -1125,44 +1222,42 @@
                 <div class="lesson-desc-box">
                   <strong>💡 Foco na Prova:</strong> ${current.desc}
                 </div>
-              </div>
 
-              <div class="player-buttons-row">
-                <button class="btn-action btn-done ${isDone ? 'completed' : ''}" onclick="toggleCompleteCurrent()">
-                  ${isDone ? '✓ Aula Concluída (Clique p/ Desmarcar)' : '○ Marcar como Concluída'}
-                </button>
+                <div class="lesson-action-row">
+                  <button class="btn-toggle-done ${isDone ? 'done' : ''}" onclick="toggleLessonDone('${current.id}')">
+                    ${isDone ? '✓ Aula Concluída' : '○ Marcar como Concluída'}
+                  </button>
 
-                <button class="btn-action btn-next" onclick="nextLesson()">
-                  Próxima Aula →
-                </button>
+                  <button class="btn-next-lesson" onclick="goToNextLesson()">
+                    Próxima Aula →
+                  </button>
+                </div>
               </div>
             </div>
 
           </div>
 
-          <!-- COLUNA DIREITA: LISTA DE AULAS DO NÍVEL ATUAL -->
+          <!-- COLUNA DIREITA: PLAYLIST DO BLOCO -->
           <div>
-            <div class="playlist-panel">
-              <div class="playlist-header">
-                <span class="playlist-title">${current.levelName}</span>
-                <span style="font-size:0.75rem; color:var(--primary-light); font-weight:700;">
-                  ${lvlLessons.filter(l => completedMap[l.id]).length}/${lvlLessons.length} Feitas
-                </span>
+            <div class="playlist-card">
+              <div class="playlist-head">
+                <span class="playlist-head-title">${current.levelName}</span>
+                <span class="playlist-head-count">${lvlLessons.filter(l => completedMap[l.id]).length}/${lvlLessons.length} Feitas</span>
               </div>
 
-              <div>
+              <div class="playlist-scroll">
                 ${lvlLessons.map((l, idx) => {
                   const done = !!completedMap[l.id];
                   const active = l.id === current.id;
                   return `
-                    <div class="lesson-item-card ${active ? 'active' : ''} ${done ? 'done' : ''}" onclick="selectLesson('${l.id}')">
-                      <div>
-                        <div class="lesson-item-sub">Aula ${idx + 1} • ${l.prof}</div>
-                        <div class="lesson-item-title">${l.title}</div>
-                      </div>
-                      <span style="color:${done ? 'var(--green-light)' : 'var(--text-dim)'}; font-weight:800; font-size:0.85rem;">
+                    <div class="playlist-item ${active ? 'active' : ''} ${done ? 'done' : ''}" onclick="selectLesson('${l.id}')">
+                      <div class="playlist-item-idx">
                         ${done ? '✓' : idx + 1}
-                      </span>
+                      </div>
+                      <div class="playlist-item-info">
+                        <div class="playlist-item-title">${l.title}</div>
+                        <div class="playlist-item-prof">${l.prof}</div>
+                      </div>
                     </div>
                   `;
                 }).join("")}
@@ -1174,60 +1269,60 @@
       `;
     }
 
-    // EXTRAI O ID DO YOUTUBE DE QUALQUER URL
-    function extractYouTubeId(url) {
-      if (!url) return null;
-      url = url.trim();
-      if (url.length === 11 && !url.includes("/") && !url.includes(".")) return url;
-      const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-      const match = url.match(regExp);
-      return (match && match[2].length === 11) ? match[2] : null;
+    function selectLesson(id) {
+      activeLessonId = id;
+      const curr = lessons.find(l => l.id === id);
+      if (curr) activeLevel = curr.level;
+      saveState();
+      renderPlayerUI();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function toggleLessonDone(id) {
+      completedMap[id] = !completedMap[id];
+      saveState();
+      renderPlayerUI();
     }
 
     function promptCustomVideo(lessonId) {
-      const current = lessons.find(l => l.id === lessonId);
-      const input = prompt(`Cole a URL ou o ID de vídeo do YouTube para a aula "${current.title}":`, customVideosMap[lessonId] || "");
-      if (input !== null) {
-        if (input.trim() === "") {
+      const currentVal = customVideosMap[lessonId] || "";
+      const promptRes = prompt(
+        "Insira a URL completa do YouTube ou o ID do vídeo (11 caracteres) para personalizar esta aula:\n\nExemplo: https://www.youtube.com/watch?v=L2lXiq54qno",
+        currentVal ? `https://www.youtube.com/watch?v=${currentVal}` : ""
+      );
+
+      if (promptRes !== null) {
+        const trimmed = promptRes.trim();
+        if (trimmed === "") {
           delete customVideosMap[lessonId];
           saveState();
           renderPlayerUI();
-          alert("Vídeo restaurado para o padrão oficial!");
+          alert("Vídeo resetado para o padrão original!");
+          return;
+        }
+
+        let extractedId = trimmed;
+        if (trimmed.includes("v=")) {
+          extractedId = trimmed.split("v=")[1].split("&")[0];
+        } else if (trimmed.includes("youtu.be/")) {
+          extractedId = trimmed.split("youtu.be/")[1].split("?")[0];
+        }
+
+        if (extractedId.length >= 11) {
+          customVideosMap[lessonId] = extractedId;
+          saveState();
+          renderPlayerUI();
+          alert("Link de vídeo atualizado com sucesso!");
         } else {
-          const extracted = extractYouTubeId(input);
-          if (extracted) {
-            customVideosMap[lessonId] = extracted;
-            saveState();
-            renderPlayerUI();
-            alert("Vídeo atualizado com sucesso para este aparelho!");
-          } else {
-            alert("Não foi possível extrair um ID válido do YouTube. Certifique-se de colar uma URL completa do YouTube.");
-          }
+          alert("Link inválido. Certifique-se de colar uma URL válida do YouTube.");
         }
       }
     }
 
-    function selectLesson(id) {
-      activeLessonId = id;
-      saveState();
-      renderPlayerUI();
-    }
-
-    function toggleCompleteCurrent() {
-      completedMap[activeLessonId] = !completedMap[activeLessonId];
-      saveState();
-      renderPlayerUI();
-    }
-
-    function nextLesson() {
-      const idx = lessons.findIndex(l => l.id === activeLessonId);
-      if (idx !== -1 && idx < lessons.length - 1) {
-        const next = lessons[idx + 1];
-        if (next.level !== activeLevel) {
-          showLevel(next.level, next.id);
-        } else {
-          selectLesson(next.id);
-        }
+    function goToNextLesson() {
+      const currIdx = lessons.findIndex(l => l.id === activeLessonId);
+      if (currIdx !== -1 && currIdx < lessons.length - 1) {
+        selectLesson(lessons[currIdx + 1].id);
       } else {
         alert("🎉 Você chegou ao final de todas as aulas cadastradas na plataforma!");
       }
@@ -1264,7 +1359,7 @@
       container.innerHTML = `
         <div>
           <div style="margin-bottom:16px;">
-            <span style="color:var(--gold); font-size:0.75rem; font-weight:800; text-transform:uppercase;">👥 Sabatina em Trio</span>
+            <span style="color:var(--gold); font-size:0.75rem; font-weight:800; text-transform:uppercase;">⚔️ Sabatina em Trio</span>
             <h1 style="font-size:1.5rem; font-weight:900; color:#fff;">Arena de Debates do Concurso</h1>
             <p style="font-size:0.88rem; color:var(--text-muted);">
               A proposta do trio: estudem o tema e façam a sabatina oral entre si. Cada debate tem 5 perguntas técnicas com a chave de resposta para quem mediar!
@@ -1293,7 +1388,7 @@
                   <div class="q-title">${q.q}</div>
 
                   <button class="btn-toggle-criteria" onclick="document.getElementById('ans-${d.id}-${idx}').classList.toggle('open')">
-                    👁️ Ver Critério Técnico da Resposta
+                    💡 Ver Critério Técnico da Resposta
                   </button>
 
                   <div class="q-answer-box" id="ans-${d.id}-${idx}">
@@ -1330,28 +1425,35 @@
                 <strong style="color:#fff; font-size:0.9rem;">Dia 1: Atos Administrativos (CO-FI-FO-MO-OB)</strong>
                 <span style="color:var(--text-muted); font-size:0.75rem;">Direito Administrativo Básico</span>
               </div>
-              <span class="crono-badge-go">Estudar Agora ➔</span>
+              <span class="crono-badge-go">Estudar Agora →</span>
             </div>
             <div class="crono-day-item" onclick="showLevel(1, 'n1a2')">
               <div class="crono-day-info">
                 <strong style="color:#fff; font-size:0.9rem;">Dia 2: Princípios LIMPE (Art. 37 CF)</strong>
                 <span style="color:var(--text-muted); font-size:0.75rem;">Regras de Conduta e Moralidade</span>
               </div>
-              <span class="crono-badge-go">Estudar Agora ➔</span>
+              <span class="crono-badge-go">Estudar Agora →</span>
             </div>
             <div class="crono-day-item" onclick="showLevel(1, 'n1a5')">
               <div class="crono-day-info">
                 <strong style="color:#fff; font-size:0.9rem;">Dia 3: Orçamento Fácil (PPA Senado)</strong>
                 <span style="color:var(--text-muted); font-size:0.75rem;">Conceito de Planejamento Público</span>
               </div>
-              <span class="crono-badge-go">Estudar Agora ➔</span>
+              <span class="crono-badge-go">Estudar Agora →</span>
+            </div>
+            <div class="crono-day-item" onclick="showLevel(1, 'n1a8')">
+              <div class="crono-day-info">
+                <strong style="color:#fff; font-size:0.9rem;">Dia 4: Português FCC: Concordância Verbal</strong>
+                <span style="color:var(--text-muted); font-size:0.75rem;">Casos de pegadinha da banca</span>
+              </div>
+              <span class="crono-badge-go">Estudar Agora →</span>
             </div>
             <div class="crono-day-item" onclick="showView('debates', 1)">
               <div class="crono-day-info">
                 <strong style="color:#fff; font-size:0.9rem;">Sábado: Debate 1 em Trio</strong>
                 <span style="color:var(--text-muted); font-size:0.75rem;">Sabatina oral sobre Controle Externo</span>
               </div>
-              <span class="crono-badge-go">Abrir Debate ➔</span>
+              <span class="crono-badge-go">Abrir Debate →</span>
             </div>
           </div>
 
@@ -1366,28 +1468,28 @@
                 <strong style="color:#fff; font-size:0.9rem;">Dia 15: Nova Lei de Licitações (14.133/21)</strong>
                 <span style="color:var(--text-muted); font-size:0.75rem;">As 5 Modalidades e Fases</span>
               </div>
-              <span class="crono-badge-go">Estudar Agora ➔</span>
+              <span class="crono-badge-go">Estudar Agora →</span>
             </div>
-            <div class="crono-day-item" onclick="showLevel(2, 'n2a3')">
+            <div class="crono-day-item" onclick="showLevel(2, 'n2a2')">
               <div class="crono-day-info">
-                <strong style="color:#fff; font-size:0.9rem;">Dia 17: Controle Externo (Arts. 70 a 75 CF)</strong>
+                <strong style="color:#fff; font-size:0.9rem;">Dia 17: Controle Externo para o TCU / TCE</strong>
                 <span style="color:var(--text-muted); font-size:0.75rem;">Atribuições Constitucionais do Tribunal</span>
               </div>
-              <span class="crono-badge-go">Estudar Agora ➔</span>
+              <span class="crono-badge-go">Estudar Agora →</span>
             </div>
-            <div class="crono-day-item" onclick="showLevel(2, 'n2a4')">
+            <div class="crono-day-item" onclick="showLevel(2, 'n2a5')">
               <div class="crono-day-info">
-                <strong style="color:#fff; font-size:0.9rem;">Dia 18: Ciclo Orçamentário (PPA, LDO e LOA)</strong>
-                <span style="color:var(--text-muted); font-size:0.75rem;">AFO Descomplicada</span>
+                <strong style="color:#fff; font-size:0.9rem;">Dia 18: LRF: Lei de Responsabilidade Fiscal</strong>
+                <span style="color:var(--text-muted); font-size:0.75rem;">Limites de gastos com pessoal e metas</span>
               </div>
-              <span class="crono-badge-go">Estudar Agora ➔</span>
+              <span class="crono-badge-go">Estudar Agora →</span>
             </div>
             <div class="crono-day-item" onclick="showView('debates', 2)">
               <div class="crono-day-info">
                 <strong style="color:#fff; font-size:0.9rem;">Sábado: Debate 2 em Trio</strong>
                 <span style="color:var(--text-muted); font-size:0.75rem;">Sabatina sobre Licitações e Contratos</span>
               </div>
-              <span class="crono-badge-go">Abrir Debate ➔</span>
+              <span class="crono-badge-go">Abrir Debate →</span>
             </div>
           </div>
 
@@ -1402,28 +1504,35 @@
                 <strong style="color:#fff; font-size:0.9rem;">Dia 29: Estatuto dos Servidores GO (Lei 20.756/20)</strong>
                 <span style="color:var(--text-muted); font-size:0.75rem;">Provimento e Estágio Probatório</span>
               </div>
-              <span class="crono-badge-go">Estudar Agora ➔</span>
+              <span class="crono-badge-go">Estudar Agora →</span>
             </div>
             <div class="crono-day-item" onclick="showLevel(3, 'n3a3')">
               <div class="crono-day-info">
                 <strong style="color:#fff; font-size:0.9rem;">Dia 31: Lei Orgânica do TCE-GO (Lei 16.168/07)</strong>
-                <span style="color:var(--text-muted); font-size:0.75rem;">Organização e Competências</span>
+                <span style="color:var(--text-muted); font-size:0.75rem;">Organização e Competências do Tribunal</span>
               </div>
-              <span class="crono-badge-go">Estudar Agora ➔</span>
+              <span class="crono-badge-go">Estudar Agora →</span>
+            </div>
+            <div class="crono-day-item" onclick="showLevel(3, 'n3a5')">
+              <div class="crono-day-info">
+                <strong style="color:#fff; font-size:0.9rem;">Dia 35: Improbidade Administrativa (Lei 8.429/92)</strong>
+                <span style="color:var(--text-muted); font-size:0.75rem;">Reforma da Lei 14.230/21</span>
+              </div>
+              <span class="crono-badge-go">Estudar Agora →</span>
             </div>
             <div class="crono-day-item" onclick="showView('debates', 3)">
               <div class="crono-day-info">
                 <strong style="color:#fff; font-size:0.9rem;">Sábado: Debate 3 em Trio</strong>
                 <span style="color:var(--text-muted); font-size:0.75rem;">Sabatina sobre Finanças e LRF</span>
               </div>
-              <span class="crono-badge-go">Abrir Debate ➔</span>
+              <span class="crono-badge-go">Abrir Debate →</span>
             </div>
           </div>
 
           <!-- SEMANAS 7 E 8 -->
           <div class="crono-week-box">
             <div class="crono-week-top">
-              <span>Semanas 7 e 8: Redação FCC & Simulados</span>
+              <span>Semanas 7 e 8: Redação FCC & Simulados Finais</span>
               <span style="color:var(--gold);">Dias 43 a 80</span>
             </div>
             <div class="crono-day-item" onclick="showLevel(4, 'n4a1')">
@@ -1431,21 +1540,28 @@
                 <strong style="color:#fff; font-size:0.9rem;">Dia 43: Esqueleto Coringa da Redação FCC</strong>
                 <span style="color:var(--text-muted); font-size:0.75rem;">30 Linhas em 4 Parágrafos</span>
               </div>
-              <span class="crono-badge-go">Estudar Agora ➔</span>
+              <span class="crono-badge-go">Estudar Agora →</span>
             </div>
             <div class="crono-day-item" onclick="showView('redacao')">
               <div class="crono-day-info">
                 <strong style="color:#fff; font-size:0.9rem;">Dia 45: Treino de Redação no Editor</strong>
                 <span style="color:var(--text-muted); font-size:0.75rem;">Redação com repertório de John Rawls</span>
               </div>
-              <span class="crono-badge-go">Abrir Editor ➔</span>
+              <span class="crono-badge-go">Abrir Editor →</span>
             </div>
             <div class="crono-day-item" onclick="showView('simulados')">
               <div class="crono-day-info">
                 <strong style="color:#fff; font-size:0.9rem;">Dia 47: Bateria de Simulados FCC</strong>
                 <span style="color:var(--text-muted); font-size:0.75rem;">Questões comentadas com gabarito</span>
               </div>
-              <span class="crono-badge-go">Fazer Simulado ➔</span>
+              <span class="crono-badge-go">Fazer Simulado →</span>
+            </div>
+            <div class="crono-day-item" onclick="showView('debates', 4)">
+              <div class="crono-day-info">
+                <strong style="color:#fff; font-size:0.9rem;">Sábado: Debate 4 em Trio</strong>
+                <span style="color:var(--text-muted); font-size:0.75rem;">Sabatina sobre Redação e Filosofia</span>
+              </div>
+              <span class="crono-badge-go">Abrir Debate →</span>
             </div>
           </div>
 
@@ -1457,7 +1573,7 @@
       container.innerHTML = `
         <div style="background:var(--bg-card); border:1px solid var(--border-color); border-radius:var(--radius-lg); padding:20px;">
           <h1 style="font-size:1.5rem; font-weight:800; color:#fff; margin-bottom:4px;">Simulado FCC de Fixação</h1>
-          <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:16px;">Teste seus conhecimentos com questões no formato da banca.</p>
+          <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:16px;">Teste seus conhecimentos com questões reais no formato da banca com resposta comentada instantânea.</p>
 
           <div style="background:#090e1a; border:1px solid var(--border-color); border-radius:var(--radius-md); padding:16px; margin-bottom:14px;">
             <span style="font-size:0.72rem; font-weight:800; color:var(--primary-light);">QUESTÃO 1 • DIREITO ADMINISTRATIVO</span>
@@ -1465,10 +1581,36 @@
               Em relação aos requisitos ou elementos do ato administrativo, assinale a opção correta:
             </p>
             <div style="display:flex; flex-direction:column; gap:6px;">
-              <button class="nav-item-btn" style="background:var(--bg-surface);" onclick="alert('Incorreto. A competência em regra é irrenunciável.')">A) A competência é sempre discricionária e delegável irrestritamente.</button>
-              <button class="nav-item-btn" style="background:var(--bg-surface);" onclick="alert('Incorreto. A forma é em regra vinculada.')">B) A forma é elemento livre e de livre escolha do gestor.</button>
+              <button class="nav-item-btn" style="background:var(--bg-surface);" onclick="alert('Incorreto. A competência em regra é irrenunciável e vinculada.')">A) A competência é sempre discricionária e delegável irrestritamente.</button>
+              <button class="nav-item-btn" style="background:var(--bg-surface);" onclick="alert('Incorreto. A forma é em regra vinculada (escrita).')">B) A forma é elemento livre e de livre escolha do gestor.</button>
               <button class="nav-item-btn" style="background:rgba(16,185,129,0.2); border:1px solid var(--green); color:var(--green-light); font-weight:800;" onclick="alert('CORRETO! A competência e a finalidade são elementos estritamente vinculados do ato.')">C) A competência e a finalidade são elementos sempre vinculados. (CORRETA)</button>
-              <button class="nav-item-btn" style="background:var(--bg-surface);" onclick="alert('Incorreto. O vício de competência relativa admite convalidação.')">D) Nenhum ato com vício admite convalidação pela Administração.</button>
+              <button class="nav-item-btn" style="background:var(--bg-surface);" onclick="alert('Incorreto. O vício de competência relativa e de forma admitem convalidação.')">D) Nenhum ato com vício admite convalidação pela Administração.</button>
+            </div>
+          </div>
+
+          <div style="background:#090e1a; border:1px solid var(--border-color); border-radius:var(--radius-md); padding:16px; margin-bottom:14px;">
+            <span style="font-size:0.72rem; font-weight:800; color:var(--primary-light);">QUESTÃO 2 • CONTROLE EXTERNO & CONSTITUCIONAL</span>
+            <p style="color:#fff; margin:8px 0; font-size:0.95rem;">
+              No tocante às competências constitucionais do Tribunal de Contas (art. 71 da CF), assinale a afirmativa verdadeira:
+            </p>
+            <div style="display:flex; flex-direction:column; gap:6px;">
+              <button class="nav-item-btn" style="background:var(--bg-surface);" onclick="alert('Incorreto. O Tribunal de Contas APRECIA as contas do Governador emitindo parecer prévio. O julgamento político é do Legislativo.')">A) O Tribunal de Contas julga em definitivo as contas do Chefe do Poder Executivo.</button>
+              <button class="nav-item-btn" style="background:rgba(16,185,129,0.2); border:1px solid var(--green); color:var(--green-light); font-weight:800;" onclick="alert('CORRETO! As decisões do Tribunal de Contas que resultem em débito ou multa têm eficácia de título executivo extrajudicial (art. 71, §3º da CF).')">B) As decisões que cominam débito ou multa possuem eficácia de título executivo. (CORRETA)</button>
+              <button class="nav-item-btn" style="background:var(--bg-surface);" onclick="alert('Incorreto. O Tribunal de Contas não pode decretar prisão nem perda de direitos políticos.')">C) O Tribunal de Contas pode decretar a prisão temporária de gestores faltosos.</button>
+              <button class="nav-item-btn" style="background:var(--bg-surface);" onclick="alert('Incorreto. O Tribunal de Contas integra o rol de órgãos autônomos auxiliares, não faz parte da estrutura do Poder Judiciário.')">D) O Tribunal de Contas faz parte da estrutura do Poder Judiciário.</button>
+            </div>
+          </div>
+
+          <div style="background:#090e1a; border:1px solid var(--border-color); border-radius:var(--radius-md); padding:16px; margin-bottom:14px;">
+            <span style="font-size:0.72rem; font-weight:800; color:var(--primary-light);">QUESTÃO 3 • NOVA LEI DE LICITAÇÕES (LEI 14.133/21)</span>
+            <p style="color:#fff; margin:8px 0; font-size:0.95rem;">
+              Sobre as modalidades de licitação trazidas pela Lei 14.133/2021, é correto afirmar:
+            </p>
+            <div style="display:flex; flex-direction:column; gap:6px;">
+              <button class="nav-item-btn" style="background:var(--bg-surface);" onclick="alert('Incorreto. Tomada de preços e convite foram revogados pela Lei 14.133.')">A) A Tomada de Preços e o Convite continuam em vigor normalmente.</button>
+              <button class="nav-item-btn" style="background:rgba(16,185,129,0.2); border:1px solid var(--green); color:var(--green-light); font-weight:800;" onclick="alert('CORRETO! O Diálogo Competitivo é a nova modalidade trazida para contratações complexas e inovadoras.')">B) O Diálogo Competitivo é uma nova modalidade de licitação. (CORRETA)</button>
+              <button class="nav-item-btn" style="background:var(--bg-surface);" onclick="alert('Incorreto. O Leilão é modalidade para alienação de bens móveis e imóveis.')">C) O Leilão foi expressamente extinto pela nova lei.</button>
+              <button class="nav-item-btn" style="background:var(--bg-surface);" onclick="alert('Incorreto. O pregão não se aplica a obras de engenharia que não sejam comuns.')">D) O Pregão pode ser utilizado para contratar obras complexas de engenharia.</button>
             </div>
           </div>
         </div>
@@ -1483,13 +1625,21 @@
             <h1 style="font-size:1.5rem; font-weight:800; color:#fff;">Editor de Redação FCC (30 Linhas)</h1>
             <span id="lines-badge" style="background:var(--bg-surface); padding:4px 12px; border-radius:999px; font-weight:800; color:var(--primary-light);">0 / 30 Linhas</span>
           </div>
-          <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:12px;">Escreva ou cole seu rascunho. O texto fica salvo automaticamente no seu aparelho.</p>
+          <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:12px;">Escreva ou cole seu rascunho de 30 linhas. O texto fica salvo automaticamente no seu navegador.</p>
+
+          <div style="background:#090e1a; padding:12px; border-radius:var(--radius-sm); border-left:3px solid var(--gold); margin-bottom:14px; font-size:0.84rem; color:#cbd5e1;">
+            <strong>🎯 Estrutura Padrão FCC:</strong><br>
+            • Parágrafo 1 (Linhas 1 a 6): Introdução com contextualização e tese com 2 argumentos.<br>
+            • Parágrafo 2 (Linhas 7 a 14): D1 - Aprofundamento do Argumento 1 com repertório (ex: John Rawls).<br>
+            • Parágrafo 3 (Linhas 15 a 22): D2 - Aprofundamento do Argumento 2 com dados e controle social.<br>
+            • Parágrafo 4 (Linhas 23 a 30): Conclusão com conectivo, síntese da tese e reflexão ética/cidadã.
+          </div>
 
           <textarea class="essay-box" id="essay-text" placeholder="Comece sua redação aqui..." oninput="onEssayChange()">${saved}</textarea>
 
           <div style="display:flex; gap:10px; margin-top:12px;">
             <button class="btn-resume" onclick="localStorage.setItem(KEY_ESSAY, document.getElementById('essay-text').value); alert('Salvo no dispositivo com sucesso!')">💾 Salvar Rascunho</button>
-            <button class="btn-resume" style="background:var(--bg-surface); color:#fff; border:1px solid var(--border-color);" onclick="document.getElementById('essay-text').value = ''; onEssayChange();">🗑️ Limpar</button>
+            <button class="btn-resume" style="background:var(--bg-surface); color:#fff; border:1px solid var(--border-color);" onclick="if(confirm('Tem certeza que deseja limpar o texto?')){ document.getElementById('essay-text').value = ''; onEssayChange(); }">🗑️ Limpar</button>
           </div>
         </div>
       `;
@@ -1516,19 +1666,19 @@
       container.innerHTML = `
         <div style="background:var(--bg-card); border:1px solid var(--border-color); border-radius:var(--radius-lg); padding:20px;">
           <h1 style="font-size:1.5rem; font-weight:800; color:#fff; margin-bottom:8px;">Glossário Jurídico Descomplicado</h1>
-          <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:16px;">Mnemônicos e termos fundamentais para não errar termos técnicos.</p>
+          <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:16px;">Mnemônicos e termos fundamentais para não errar termos técnicos na prova.</p>
           <div style="display:flex; flex-direction:column; gap:10px;">
             <div style="background:#090e1a; padding:12px; border-radius:var(--radius-sm); border:1px solid var(--border-color);">
-              <strong style="color:var(--primary-light);">CO-FI-FO-MO-OB:</strong> Elementos do Ato (Competência, Finalidade, Forma, Motivo, Objeto).
+              <strong style="color:var(--primary-light);">CO-FI-FO-MO-OB:</strong> Elementos do Ato Administrativo (Competência, Finalidade, Forma, Motivo, Objeto).
             </div>
             <div style="background:#090e1a; padding:12px; border-radius:var(--radius-sm); border:1px solid var(--border-color);">
-              <strong style="color:var(--gold);">LIMPE:</strong> Princípios Constitucionais (Legalidade, Impessoalidade, Moralidade, Publicidade, Eficiência - Art. 37 CF).
+              <strong style="color:var(--gold);">LIMPE:</strong> Princípios Constitucionais Expressos (Legalidade, Impessoalidade, Moralidade, Publicidade, Eficiência - Art. 37 CF).
             </div>
             <div style="background:#090e1a; padding:12px; border-radius:var(--radius-sm); border:1px solid var(--border-color);">
-              <strong style="color:var(--green-light);">PATI:</strong> Atributos do Ato (Presunção de Legitimidade, Autoexecutoriedade, Tipicidade, Imperatividade).
+              <strong style="color:var(--green-light);">PATI:</strong> Atributos do Ato Administrativo (Presunção de Legitimidade, Autoexecutoriedade, Tipicidade, Imperatividade).
             </div>
             <div style="background:#090e1a; padding:12px; border-radius:var(--radius-sm); border:1px solid var(--border-color);">
-              <strong style="color:var(--purple);">PODC:</strong> Funções Administrativas (Planejamento, Organização, Direção e Controle).
+              <strong style="color:var(--purple);">PODC:</strong> Funções Administrativas da Gestão (Planejamento, Organização, Direção e Controle).
             </div>
           </div>
         </div>
@@ -1540,7 +1690,7 @@
         <div style="background:var(--bg-card); border:1px solid var(--border-color); border-radius:var(--radius-lg); padding:20px;">
           <h1 style="font-size:1.5rem; font-weight:800; color:#fff; margin-bottom:8px;">Manual do Zero (Padeiro ao TCE-GO)</h1>
           <p style="font-size:0.9rem; color:#cbd5e1; line-height:1.6; margin-bottom:14px;">
-            Você não precisa de faculdade de Direito para ser aprovado. Siga o roteiro passo a passo: comece pelo Nível 1, assista uma aula por dia com o caderno na mão, faça a sabatina do debate com o seu grupo no fim de semana e treine uma redação semanalmente no laboratório.
+            Você não precisa ter faculdade de Direito para conquistar sua vaga. Siga o roteiro passo a passo: comece pelo Nível 1, assista a uma aula por dia com o caderno na mão anotando os conceitos-chave, faça a sabatina do debate com seu trio no fim de semana para fixar a oratória e treine uma redação semanalmente no editor de 30 linhas.
           </p>
           <button class="btn-resume" onclick="showLevel(1)">▶ Começar Agora no Nível 1</button>
         </div>
@@ -1553,7 +1703,7 @@
           <h1 style="font-size:1.5rem; font-weight:800; color:#fff; margin-bottom:12px;">Links Oficiais do Concurso</h1>
           <div style="display:flex; flex-direction:column; gap:8px;">
             <a href="https://www.concursosfcc.com.br/concursos/tcego125/edital_de_abertura_versaex771_o_15_09_2026_-_consolidado_com_retificacoes__1_.pdf" target="_blank" class="nav-item-btn" style="background:#090e1a; color:#fff;">📄 Edital Consolidado FCC (PDF) ↗</a>
-            <a href="https://legisla.casacivil.go.gov.br/pesquisa_legislacao/102047/lei-20756" target="_blank" class="nav-item-btn" style="background:#090e1a; color:#fff;">⚖️ Estatuto dos Servidores de GO (Lei 20.756) ↗</a>
+            <a href="https://legisla.casacivil.go.gov.br/pesquisa_legislacao/102047/lei-20756" target="_blank" class="nav-item-btn" style="background:#090e1a; color:#fff;">🏛️ Estatuto dos Servidores de GO (Lei 20.756) ↗</a>
             <a href="https://legisla.casacivil.go.gov.br/pesquisa_legislacao/82155/lei-16168" target="_blank" class="nav-item-btn" style="background:#090e1a; color:#fff;">⚖️ Lei Orgânica do TCE-GO (Lei 16.168) ↗</a>
           </div>
         </div>
